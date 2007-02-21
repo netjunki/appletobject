@@ -111,28 +111,28 @@ function asd() {
         <pre class="sourceview"><span class="comment">/*
  *  AppletObject
  *
- *	Florian Jenett, Stephen Williams, Aaron Steed
+ *    Florian Jenett, Stephen Williams, Aaron Steed
  *
- *	http://ez-applet-html.sourceforge.net/
- *	http://svn.sourceforge.net/viewvc/ez-applet-html/trunk/
- *	http://sourceforge.net/projects/ez-applet-html/
+ *    http://ez-applet-html.sourceforge.net/
+ *    http://svn.sourceforge.net/viewvc/ez-applet-html/trunk/
+ *    http://sourceforge.net/projects/ez-applet-html/
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-02-19 23:38:24 - fjenett
+ *    changed: 2007-02-20 15:51:27 - fjenett
  *  version: 0.0.6
  *
  *  -----------------------------------------------------------
  *
- *	
+ *    
  *
  *  ----------------------------------------------------------- */</span>
 
 
 <span class="comment">/**
-		getElement()
-		
-		return an DOMElement by ID
+        getElement()
+        
+        return an DOMElement by ID
  */</span>
  
 var getElement = <span class="reserved">function</span> (aID)
@@ -144,17 +144,17 @@ var getElement = <span class="reserved">function</span> (aID)
 
 <span class="reserved">if</span> ( !Array.<span class="reserved">prototype</span>.push ) {
 <span class="comment">/**
-		Array.push()
-		
-		win IE 5.01 fix,
-		push items onto an array, return new length
+        Array.push()
+        
+        win IE 5.01 fix,
+        push items onto an array, return new length
  */</span>
 Array.<span class="reserved">prototype</span>.push = <span class="reserved">function</span>() 
 {
-	<span class="reserved">for</span>(var j = 0, n = arguments.length; j &lt; n; ++j) {
-		<span class="reserved">this</span>[<span class="reserved">this</span>.length] = arguments[j];
-	}
-	<span class="reserved">return</span> <span class="reserved">this</span>.length;
+    <span class="reserved">for</span>(var j = 0, n = arguments.length; j &lt; n; ++j) {
+        <span class="reserved">this</span>[<span class="reserved">this</span>.length] = arguments[j];
+    }
+    <span class="reserved">return</span> <span class="reserved">this</span>.length;
 }
 }
 
@@ -162,44 +162,44 @@ Array.<span class="reserved">prototype</span>.push = <span class="reserved">func
 
 <span class="reserved">if</span> ( !Array.<span class="reserved">prototype</span>.shift ) {
 <span class="comment">/**
-		Array.shift()
-		
-		win IE 5.01 fix,
-		remove and return first item in an array
+        Array.shift()
+        
+        win IE 5.01 fix,
+        remove and return first item in an array
  */</span>
 Array.<span class="reserved">prototype</span>.shift = <span class="reserved">function</span> ()
 {
-	<span class="reserved">if</span> ( <span class="reserved">this</span>.length == 0 ) <span class="reserved">return</span> null;
-	var val = <span class="reserved">this</span>[0];
-	var arr = [];
-	<span class="reserved">for</span> ( var i= 0; i &lt; <span class="reserved">this</span>.length  ; i++) arr[i]  = <span class="reserved">this</span>[i];
-	<span class="reserved">for</span> ( var i= 0; i &lt; <span class="reserved">this</span>.length-1; i++) <span class="reserved">this</span>[i] = arr[i+1];
-	<span class="reserved">this</span>[<span class="reserved">this</span>.length-1] = null;
-	<span class="reserved">return</span> val;
+    <span class="reserved">if</span> ( <span class="reserved">this</span>.length == 0 ) <span class="reserved">return</span> null;
+    var val = <span class="reserved">this</span>[0];
+    var arr = [];
+    <span class="reserved">for</span> ( var i= 0; i &lt; <span class="reserved">this</span>.length  ; i++) arr[i]  = <span class="reserved">this</span>[i];
+    <span class="reserved">for</span> ( var i= 0; i &lt; <span class="reserved">this</span>.length-1; i++) <span class="reserved">this</span>[i] = arr[i+1];
+    <span class="reserved">this</span>[<span class="reserved">this</span>.length-1] = null;
+    <span class="reserved">return</span> val;
 }
 }
 
 
 <span class="reserved">if</span> ( !Array.<span class="reserved">prototype</span>.concat ) {
 <span class="comment">/**
-		Array.concat()
-		
-		win IE 5.01 fix,
-		append an array to another
+        Array.concat()
+        
+        win IE 5.01 fix,
+        append an array to another
  */</span>
 Array.<span class="reserved">prototype</span>.concat = <span class="reserved">function</span> ()
 {
-	<span class="reserved">for</span> ( var i=0; i&lt; arguments[0].length; i++ ) <span class="reserved">this</span>[<span class="reserved">this</span>.length+i] = arguments[0][i];
+    <span class="reserved">for</span> ( var i=0; i&lt; arguments[0].length; i++ ) <span class="reserved">this</span>[<span class="reserved">this</span>.length+i] = arguments[0][i];
 }
 }
 
 
 <span class="reserved">if</span> ( !Number.<span class="reserved">prototype</span>.toFixed ) {
 <span class="comment">/**
-		Number.toFixed()
-		
-		win IE 5.01 fix,
-		return a fixed length float for a number
+        Number.toFixed()
+        
+        win IE 5.01 fix,
+        return a fixed length float for a number
  */</span>
 Number.<span class="reserved">prototype</span>.toFixed = <span class="reserved">function</span> ( fractionDigits )
 {
@@ -222,10 +222,10 @@ Number.<span class="reserved">prototype</span>.toFixed = <span class="reserved">
 <span class="comment">/*--------------------------------------------------------------------------*/</span>
 
 <span class="comment">/**
-		Function.bind()
-		
-		bind a function to an object
-		from: Prototype JavaScript framework, version 1.5.0_rc2
+        Function.bind()
+        
+        bind a function to an object
+        from: Prototype JavaScript framework, version 1.5.0_rc2
  */</span>
 
 Function.<span class="reserved">prototype</span>.bind = <span class="reserved">function</span>()
@@ -237,10 +237,10 @@ Function.<span class="reserved">prototype</span>.bind = <span class="reserved">f
 }
 
 <span class="comment">/**
-		$A
-		
-		return an array for an iterable
-		from: Prototype JavaScript framework, version 1.5.0_rc2
+        $A
+        
+        return an array for an iterable
+        from: Prototype JavaScript framework, version 1.5.0_rc2
  */</span>
  
 var $A = <span class="reserved">function</span>(iterable) {
@@ -257,1268 +257,1268 @@ var $A = <span class="reserved">function</span>(iterable) {
 
 
 <span class="comment">/**
-		Array.implode()
-		
-		in love with PHPs implode function,
-		opposite to string.split(seperator)
-		
-		<span class="attrib">@param</span> string seperator
+        Array.implode()
+        
+        in love with PHPs implode function,
+        opposite to string.split(seperator)
+        
+        <span class="attrib">@param</span> string seperator
 
-		example:
-		  (["1","2","3"]).implode( ", " );
-		  &gt; "1, 2, 3"
+        example:
+          (["1","2","3"]).implode( ", " );
+          &gt; "1, 2, 3"
  */</span>
  
 Array.<span class="reserved">prototype</span>.implode = <span class="reserved">function</span> ( _sep )
 {
-	var i = 0;	var _str = <span class="reserved">this</span>[0];
-	<span class="reserved">while</span> ( <span class="reserved">this</span>[i+1] ) _str = _str + _sep + <span class="reserved">this</span>[++i];
-	<span class="reserved">return</span> _str;
+    var i = 0;    var _str = <span class="reserved">this</span>[0];
+    <span class="reserved">while</span> ( <span class="reserved">this</span>[i+1] ) _str = _str + _sep + <span class="reserved">this</span>[++i];
+    <span class="reserved">return</span> _str;
 }
 
 
 
 <span class="comment">/**
-		singleton prototype AppletObjects
-		
-		a wrapper around all AppletObjects, it does:
-		- java detection
-		- handles callbacks from the preloader-applet
-		- maintains access to all appletobjects
+        singleton prototype AppletObjects
+        
+        a wrapper around all AppletObjects, it does:
+        - java detection
+        - handles callbacks from the preloader-applet
+        - maintains access to all appletobjects
  */</span>
  
 AppletObjects =
 {
-	objects : [], <span class="comment">// array containing all appletobjects</span>
-	push : <span class="reserved">function</span> ( _obj )
-	{
-		<span class="reserved">return</span> <span class="reserved">this</span>.objects.push(_obj)-1; <span class="comment">// return the ID of the object injected</span>
-	},
-	
-	create : <span class="reserved">function</span> ( opt )
-	{
-		<span class="reserved">return</span> new AppletObject( opt.code, 
-								 opt.archives, 
-								 opt.width, opt.height,
-								 
-								 opt.minimumVersionString,
-								 opt.mayscript,
-								 opt.codebase,
-								 opt.params,
-								 opt.tagType );
-	},
-	
-	<span class="comment">// Preloading-applet callbacks</span>
-	<span class="comment">//</span>
-	inited : <span class="reserved">function</span> ( _id )
-	{
-		<span class="reserved">if</span> ( <span class="reserved">this</span>.objects[_id] ) <span class="reserved">this</span>.objects[_id].inited = true;
-	},
-	started : <span class="reserved">function</span> ( _id )
-	{
-		<span class="reserved">if</span> ( <span class="reserved">this</span>.objects[_id] ) <span class="reserved">this</span>.objects[_id].started = true;
-	},
-	
-	readRegistry : false,
-	useBrutForceDetectionForIE : true,
-	IEDetectUnder13 : true, <span class="comment">// see not in getJavaVersionWithBrutForce()</span>
-	debugLevel : 0,
-	
-	JAVA_PLUGIN_MISSING : -1,
-	JAVA_DISABLED : -2,
-	JAVA_PLUGIN_TOO_OLD : -3,
-	hasJava : <span class="reserved">function</span> ()
-	{
-		<span class="comment">// refresh() is not working properly ..</span>
-		<span class="comment">//if ( navigator.plugins &amp;&amp; navigator.plugins.refresh )</span>
-		<span class="comment">//		navigator.plugins.refresh(true);</span>
-		
-		var jMimeType = <span class="literal">'application/x-java-applet'</span>;
-		
-		var hasPlugin = false; <span class="comment">// true as default for IE</span>
-		
-		<span class="comment">// netscape mac seems to wrongly report javaEnabled() as false.</span>
-		<span class="comment">// so we take our chances and just assume it's enabled ...</span>
-		<span class="comment">//</span>
-		var isEnabled = (navigator.userAgent.toLowerCase().match(<span class="literal">"netscape"</span>)
-						 ? true
-						 : navigator.javaEnabled());
-		
-		<span class="comment">// [fjen] i read that actually VBScript is more compatible on IE.</span>
-		<span class="comment">//		  we should think / talk about switching over to that ...</span>
-		
-		<span class="reserved">if</span> (	window.ActiveXObject
-			 &amp;&amp; navigator.plugins.length == 0 ) <span class="comment">// msIE</span>
-		{
-			<span class="comment">// checks for JavaPlugin versions 1.2.0_00 to 1.6.6_14</span>
-			<span class="comment">// IE win only</span>
-			<span class="comment">//</span>
-			var vers; var n1 = 12, n2 = 0, n3 = 0;
-			<span class="reserved">for</span> ( n1 = 12; n1 &lt; 17 &amp;&amp; !hasPlugin; n1++ )
-			{
-				<span class="reserved">for</span> ( n2 = 0; n2 &lt; 7 &amp;&amp; !hasPlugin; n2++ )
-				{
-					<span class="reserved">for</span> ( n3 = 0; n3 &lt; 15 &amp;&amp; !hasPlugin; n3++ )
-					{
-						vers = n1+(n2+<span class="literal">'_'</span>+(n3&lt;10?<span class="literal">'0'</span>+n3:n3));
-						try {
-							hasPlugin = new ActiveXObject(<span class="literal">'JavaPlugin.'</span>+vers);
-							<span class="reserved">if</span> ( hasPlugin )
-							{
-								var versString = <span class="literal">'1.'</span> +
-												 (n1 - 10) + <span class="literal">'.'</span> +
-												 (n2+<span class="literal">'_'</span>+(n3&lt;10?<span class="literal">'0'</span>+n3:n3));
-								
-								<span class="reserved">this</span>.JREVersion =  
-									new AppletObjects.JavaVersion( versString );
-								
-								<span class="reserved">if</span> ( <span class="reserved">this</span>.debugLevel == 0 ) 
-									<span class="reserved">this</span>.saveJavaVersionToCookie( javaVersion );
-							}
-						} catch (e) {}
-					}
-				}
-			}
-			<span class="reserved">if</span> ( !hasPlugin ) <span class="reserved">return</span> AppletObjects.JAVA_PLUGIN_MISSING;
-		}
-		
-		
-		var i, j;
-		<span class="reserved">for</span> (i = 0;    i &lt; navigator.plugins.length 
-					&amp;&amp; !hasPlugin; i++)
-		{
-			<span class="reserved">if</span> ( navigator.plugins[i].name.toLowerCase().match(<span class="literal">"java"</span>) )
-			{
-				<span class="reserved">for</span> (j = 0; j &lt; navigator.plugins[i].length &amp;&amp; !hasPlugin; j++)
-				{
-					hasPlugin = navigator.plugins[i][j].type.match(jMimeType);
-					<span class="comment">//if ( hasPlugin )  alert( navigator.plugins[i][j].type );</span>
-				}
-			}
-		}
-		
-		<span class="comment">// [fjen] this is an opera fix, java will not be in plugins[],</span>
-		<span class="comment">//	      but in mimetypes[]</span>
-		<span class="comment">//	      sidenote: after deinstalling java on winXP, opera 8.51</span>
-		<span class="comment">//	      kept the mimetype around.</span>
-		<span class="comment">//</span>
-		<span class="reserved">for</span> (i = 0;    i &lt; navigator.mimeTypes.length 
-					&amp;&amp; !hasPlugin; i++)
-		{
-			hasPlugin = navigator.mimeTypes[i].type.toLowerCase().match(jMimeType);
-			<span class="comment">//if ( hasPlugin )  alert( navigator.mimeTypes[i].type );</span>
-		}
-		
-		
-		<span class="comment">// [fjen] opera is not registering the java-plugin with </span>
-		<span class="comment">//	      navigator.plugins, we try to rely on isEnabled</span>
-		<span class="comment">//	      for that ...</span>
-		<span class="comment">//</span>
-		var returnValue = true;
-		
-		<span class="reserved">if</span> ( !isEnabled &amp;&amp; hasPlugin ) {
-		
-			returnValue = AppletObjects.JAVA_DISABLED;
-			
-		} <span class="reserved">else</span> <span class="reserved">if</span> ( !hasPlugin ) {
-		
-			returnValue = AppletObjects.JAVA_PLUGIN_MISSING;
-		}
+    objects : [], <span class="comment">// array containing all appletobjects</span>
+    push : <span class="reserved">function</span> ( _obj )
+    {
+        <span class="reserved">return</span> <span class="reserved">this</span>.objects.push(_obj)-1; <span class="comment">// return the ID of the object injected</span>
+    },
+    
+    create : <span class="reserved">function</span> ( opt )
+    {
+        <span class="reserved">return</span> new AppletObject( opt.code, 
+                                 opt.archives, 
+                                 opt.width, opt.height,
+                                 
+                                 opt.minimumVersionString,
+                                 opt.mayscript,
+                                 opt.codebase,
+                                 opt.params,
+                                 opt.tagType );
+    },
+    
+    <span class="comment">// Preloading-applet callbacks</span>
+    <span class="comment">//</span>
+    inited : <span class="reserved">function</span> ( _id )
+    {
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.objects[_id] ) <span class="reserved">this</span>.objects[_id].inited = true;
+    },
+    started : <span class="reserved">function</span> ( _id )
+    {
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.objects[_id] ) <span class="reserved">this</span>.objects[_id].started = true;
+    },
+    
+    readRegistry : false,
+    useBrutForceDetectionForIE : true,
+    IEDetectUnder13 : true, <span class="comment">// see not in getJavaVersionWithBrutForce()</span>
+    debugLevel : 0,
+    
+    JAVA_PLUGIN_MISSING : -1,
+    JAVA_DISABLED : -2,
+    JAVA_PLUGIN_TOO_OLD : -3,
+    hasJava : <span class="reserved">function</span> ()
+    {
+        <span class="comment">// refresh() is not working properly ..</span>
+        <span class="comment">//if ( navigator.plugins &amp;&amp; navigator.plugins.refresh )</span>
+        <span class="comment">//        navigator.plugins.refresh(true);</span>
+        
+        var jMimeType = <span class="literal">'application/x-java-applet'</span>;
+        
+        var hasPlugin = false; <span class="comment">// true as default for IE</span>
+        
+        <span class="comment">// netscape mac seems to wrongly report javaEnabled() as false.</span>
+        <span class="comment">// so we take our chances and just assume it's enabled ...</span>
+        <span class="comment">//</span>
+        var isEnabled = (navigator.userAgent.toLowerCase().match(<span class="literal">"netscape"</span>)
+                         ? true
+                         : navigator.javaEnabled());
+        
+        <span class="comment">// [fjen] i read that actually VBScript is more compatible on IE.</span>
+        <span class="comment">//          we should think / talk about switching over to that ...</span>
+        
+        <span class="reserved">if</span> (    window.ActiveXObject
+             &amp;&amp; navigator.plugins.length == 0 ) <span class="comment">// msIE</span>
+        {
+            <span class="comment">// checks for JavaPlugin versions 1.2.0_00 to 1.6.6_14</span>
+            <span class="comment">// IE win only</span>
+            <span class="comment">//</span>
+            var vers; var n1 = 12, n2 = 0, n3 = 0;
+            <span class="reserved">for</span> ( n1 = 12; n1 &lt; 17 &amp;&amp; !hasPlugin; n1++ )
+            {
+                <span class="reserved">for</span> ( n2 = 0; n2 &lt; 7 &amp;&amp; !hasPlugin; n2++ )
+                {
+                    <span class="reserved">for</span> ( n3 = 0; n3 &lt; 15 &amp;&amp; !hasPlugin; n3++ )
+                    {
+                        vers = n1+(n2+<span class="literal">'_'</span>+(n3&lt;10?<span class="literal">'0'</span>+n3:n3));
+                        try {
+                            hasPlugin = new ActiveXObject(<span class="literal">'JavaPlugin.'</span>+vers);
+                            <span class="reserved">if</span> ( hasPlugin )
+                            {
+                                var versString = <span class="literal">'1.'</span> +
+                                                 (n1 - 10) + <span class="literal">'.'</span> +
+                                                 (n2+<span class="literal">'_'</span>+(n3&lt;10?<span class="literal">'0'</span>+n3:n3));
+                                
+                                <span class="reserved">this</span>.JREVersion =  
+                                    new AppletObjects.JavaVersion( versString );
+                                
+                                <span class="reserved">if</span> ( <span class="reserved">this</span>.debugLevel == 0 ) 
+                                    <span class="reserved">this</span>.saveJavaVersionToCookie( javaVersion );
+                            }
+                        } catch (e) {}
+                    }
+                }
+            }
+            <span class="reserved">if</span> ( !hasPlugin ) <span class="reserved">return</span> AppletObjects.JAVA_PLUGIN_MISSING;
+        }
+        
+        
+        var i, j;
+        <span class="reserved">for</span> (i = 0;    i &lt; navigator.plugins.length 
+                    &amp;&amp; !hasPlugin; i++)
+        {
+            <span class="reserved">if</span> ( navigator.plugins[i].name.toLowerCase().match(<span class="literal">"java"</span>) )
+            {
+                <span class="reserved">for</span> (j = 0; j &lt; navigator.plugins[i].length &amp;&amp; !hasPlugin; j++)
+                {
+                    hasPlugin = navigator.plugins[i][j].type.match(jMimeType);
+                    <span class="comment">//if ( hasPlugin )  alert( navigator.plugins[i][j].type );</span>
+                }
+            }
+        }
+        
+        <span class="comment">// [fjen] this is an opera fix, java will not be in plugins[],</span>
+        <span class="comment">//          but in mimetypes[]</span>
+        <span class="comment">//          sidenote: after deinstalling java on winXP, opera 8.51</span>
+        <span class="comment">//          kept the mimetype around.</span>
+        <span class="comment">//</span>
+        <span class="reserved">for</span> (i = 0;    i &lt; navigator.mimeTypes.length 
+                    &amp;&amp; !hasPlugin; i++)
+        {
+            hasPlugin = navigator.mimeTypes[i].type.toLowerCase().match(jMimeType);
+            <span class="comment">//if ( hasPlugin )  alert( navigator.mimeTypes[i].type );</span>
+        }
+        
+        
+        <span class="comment">// [fjen] opera is not registering the java-plugin with </span>
+        <span class="comment">//          navigator.plugins, we try to rely on isEnabled</span>
+        <span class="comment">//          for that ...</span>
+        <span class="comment">//</span>
+        var returnValue = true;
+        
+        <span class="reserved">if</span> ( !isEnabled &amp;&amp; hasPlugin ) {
+        
+            returnValue = AppletObjects.JAVA_DISABLED;
+            
+        } <span class="reserved">else</span> <span class="reserved">if</span> ( !hasPlugin ) {
+        
+            returnValue = AppletObjects.JAVA_PLUGIN_MISSING;
+        }
 
-		<span class="reserved">return</span> returnValue;
-	},
-	
-	<span class="comment">/**
-	 *  This code is based on some code posted to the Java Forum. 
-	 *  Have another look to find the authors details.
-	 *
-	 *	http://forum.java.sun.com/thread.jspa?threadID=168544
-	 */</span>
-	
-	JREVersion : null,
-	
-	getJavaVersion : <span class="reserved">function</span> ()
-	{
-		<span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0)
-		{
-			var JREVersionFromCookie = <span class="reserved">this</span>.getCookie(<span class="literal">"JREVersion"</span>);
-			<span class="reserved">if</span> (JREVersionFromCookie)
-			{
-				alert(<span class="literal">"from cookie: "</span>+JREVersionFromCookie);
-				<span class="reserved">this</span>.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
-				<span class="reserved">return</span> JREVersionFromCookie;
-			}
-		}
-		<span class="reserved">if</span> ( <span class="reserved">this</span>.JREVersion ) <span class="reserved">return</span> <span class="reserved">this</span>.JREVersion;
+        <span class="reserved">return</span> returnValue;
+    },
+    
+    <span class="comment">/**
+     *  This code is based on some code posted to the Java Forum. 
+     *  Have another look to find the authors details.
+     *
+     *    http://forum.java.sun.com/thread.jspa?threadID=168544
+     */</span>
+    
+    JREVersion : null,
+    
+    getJavaVersion : <span class="reserved">function</span> ()
+    {
+        <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0)
+        {
+            var JREVersionFromCookie = <span class="reserved">this</span>.getCookie(<span class="literal">"JREVersion"</span>);
+            <span class="reserved">if</span> (JREVersionFromCookie)
+            {
+                alert(<span class="literal">"from cookie: "</span>+JREVersionFromCookie);
+                <span class="reserved">this</span>.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
+                <span class="reserved">return</span> JREVersionFromCookie;
+            }
+        }
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.JREVersion ) <span class="reserved">return</span> <span class="reserved">this</span>.JREVersion;
 
-		var javaVersion = new AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>);
-		var agt=navigator.userAgent.toLowerCase();
-		
-		<span class="reserved">this</span>.browser = agt;
-		
-		var is_major = parseInt(navigator.appVersion);
-	
-		var is_nav = (	  (agt.indexOf(<span class="literal">'mozilla'</span>)!=-1)
-					   &amp;&amp; (agt.indexOf(<span class="literal">'spoofer'</span>)==-1)
-					   &amp;&amp; (agt.indexOf(<span class="literal">'compatible'</span>) == -1) 
-					   &amp;&amp; (agt.indexOf(<span class="literal">'opera'</span>)==-1)
-					   &amp;&amp; (agt.indexOf(<span class="literal">'webtv'</span>)==-1) 
-					   &amp;&amp; (agt.indexOf(<span class="literal">'hotjava'</span>)==-1)  );
-					   
-		var is_nav4up= (is_nav &amp;&amp; (is_major &gt;= 4));
-		
-		var is_ie    = ((agt.indexOf(<span class="literal">"msie"</span>) != -1) &amp;&amp; (agt.indexOf(<span class="literal">"opera"</span>) == -1));
-		
-		var is_ie5   = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 5.0"</span>) !=-1) );
-		var is_ie5_5 = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 5.5"</span>) !=-1));
-		var is_ie6   = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 6.0"</span>) !=-1));
-		var is_ie7   = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 7.0"</span>) !=-1));
-		var is_ie5up = (is_ie &amp;&amp; (is_major == 4) 
-					   &amp;&amp; (    (agt.indexOf(<span class="literal">"msie 5.0"</span>)!=-1)
-							|| (agt.indexOf(<span class="literal">"msie 5.5"</span>)!=-1)
-							|| (agt.indexOf(<span class="literal">"msie 6.0"</span>)!=-1) 
-							|| (agt.indexOf(<span class="literal">"msie 7.0"</span>)!=-1) 
-						) );
-	
-		var pluginDetected = false;
-		var activeXDisabled = false;
-		
-		<span class="comment">// we can check for plugin existence only when browser is 'is_ie5up' or 'is_nav4up'</span>
-		<span class="reserved">if</span> (is_nav4up)
-		{
-			<span class="comment">// Refresh 'navigator.plugins' to get newly installed plugins.</span>
-			<span class="comment">// Use 'navigator.plugins.refresh(false)' to refresh plugins</span>
-			<span class="comment">// without refreshing open documents (browser windows)</span>
-			<span class="comment">//</span>
-			<span class="comment">// [fjen] this is actually not working in some cases .. opera i think had problems.</span>
-			<span class="comment">//		  have to recheck which browsers ignore it though.</span>
-			
-			<span class="reserved">if</span> (navigator.plugins) 
-			{
-				navigator.plugins.refresh(false);
-			}
-		
-			<span class="comment">// check for Java plugin in installed plugins</span>
-			<span class="reserved">if</span> ( navigator.mimeTypes )
-			{
-				<span class="reserved">for</span> ( var i=0; i &lt; navigator.mimeTypes.length; i++ )
-				{
-					mimeType = navigator.mimeTypes[i].type;
-					
-					<span class="comment">// [fjen]</span>
-					<span class="comment">// ";jpi-version="</span>
-					<span class="comment">// i wonder if all browsers actually report the mimetypes in this format.</span>
-					<span class="comment">// - safari mac will not have jpi-version in mimetype</span>
-					
-					<span class="reserved">if</span>( (mimeType != null)
-						&amp;&amp; (mimeType.indexOf( <span class="literal">"application/x-java-applet;jpi-version="</span>) != -1) )
-					{
-							var versionIndex = mimeType.indexOf(<span class="literal">"version="</span>);
-							var tmpJavaVersion = 
-								new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
-							<span class="reserved">if</span> ( tmpJavaVersion.isGreater(javaVersion) )
-							{
-								javaVersion = 
-								new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
-							}
-							pluginDetected = true;
-					}
-				}
-			}
-		}
-		<span class="reserved">else</span> <span class="reserved">if</span> (is_ie5up)	 <span class="comment">// [fjen] what about IE 5.2 Mac? came installed until osx 10.3</span>
-		{
-			registryBeenRead = false;
-			<span class="reserved">if</span> ( <span class="reserved">this</span>.readRegistry )
-			{
-				<span class="comment">/*
-				 * Using the shell causes IE to display a warning that the script
-				 * may not be safe.
-				 *
-				 */</span>
-				var shell;
-				try
-				{
-					<span class="comment">// Create WSH(WindowsScriptHost) shell, available on Windows only</span>
-					shell = new ActiveXObject(<span class="literal">"WScript.Shell"</span>);
-			
-					<span class="reserved">if</span> (shell != null) 
-					{
-						<span class="comment">// Read JRE version from Window Registry</span>
-						try
-						{
-							javaVersion = 
-								new AppletObjects.JavaVersion( shell.regRead(
-											<span class="literal">"HKEY_LOCAL_MACHINE\\Software\\"</span>+
-											<span class="literal">"JavaSoft\\Java Runtime Environment\\CurrentVersion"</span>));
-							registryBeenRead = true;
-						} catch(e) {
-							<span class="comment">// handle exceptions raised by 'shell.regRead(...)' here</span>
-							<span class="comment">// so that the outer try-catch block would receive only</span>
-							<span class="comment">// exceptions raised by 'shell = new ActiveXObject(...)'</span>
-						}
-					} <span class="reserved">else</span> { 
-						<span class="comment">//alert("Couldn t get shell");</span>
-					}
-				} catch(e) {
-					<span class="comment">// Creating ActiveX controls thru script is disabled</span>
-					<span class="comment">// in InternetExplorer security options</span>
-					
-					<span class="comment">// To enable it:</span>
-					<span class="comment">// a. Go to the 'Tools --&gt; Internet Options' menu</span>
-					<span class="comment">// b. Select the 'Security' tab</span>
-					<span class="comment">// c. Select zone (Internet/Intranet)</span>
-					<span class="comment">// d. Click the 'Custom Level..' button which will display the</span>
-					<span class="comment">// 'Security Settings' window.</span>
-					<span class="comment">// e. Enable the option 'Initialize and script ActiveX controls</span>
-					<span class="comment">// not marked as safe'</span>
-				
-					activeXDisabled = true;
-				}
-			}
-			
-			<span class="comment">// so, this is only IE5+ ?</span>
-			
-			<span class="reserved">if</span> ( !registryBeenRead &amp;&amp; <span class="reserved">this</span>.useBrutForceDetectionForIE )
-			{
-				javaVersion = <span class="reserved">this</span>.getJavaVersionWithBrutForce( <span class="reserved">this</span>.minimumVersion ); <span class="comment">// where does this arg end up?</span>
-			}
-		}
-		<span class="reserved">this</span>.JREVersion = javaVersion;
-		<span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0){
-			<span class="reserved">this</span>.saveJavaVersionToCookie(javaVersion);
-		}
-		<span class="reserved">return</span> javaVersion;
-	},
+        var javaVersion = new AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>);
+        var agt=navigator.userAgent.toLowerCase();
+        
+        <span class="reserved">this</span>.browser = agt;
+        
+        var is_major = parseInt(navigator.appVersion);
+    
+        var is_nav = (      (agt.indexOf(<span class="literal">'mozilla'</span>)!=-1)
+                       &amp;&amp; (agt.indexOf(<span class="literal">'spoofer'</span>)==-1)
+                       &amp;&amp; (agt.indexOf(<span class="literal">'compatible'</span>) == -1) 
+                       &amp;&amp; (agt.indexOf(<span class="literal">'opera'</span>)==-1)
+                       &amp;&amp; (agt.indexOf(<span class="literal">'webtv'</span>)==-1) 
+                       &amp;&amp; (agt.indexOf(<span class="literal">'hotjava'</span>)==-1)  );
+                       
+        var is_nav4up= (is_nav &amp;&amp; (is_major &gt;= 4));
+        
+        var is_ie    = ((agt.indexOf(<span class="literal">"msie"</span>) != -1) &amp;&amp; (agt.indexOf(<span class="literal">"opera"</span>) == -1));
+        
+        var is_ie5   = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 5.0"</span>) !=-1) );
+        var is_ie5_5 = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 5.5"</span>) !=-1));
+        var is_ie6   = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 6.0"</span>) !=-1));
+        var is_ie7   = (is_ie &amp;&amp; (is_major == 4) &amp;&amp; (agt.indexOf(<span class="literal">"msie 7.0"</span>) !=-1));
+        var is_ie5up = (is_ie &amp;&amp; (is_major == 4) 
+                       &amp;&amp; (    (agt.indexOf(<span class="literal">"msie 5.0"</span>)!=-1)
+                            || (agt.indexOf(<span class="literal">"msie 5.5"</span>)!=-1)
+                            || (agt.indexOf(<span class="literal">"msie 6.0"</span>)!=-1) 
+                            || (agt.indexOf(<span class="literal">"msie 7.0"</span>)!=-1) 
+                        ) );
+    
+        var pluginDetected = false;
+        var activeXDisabled = false;
+        
+        <span class="comment">// we can check for plugin existence only when browser is 'is_ie5up' or 'is_nav4up'</span>
+        <span class="reserved">if</span> (is_nav4up)
+        {
+            <span class="comment">// Refresh 'navigator.plugins' to get newly installed plugins.</span>
+            <span class="comment">// Use 'navigator.plugins.refresh(false)' to refresh plugins</span>
+            <span class="comment">// without refreshing open documents (browser windows)</span>
+            <span class="comment">//</span>
+            <span class="comment">// [fjen] this is actually not working in some cases .. opera i think had problems.</span>
+            <span class="comment">//          have to recheck which browsers ignore it though.</span>
+            
+            <span class="reserved">if</span> (navigator.plugins) 
+            {
+                navigator.plugins.refresh(false);
+            }
+        
+            <span class="comment">// check for Java plugin in installed plugins</span>
+            <span class="reserved">if</span> ( navigator.mimeTypes )
+            {
+                <span class="reserved">for</span> ( var i=0; i &lt; navigator.mimeTypes.length; i++ )
+                {
+                    mimeType = navigator.mimeTypes[i].type;
+                    
+                    <span class="comment">// [fjen]</span>
+                    <span class="comment">// ";jpi-version="</span>
+                    <span class="comment">// i wonder if all browsers actually report the mimetypes in this format.</span>
+                    <span class="comment">// - safari mac will not have jpi-version in mimetype</span>
+                    
+                    <span class="reserved">if</span>( (mimeType != null)
+                        &amp;&amp; (mimeType.indexOf( <span class="literal">"application/x-java-applet;jpi-version="</span>) != -1) )
+                    {
+                            var versionIndex = mimeType.indexOf(<span class="literal">"version="</span>);
+                            var tmpJavaVersion = 
+                                new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
+                            <span class="reserved">if</span> ( tmpJavaVersion.isGreater(javaVersion) )
+                            {
+                                javaVersion = 
+                                new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
+                            }
+                            pluginDetected = true;
+                    }
+                }
+            }
+        }
+        <span class="reserved">else</span> <span class="reserved">if</span> (is_ie5up)     <span class="comment">// [fjen] what about IE 5.2 Mac? came installed until osx 10.3</span>
+        {
+            registryBeenRead = false;
+            <span class="reserved">if</span> ( <span class="reserved">this</span>.readRegistry )
+            {
+                <span class="comment">/*
+                 * Using the shell causes IE to display a warning that the script
+                 * may not be safe.
+                 *
+                 */</span>
+                var shell;
+                try
+                {
+                    <span class="comment">// Create WSH(WindowsScriptHost) shell, available on Windows only</span>
+                    shell = new ActiveXObject(<span class="literal">"WScript.Shell"</span>);
+            
+                    <span class="reserved">if</span> (shell != null) 
+                    {
+                        <span class="comment">// Read JRE version from Window Registry</span>
+                        try
+                        {
+                            javaVersion = 
+                                new AppletObjects.JavaVersion( shell.regRead(
+                                            <span class="literal">"HKEY_LOCAL_MACHINE\\Software\\"</span>+
+                                            <span class="literal">"JavaSoft\\Java Runtime Environment\\CurrentVersion"</span>));
+                            registryBeenRead = true;
+                        } catch(e) {
+                            <span class="comment">// handle exceptions raised by 'shell.regRead(...)' here</span>
+                            <span class="comment">// so that the outer try-catch block would receive only</span>
+                            <span class="comment">// exceptions raised by 'shell = new ActiveXObject(...)'</span>
+                        }
+                    } <span class="reserved">else</span> { 
+                        <span class="comment">//alert("Couldn t get shell");</span>
+                    }
+                } catch(e) {
+                    <span class="comment">// Creating ActiveX controls thru script is disabled</span>
+                    <span class="comment">// in InternetExplorer security options</span>
+                    
+                    <span class="comment">// To enable it:</span>
+                    <span class="comment">// a. Go to the 'Tools --&gt; Internet Options' menu</span>
+                    <span class="comment">// b. Select the 'Security' tab</span>
+                    <span class="comment">// c. Select zone (Internet/Intranet)</span>
+                    <span class="comment">// d. Click the 'Custom Level..' button which will display the</span>
+                    <span class="comment">// 'Security Settings' window.</span>
+                    <span class="comment">// e. Enable the option 'Initialize and script ActiveX controls</span>
+                    <span class="comment">// not marked as safe'</span>
+                
+                    activeXDisabled = true;
+                }
+            }
+            
+            <span class="comment">// so, this is only IE5+ ?</span>
+            
+            <span class="reserved">if</span> ( !registryBeenRead &amp;&amp; <span class="reserved">this</span>.useBrutForceDetectionForIE )
+            {
+                javaVersion = <span class="reserved">this</span>.getJavaVersionWithBrutForce( <span class="reserved">this</span>.minimumVersion ); <span class="comment">// where does this arg end up?</span>
+            }
+        }
+        <span class="reserved">this</span>.JREVersion = javaVersion;
+        <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0){
+            <span class="reserved">this</span>.saveJavaVersionToCookie(javaVersion);
+        }
+        <span class="reserved">return</span> javaVersion;
+    },
 
-	<span class="comment">/**
-	 * This function tries to instantiate JavaPlugin.??? objects.
-	 * JRE versions 1.1.1_06 through to 1.3.1 installed a JavaSoft.JavaBeansBridge object.
-	 */</span>
-	 
-	getJavaVersionWithBrutForce: <span class="reserved">function</span> ()
-	{
-		var javaVersion = new AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>);
-		startOfRegistryClasses = new AppletObjects.JavaVersion(<span class="literal">"1.3.1_1"</span>);
-		try
-		{
-<span class="comment">//			if(!this.minimumVersion.isGreater(startOfRegistryClasses)){</span>
-			<span class="reserved">if</span> (<span class="reserved">this</span>.IEDetectUnder13)
-			{
-				<span class="comment">/* this call caused the java console to load, which takes 1 or two seconds.
-				* If you are going to display an applet anyway this is no problem otherwise
-				* you might want to avoid using it.
-				*
-				* [fjen] so, the java-console will open no matter what?
-				*/</span>
-				result = new ActiveXObject(<span class="literal">"JavaSoft.JavaBeansBridge"</span>);
-				<span class="reserved">if</span> (result)
-				{
-					javaVersion = new AppletObjects.JavaVersion(<span class="literal">"1.1.1_06"</span>);
-				}
-			}
-		} catch (e) {}
-<span class="comment">//		}</span>
+    <span class="comment">/**
+     * This function tries to instantiate JavaPlugin.??? objects.
+     * JRE versions 1.1.1_06 through to 1.3.1 installed a JavaSoft.JavaBeansBridge object.
+     */</span>
+     
+    getJavaVersionWithBrutForce: <span class="reserved">function</span> ()
+    {
+        var javaVersion = new AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>);
+        startOfRegistryClasses = new AppletObjects.JavaVersion(<span class="literal">"1.3.1_1"</span>);
+        try
+        {
+<span class="comment">//            if(!this.minimumVersion.isGreater(startOfRegistryClasses)){</span>
+            <span class="reserved">if</span> (<span class="reserved">this</span>.IEDetectUnder13)
+            {
+                <span class="comment">/* this call caused the java console to load, which takes 1 or two seconds.
+                * If you are going to display an applet anyway this is no problem otherwise
+                * you might want to avoid using it.
+                *
+                * [fjen] so, the java-console will open no matter what?
+                */</span>
+                result = new ActiveXObject(<span class="literal">"JavaSoft.JavaBeansBridge"</span>);
+                <span class="reserved">if</span> (result)
+                {
+                    javaVersion = new AppletObjects.JavaVersion(<span class="literal">"1.1.1_06"</span>);
+                }
+            }
+        } catch (e) {}
+<span class="comment">//        }</span>
 <span class="comment">// if I check every time I write an applet </span>
 <span class="comment">// then I can start looking from the supplied min version</span>
-<span class="comment">//		major = 10+this.minimumVersion.major;</span>
+<span class="comment">//        major = 10+this.minimumVersion.major;</span>
 
-		major = 13;
-		<span class="reserved">for</span> (; major &lt;= 16; major++)			<span class="comment">//major  1.3 - 1.6</span>
-		{			
-			<span class="reserved">for</span> (minor=0; minor &lt;= 2; minor++)	<span class="comment">//minor 0  - 2;  I have also seen Java version 1.1.4 to 1.1.8</span>
-			{	
-				<span class="reserved">for</span> (sub=0; sub &lt;= 20; sub++)	<span class="comment">//major  0 - 20???</span>
-				{
-					subVersion = <span class="literal">""</span>;
-					<span class="reserved">if</span> (sub &gt; 0)
-					{
-						subVersion = <span class="literal">"_"</span>;
-						<span class="reserved">if</span> (sub &lt; 10)
-						{
-							subVersion = subVersion + <span class="literal">"0"</span> + sub;
-						} 
-						<span class="reserved">else</span>
-						{
-							subVersion = subVersion + <span class="literal">""</span> + sub;
-						}
-					}
-					regVersion = major+<span class="literal">""</span>+minor+subVersion;
-					<span class="reserved">if</span> (major==15)
-					{
-<span class="comment">//						alert(regVersion);</span>
-					}
-					try 
-					{
-						result = new ActiveXObject(<span class="literal">"JavaPlugin."</span>+regVersion);
-						<span class="reserved">if</span> (result) 
-						{
-							var version = <span class="literal">""</span>+(major/10) + <span class="literal">"."</span> + minor+subVersion;
-							javaVersion = new AppletObjects.JavaVersion(version);
-							
-							<span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0) 
-							{
-								alert(regVersion);
-								javaVersion.show();
-							}
-						}
-					} catch(e) {}
-<span class="comment">//					if(!this.minimumVersion.isGreater(javaVersion)){</span>
-<span class="comment">//						return javaVersion;</span>
-<span class="comment">//					}</span>
-				}
-			}
-		}
-		<span class="reserved">return</span> javaVersion;
-	},
-	
-	<span class="comment">/**
-	 * 		setCookie(nameOfCookie, value, expireHours);
-	 * 		
-	 * 		used to save something in a cookie on the client machine
-	 */</span>
+        major = 13;
+        <span class="reserved">for</span> (; major &lt;= 16; major++)            <span class="comment">//major  1.3 - 1.6</span>
+        {            
+            <span class="reserved">for</span> (minor=0; minor &lt;= 2; minor++)    <span class="comment">//minor 0  - 2;  I have also seen Java version 1.1.4 to 1.1.8</span>
+            {    
+                <span class="reserved">for</span> (sub=0; sub &lt;= 20; sub++)    <span class="comment">//major  0 - 20???</span>
+                {
+                    subVersion = <span class="literal">""</span>;
+                    <span class="reserved">if</span> (sub &gt; 0)
+                    {
+                        subVersion = <span class="literal">"_"</span>;
+                        <span class="reserved">if</span> (sub &lt; 10)
+                        {
+                            subVersion = subVersion + <span class="literal">"0"</span> + sub;
+                        } 
+                        <span class="reserved">else</span>
+                        {
+                            subVersion = subVersion + <span class="literal">""</span> + sub;
+                        }
+                    }
+                    regVersion = major+<span class="literal">""</span>+minor+subVersion;
+                    <span class="reserved">if</span> (major==15)
+                    {
+<span class="comment">//                        alert(regVersion);</span>
+                    }
+                    try 
+                    {
+                        result = new ActiveXObject(<span class="literal">"JavaPlugin."</span>+regVersion);
+                        <span class="reserved">if</span> (result) 
+                        {
+                            var version = <span class="literal">""</span>+(major/10) + <span class="literal">"."</span> + minor+subVersion;
+                            javaVersion = new AppletObjects.JavaVersion(version);
+                            
+                            <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0) 
+                            {
+                                alert(regVersion);
+                                javaVersion.show();
+                            }
+                        }
+                    } catch(e) {}
+<span class="comment">//                    if(!this.minimumVersion.isGreater(javaVersion)){</span>
+<span class="comment">//                        return javaVersion;</span>
+<span class="comment">//                    }</span>
+                }
+            }
+        }
+        <span class="reserved">return</span> javaVersion;
+    },
+    
+    <span class="comment">/**
+     *         setCookie(nameOfCookie, value, expireHours);
+     *         
+     *         used to save something in a cookie on the client machine
+     */</span>
 
-	setCookie: <span class="reserved">function</span> (nameOfCookie, value, expireHours)
-	{
-		var expireDate = new Date ();
-	  	expireDate.setTime(expireDate.getTime() + (expireHours * 3600 * 1000));
-	  	document.cookie = nameOfCookie + <span class="literal">"="</span> + escape(value) + <span class="literal">"; path=/"</span> + ((expireHours == null) ? <span class="literal">""</span> : <span class="literal">"; expires="</span> + expireDate.toGMTString());
-	},
+    setCookie: <span class="reserved">function</span> (nameOfCookie, value, expireHours)
+    {
+        var expireDate = new Date ();
+          expireDate.setTime(expireDate.getTime() + (expireHours * 3600 * 1000));
+          document.cookie = nameOfCookie + <span class="literal">"="</span> + escape(value) + <span class="literal">"; path=/"</span> + ((expireHours == null) ? <span class="literal">""</span> : <span class="literal">"; expires="</span> + expireDate.toGMTString());
+    },
 
-	<span class="comment">/**
-	 * 		getCookie(nameOfCookie);
-	 * 		
-	 * 		used to get something from a cookie on the client machine
-	 */</span>
+    <span class="comment">/**
+     *         getCookie(nameOfCookie);
+     *         
+     *         used to get something from a cookie on the client machine
+     */</span>
 
-	getCookie: <span class="reserved">function</span>(nameOfCookie)
-	{
-		<span class="reserved">if</span> (document.cookie.length &gt; 0)
-		{
-			var begin = document.cookie.indexOf(nameOfCookie+<span class="literal">"="</span>);
-		    <span class="reserved">if</span> (begin != -1)
-		    {
-				begin += nameOfCookie.length+1; 
-				var end = document.cookie.indexOf(<span class="literal">";"</span>, begin);
-				<span class="reserved">if</span> (end == -1)
-					end = document.cookie.length;
-	    	
-	    		<span class="reserved">return</span> unescape(document.cookie.substring(begin, end));
-			}
-			<span class="reserved">return</span> null; 
-	  	}
-		<span class="reserved">return</span> null; 
-	},
+    getCookie: <span class="reserved">function</span>(nameOfCookie)
+    {
+        <span class="reserved">if</span> (document.cookie.length &gt; 0)
+        {
+            var begin = document.cookie.indexOf(nameOfCookie+<span class="literal">"="</span>);
+            <span class="reserved">if</span> (begin != -1)
+            {
+                begin += nameOfCookie.length+1; 
+                var end = document.cookie.indexOf(<span class="literal">";"</span>, begin);
+                <span class="reserved">if</span> (end == -1)
+                    end = document.cookie.length;
+            
+                <span class="reserved">return</span> unescape(document.cookie.substring(begin, end));
+            }
+            <span class="reserved">return</span> null; 
+          }
+        <span class="reserved">return</span> null; 
+    },
 
 
-	<span class="comment">/**
-	 * 		saveJavaVersionToCookie();
-	 * 		
-	 * 		used to save the java version so we don't have to retest it 
-	 * 		next time the user wants to load an applet.
-	 */</span>
-	
-	saveJavaVersionToCookie : <span class="reserved">function</span>(JREVersion)
-	{
-		var now = new Date();
+    <span class="comment">/**
+     *         saveJavaVersionToCookie();
+     *         
+     *         used to save the java version so we don't have to retest it 
+     *         next time the user wants to load an applet.
+     */</span>
+    
+    saveJavaVersionToCookie : <span class="reserved">function</span>(JREVersion)
+    {
+        var now = new Date();
 
-		userid = <span class="reserved">this</span>.getCookie(<span class="literal">"AOUSER_ID"</span>);
-		<span class="reserved">if</span> (userid == null || (userid==<span class="literal">""</span>))
-		{
-			var randomnumber = Math.floor(Math.random() * 10000);
-			userid = <span class="literal">"aouser_id"</span> + now.getTime() +<span class="literal">"r"</span>+ randomnumber
-		};
-		alert(JREVersion);
-		<span class="reserved">this</span>.setCookie(<span class="literal">"AOUSER_ID"</span>, userid, 10000);
-		<span class="reserved">this</span>.setCookie(<span class="literal">"JREVersion"</span>, JREVersion, 10000);
-		userid=<span class="literal">""</span>;
-		userid=<span class="reserved">this</span>.getCookie(<span class="literal">"AOUSER_ID"</span>);
-	},
-	
-	TAG_APPLET : 1,
-	TAG_OBJECT : 2,
-	TAG_EMBED  : 4,
-	
-	
-	PRELOAD_TIMEDOUT : -13
+        userid = <span class="reserved">this</span>.getCookie(<span class="literal">"AOUSER_ID"</span>);
+        <span class="reserved">if</span> (userid == null || (userid==<span class="literal">""</span>))
+        {
+            var randomnumber = Math.floor(Math.random() * 10000);
+            userid = <span class="literal">"aouser_id"</span> + now.getTime() +<span class="literal">"r"</span>+ randomnumber
+        };
+        alert(JREVersion);
+        <span class="reserved">this</span>.setCookie(<span class="literal">"AOUSER_ID"</span>, userid, 10000);
+        <span class="reserved">this</span>.setCookie(<span class="literal">"JREVersion"</span>, JREVersion, 10000);
+        userid=<span class="literal">""</span>;
+        userid=<span class="reserved">this</span>.getCookie(<span class="literal">"AOUSER_ID"</span>);
+    },
+    
+    TAG_APPLET : 1,
+    TAG_OBJECT : 2,
+    TAG_EMBED  : 4,
+    
+    
+    PRELOAD_TIMEDOUT : -13
 }
 
 
 <span class="comment">/**
-		prototype JavaVersion()
-		
-		represents a java version
+        prototype JavaVersion()
+        
+        represents a java version
  */</span>
 
 AppletObjects.JavaVersion = <span class="reserved">function</span> (version)
 {
-	<span class="reserved">this</span>.minor = 0;
-	<span class="reserved">this</span>.rev = 0;
-	arrVersion = version.split(<span class="literal">"."</span>);
-	
-	<span class="reserved">if</span> (arrVersion[2] != null) 
-	{
-		arrMinorAndRev = arrVersion[2].split(<span class="literal">"_"</span>);
-		<span class="reserved">this</span>.minor = arrMinorAndRev[0] != null ? parseInt(arrMinorAndRev[0]) : 0;
-		
-		<span class="reserved">if</span> (arrMinorAndRev[1] != null)
-		{
-			<span class="reserved">if</span> (arrMinorAndRev[1].substring(0,1)==<span class="literal">"0"</span>)
-			{
-				<span class="reserved">this</span>.rev = parseInt(arrMinorAndRev[1].substring(1,2));
-			}
-			<span class="reserved">else</span>
-			{
-				<span class="reserved">this</span>.rev = parseInt(arrMinorAndRev[1]);
-			}
-		}
-	}
-	
-	<span class="reserved">this</span>.superMajor = arrVersion[0] != null ? parseInt(arrVersion[0]) : 0;
-	<span class="reserved">this</span>.major = arrVersion[1] != null ? parseInt(arrVersion[1]) : 0;
+    <span class="reserved">this</span>.minor = 0;
+    <span class="reserved">this</span>.rev = 0;
+    arrVersion = version.split(<span class="literal">"."</span>);
+    
+    <span class="reserved">if</span> (arrVersion[2] != null) 
+    {
+        arrMinorAndRev = arrVersion[2].split(<span class="literal">"_"</span>);
+        <span class="reserved">this</span>.minor = arrMinorAndRev[0] != null ? parseInt(arrMinorAndRev[0]) : 0;
+        
+        <span class="reserved">if</span> (arrMinorAndRev[1] != null)
+        {
+            <span class="reserved">if</span> (arrMinorAndRev[1].substring(0,1)==<span class="literal">"0"</span>)
+            {
+                <span class="reserved">this</span>.rev = parseInt(arrMinorAndRev[1].substring(1,2));
+            }
+            <span class="reserved">else</span>
+            {
+                <span class="reserved">this</span>.rev = parseInt(arrMinorAndRev[1]);
+            }
+        }
+    }
+    
+    <span class="reserved">this</span>.superMajor = arrVersion[0] != null ? parseInt(arrVersion[0]) : 0;
+    <span class="reserved">this</span>.major = arrVersion[1] != null ? parseInt(arrVersion[1]) : 0;
 }
 
 
 <span class="comment">/**
-		AppletObjects.JavaVersion.isGreater()
-		
-		compare two JavaVersion objects
+        AppletObjects.JavaVersion.isGreater()
+        
+        compare two JavaVersion objects
  */</span>
 
 AppletObjects.JavaVersion.<span class="reserved">prototype</span>.isGreater = <span class="reserved">function</span> (fv)
 {
-	<span class="reserved">if</span>(<span class="reserved">this</span>.major &lt; fv.major) <span class="reserved">return</span> false;
-	<span class="reserved">if</span>(<span class="reserved">this</span>.major &gt; fv.major) <span class="reserved">return</span> true;
-	<span class="reserved">if</span>(<span class="reserved">this</span>.minor &lt; fv.minor) <span class="reserved">return</span> false;
-	<span class="reserved">if</span>(<span class="reserved">this</span>.minor &gt; fv.minor) <span class="reserved">return</span> true;
-	<span class="reserved">if</span>(<span class="reserved">this</span>.rev &lt; fv.rev) <span class="reserved">return</span> false;
-	<span class="reserved">return</span> true;
+    <span class="reserved">if</span>(<span class="reserved">this</span>.major &lt; fv.major) <span class="reserved">return</span> false;
+    <span class="reserved">if</span>(<span class="reserved">this</span>.major &gt; fv.major) <span class="reserved">return</span> true;
+    <span class="reserved">if</span>(<span class="reserved">this</span>.minor &lt; fv.minor) <span class="reserved">return</span> false;
+    <span class="reserved">if</span>(<span class="reserved">this</span>.minor &gt; fv.minor) <span class="reserved">return</span> true;
+    <span class="reserved">if</span>(<span class="reserved">this</span>.rev &lt; fv.rev) <span class="reserved">return</span> false;
+    <span class="reserved">return</span> true;
 }
 
 
 <span class="comment">/**
-		AppletObjects.JavaVersion.show()
-		
-		used for debugging
+        AppletObjects.JavaVersion.show()
+        
+        used for debugging
  */</span>
 
 AppletObjects.JavaVersion.<span class="reserved">prototype</span>.show = <span class="reserved">function</span> ()
 {
-	alert(<span class="reserved">this</span>.toString());
+    alert(<span class="reserved">this</span>.toString());
 }
 
 
 <span class="comment">/**
-		AppletObjects.JavaVersion.toString()
-		
-		return a string representation of this JavaVersion object
+        AppletObjects.JavaVersion.toString()
+        
+        return a string representation of this JavaVersion object
  */</span>
 
 AppletObjects.JavaVersion.<span class="reserved">prototype</span>.toString = <span class="reserved">function</span> ()
 {
-	var versionString = <span class="literal">""</span>+<span class="reserved">this</span>.superMajor+
-			<span class="literal">"."</span>+<span class="reserved">this</span>.major+
-			<span class="literal">"."</span>+<span class="reserved">this</span>.minor;
+    var versionString = <span class="literal">""</span>+<span class="reserved">this</span>.superMajor+
+            <span class="literal">"."</span>+<span class="reserved">this</span>.major+
+            <span class="literal">"."</span>+<span class="reserved">this</span>.minor;
 
-	<span class="reserved">if</span> ( <span class="reserved">this</span>.rev )
-	{
-		<span class="reserved">if</span>( <span class="reserved">this</span>.rev &gt;= 10 )
-		{
-			versionString += <span class="literal">"_"</span>+<span class="reserved">this</span>.rev;
-		}
-		<span class="reserved">else</span>
-		{
-			versionString += <span class="literal">"_0"</span>+<span class="reserved">this</span>.rev;
-		}
-	}
-	<span class="reserved">return</span> versionString;
+    <span class="reserved">if</span> ( <span class="reserved">this</span>.rev )
+    {
+        <span class="reserved">if</span>( <span class="reserved">this</span>.rev &gt;= 10 )
+        {
+            versionString += <span class="literal">"_"</span>+<span class="reserved">this</span>.rev;
+        }
+        <span class="reserved">else</span>
+        {
+            versionString += <span class="literal">"_0"</span>+<span class="reserved">this</span>.rev;
+        }
+    }
+    <span class="reserved">return</span> versionString;
 }
 
 
 var AppletObject = 
 <span class="comment">/**
-		prototype AppletObject()
-		
-		represents an applet object
+        prototype AppletObject()
+        
+        represents an applet object
  */</span>
 <span class="reserved">function</span> AppletObject ( ) 
 {
-	<span class="reserved">this</span>.code 		= arguments[0];
-	
-	<span class="reserved">this</span>.archives = new Array();
-	<span class="reserved">if</span> ( arguments[1] )
-	{
-		<span class="reserved">this</span>.archives 	= (arguments[1][0].length &gt; 1)
-						  ? arguments[1]
-						  : arguments[1].split(<span class="literal">','</span>);
-	}
-					  
-	<span class="reserved">this</span>.width 		= arguments[2] &gt; 0 ? arguments[2] : 100; <span class="comment">// [fjen] alert? read from element?</span>
-	<span class="reserved">this</span>.height 	= arguments[3] &gt; 0 ? arguments[3] : 100;
-	
-	var minimumVersionString = arguments[4] ? arguments[4] : 0;
-					  
-	<span class="reserved">this</span>.mayscript 	= arguments[5] ? arguments[5] : <span class="literal">'true'</span>;
-	
-	<span class="reserved">this</span>.codebase   = arguments[6] != <span class="literal">''</span> ? arguments[6] : null;
-	
-	<span class="reserved">this</span>.params = new Array();
-	<span class="reserved">if</span> (arguments[7]) {
-		<span class="reserved">this</span>.addParams(arguments[7]);
-	}
-	
-	<span class="reserved">this</span>.tagType    = arguments[8] &amp;&amp; arguments[8] &gt; 0 &amp;&amp; arguments[8] &lt; 5
-					  ? arguments[8]
-					  : AppletObjects.TAG_OBJECT; <span class="comment">// [fjen] changed that to object as default</span>
-	
-	<span class="reserved">this</span>.fallback	= <span class="literal">'To view this content, you need to install '</span>+
-					   <span class="literal">'Java from &lt;A HREF="http://java.com"&gt;java.com&lt;/A&gt;'</span>;
-					   
-	<span class="reserved">this</span>.java_disabled_message = <span class="literal">'&lt;p&gt;&lt;strong&gt;'</span>+
-								<span class="literal">'Java is disabled in your browsers preferences.&lt;br /&gt;'</span>+
-								<span class="literal">'You need to activate it to view this applet.'</span>+
-								<span class="literal">'&lt;'</span>+<span class="literal">'/strong&gt;&lt;'</span>+<span class="literal">'/p&gt;'</span>+
-								<span class="literal">'Reload this page once you enabled Java.'</span>;
-								
-	<span class="reserved">this</span>.java_plugin_message = <span class="literal">'&lt;p&gt;&lt;strong&gt;'</span>+
-								<span class="literal">'This browser does not have a Java Plug-in.'</span>+
-								<span class="literal">'&lt;'</span>+<span class="literal">'/strong&gt;&lt;'</span>+<span class="literal">'/p&gt;'</span>+
-								<span class="literal">'&lt;a href="http://java.sun.com/products/plugin/downloads/index.html"&gt;'</span>+
-								<span class="literal">'Get the latest Java Plug-in here.'</span>+
-								<span class="literal">'&lt;'</span>+<span class="literal">'/a&gt;'</span>;
+    <span class="reserved">this</span>.code         = arguments[0];
+    
+    <span class="reserved">this</span>.archives = new Array();
+    <span class="reserved">if</span> ( arguments[1] )
+    {
+        <span class="reserved">this</span>.archives     = (arguments[1][0].length &gt; 1)
+                          ? arguments[1]
+                          : arguments[1].split(<span class="literal">','</span>);
+    }
+                      
+    <span class="reserved">this</span>.width         = arguments[2] &gt; 0 ? arguments[2] : 100; <span class="comment">// [fjen] alert? read from element?</span>
+    <span class="reserved">this</span>.height     = arguments[3] &gt; 0 ? arguments[3] : 100;
+    
+    var minimumVersionString = arguments[4] ? arguments[4] : 0;
+                      
+    <span class="reserved">this</span>.mayscript     = arguments[5] ? arguments[5] : <span class="literal">'true'</span>;
+    
+    <span class="reserved">this</span>.codebase   = arguments[6] != <span class="literal">''</span> ? arguments[6] : null;
+    
+    <span class="reserved">this</span>.params = new Array();
+    <span class="reserved">if</span> (arguments[7]) {
+        <span class="reserved">this</span>.addParams(arguments[7]);
+    }
+    
+    <span class="reserved">this</span>.tagType    = arguments[8] &amp;&amp; arguments[8] &gt; 0 &amp;&amp; arguments[8] &lt; 5
+                      ? arguments[8]
+                      : AppletObjects.TAG_OBJECT; <span class="comment">// [fjen] changed that to object as default</span>
+    
+    <span class="reserved">this</span>.fallback    = <span class="literal">'To view this content, you need to install '</span>+
+                       <span class="literal">'Java from &lt;A HREF="http://java.com"&gt;java.com&lt;/A&gt;'</span>;
+                       
+    <span class="reserved">this</span>.java_disabled_message = <span class="literal">'&lt;p&gt;&lt;strong&gt;'</span>+
+                                <span class="literal">'Java is disabled in your browsers preferences.&lt;br /&gt;'</span>+
+                                <span class="literal">'You need to activate it to view this applet.'</span>+
+                                <span class="literal">'&lt;'</span>+<span class="literal">'/strong&gt;&lt;'</span>+<span class="literal">'/p&gt;'</span>+
+                                <span class="literal">'Reload this page once you enabled Java.'</span>;
+                                
+    <span class="reserved">this</span>.java_plugin_message = <span class="literal">'&lt;p&gt;&lt;strong&gt;'</span>+
+                                <span class="literal">'This browser does not have a Java Plug-in.'</span>+
+                                <span class="literal">'&lt;'</span>+<span class="literal">'/strong&gt;&lt;'</span>+<span class="literal">'/p&gt;'</span>+
+                                <span class="literal">'&lt;a href="http://java.sun.com/products/plugin/downloads/index.html"&gt;'</span>+
+                                <span class="literal">'Get the latest Java Plug-in here.'</span>+
+                                <span class="literal">'&lt;'</span>+<span class="literal">'/a&gt;'</span>;
 
-	<span class="reserved">this</span>.java_version_message = <span class="literal">'&lt;p&gt;&lt;strong&gt;'</span>+
-								<span class="literal">'This browser does not have a recent enough Java Plug-in.'</span>+
-								<span class="literal">'&lt;'</span>+<span class="literal">'/strong&gt;&lt;'</span>+<span class="literal">'/p&gt;'</span>+
-								<span class="literal">'&lt;a href="http://java.sun.com/products/plugin/downloads/index.html"&gt;'</span>+
-								<span class="literal">'Get the latest Java Plug-in here.'</span>+
-								<span class="literal">'&lt;'</span>+<span class="literal">'/a&gt;'</span>;
+    <span class="reserved">this</span>.java_version_message = <span class="literal">'&lt;p&gt;&lt;strong&gt;'</span>+
+                                <span class="literal">'This browser does not have a recent enough Java Plug-in.'</span>+
+                                <span class="literal">'&lt;'</span>+<span class="literal">'/strong&gt;&lt;'</span>+<span class="literal">'/p&gt;'</span>+
+                                <span class="literal">'&lt;a href="http://java.sun.com/products/plugin/downloads/index.html"&gt;'</span>+
+                                <span class="literal">'Get the latest Java Plug-in here.'</span>+
+                                <span class="literal">'&lt;'</span>+<span class="literal">'/a&gt;'</span>;
 
-	<span class="reserved">this</span>.loading_message = <span class="literal">'&lt;b&gt;Loading applet ...&lt;'</span>+<span class="literal">'/'</span>+<span class="literal">'b&gt;'</span>;
-	
-	<span class="reserved">this</span>.preload_timedout_message = <span class="literal">'&lt;b&gt;Preloading timed out!&lt;'</span>+<span class="literal">'/'</span>+<span class="literal">'b&gt;'</span>;
-	
-	<span class="reserved">this</span>.currentJar = 0;
-	
-	<span class="reserved">this</span>.loaded 	= false;
-	<span class="reserved">this</span>.inited 	= false;
-	<span class="reserved">this</span>.started 	= false;
-	
-	<span class="reserved">this</span>.container 	= null;
-	<span class="reserved">this</span>.preloadContainer = null;
-	<span class="reserved">this</span>.preLoadClass = <span class="literal">"de.bezier.js.preloading.Preloading.class"</span>;
-	<span class="reserved">this</span>.preLoadJar   = <span class="literal">"ZZZZZZ.jar"</span>;
-	<span class="reserved">this</span>.timeoutFunctionID 	= null;
-	<span class="reserved">this</span>.timeLastPreload = 0;
-	
-	<span class="comment">// [fjenett 20070219] 1 minute, timeout if preloader fails (no callbacks)</span>
-	<span class="reserved">this</span>.preloadTimeout = 1000*60*1;
-	
-	<span class="comment">// [fjen] should fork, but 0 would strangle konqeror 3.x</span>
-	<span class="reserved">this</span>.wait 		= 500;
-	<span class="reserved">this</span>.loadChecks = 0;
-	
-	<span class="reserved">this</span>.javaCheck = AppletObjects.hasJava();
-	
-	<span class="reserved">if</span> ( minimumVersionString.length &gt; 0 )
-	{		
-		AppletObjects.getJavaVersion();
-		<span class="reserved">this</span>.minimumVersion = new AppletObjects.JavaVersion( minimumVersionString );
-		
-		<span class="reserved">if</span> ( !AppletObjects.JREVersion.isGreater( <span class="reserved">this</span>.minimumVersion ) )
-		{
-			<span class="reserved">this</span>.javaCheck = AppletObjects.JAVA_PLUGIN_TOO_OLD;
-		}
-	}
-	
-	<span class="reserved">this</span>.id = AppletObjects.push(<span class="reserved">this</span>);
+    <span class="reserved">this</span>.loading_message = <span class="literal">'&lt;b&gt;Loading applet ...&lt;'</span>+<span class="literal">'/'</span>+<span class="literal">'b&gt;'</span>;
+    
+    <span class="reserved">this</span>.preload_timedout_message = <span class="literal">'&lt;b&gt;Preloading timed out!&lt;'</span>+<span class="literal">'/'</span>+<span class="literal">'b&gt;'</span>;
+    
+    <span class="reserved">this</span>.currentJar = 0;
+    
+    <span class="reserved">this</span>.loaded     = false;
+    <span class="reserved">this</span>.inited     = false;
+    <span class="reserved">this</span>.started     = false;
+    
+    <span class="reserved">this</span>.container     = null;
+    <span class="reserved">this</span>.preloadContainer = null;
+    <span class="reserved">this</span>.preLoadClass = <span class="literal">"de.bezier.js.preloading.Preloading.class"</span>;
+    <span class="reserved">this</span>.preLoadJar   = <span class="literal">"ZZZZZZ.jar"</span>;
+    <span class="reserved">this</span>.timeoutFunctionID     = null;
+    <span class="reserved">this</span>.timeLastPreload = 0;
+    
+    <span class="comment">// [fjenett 20070219] 1 minute, timeout if preloader fails (no callbacks)</span>
+    <span class="reserved">this</span>.preloadTimeout = 1000*60*1;
+    
+    <span class="comment">// [fjen] should fork, but 0 would strangle konqeror 3.x</span>
+    <span class="reserved">this</span>.wait         = 500;
+    <span class="reserved">this</span>.loadChecks = 0;
+    
+    <span class="reserved">this</span>.javaCheck = AppletObjects.hasJava();
+    
+    <span class="reserved">if</span> ( minimumVersionString.length &gt; 0 )
+    {        
+        AppletObjects.getJavaVersion();
+        <span class="reserved">this</span>.minimumVersion = new AppletObjects.JavaVersion( minimumVersionString );
+        
+        <span class="reserved">if</span> ( !AppletObjects.JREVersion.isGreater( <span class="reserved">this</span>.minimumVersion ) )
+        {
+            <span class="reserved">this</span>.javaCheck = AppletObjects.JAVA_PLUGIN_TOO_OLD;
+        }
+    }
+    
+    <span class="reserved">this</span>.id = AppletObjects.push(<span class="reserved">this</span>);
 }
 
 
 <span class="comment">/**
-		AppletObject.getContainer()
-		
-		set and return the DOMElement into which the applet will be created
+        AppletObject.getContainer()
+        
+        set and return the DOMElement into which the applet will be created
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span> (elmID)
 {
-	<span class="reserved">if</span> (!elmID &amp;&amp; <span class="reserved">this</span>.container) <span class="reserved">return</span> <span class="reserved">this</span>.container;
-	<span class="reserved">if</span> (<span class="reserved">this</span>.container == null ) <span class="reserved">this</span>.container = getElement(elmID);
-	<span class="reserved">return</span> <span class="reserved">this</span>.container;
+    <span class="reserved">if</span> (!elmID &amp;&amp; <span class="reserved">this</span>.container) <span class="reserved">return</span> <span class="reserved">this</span>.container;
+    <span class="reserved">if</span> (<span class="reserved">this</span>.container == null ) <span class="reserved">this</span>.container = getElement(elmID);
+    <span class="reserved">return</span> <span class="reserved">this</span>.container;
 }
 
 
 
 <span class="comment">/**
-		AppletObject.alterElement()
-		
-		2007-02-10 17:38:49 - fjenett
-		this is a fix for camino 1.0.3 mac,
-		which will flicker when using Element.innerHTML = ...
-		
-		todo: check element is !null and DOM
+        AppletObject.alterElement()
+        
+        2007-02-10 17:38:49 - fjenett
+        this is a fix for camino 1.0.3 mac,
+        which will flicker when using Element.innerHTML = ...
+        
+        todo: check element is !null and DOM
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.alterElement = <span class="reserved">function</span> ( element, html_snip )
 {
-	setTimeout( <span class="reserved">function</span>(){ element.innerHTML=html_snip; }, 10 );
+    setTimeout( <span class="reserved">function</span>(){ element.innerHTML=html_snip; }, 10 );
 }
 
 
 <span class="comment">/**
-		default callback from Preloading applet
-		
-		onfail() will be called once if loading fails.
+        default callback from Preloading applet
+        
+        onfail() will be called once if loading fails.
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.onfail = <span class="reserved">function</span>( err, element_id )
 {
-	switch ( err )
-	{
-		case AppletObjects.PRELOAD_TIMEDOUT:
-			<span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.preload_timedout_message);
-			break;
-			
-		case AppletObjects.JAVA_DISABLED:
-			<span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_disabled_message);
-			break;
-			
-		case AppletObjects.JAVA_PLUGIN_TOO_OLD:
-			<span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_version_message);
-			break;
-			
-		case AppletObjects.JAVA_PLUGIN_MISSING:
-		default:
-			<span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_plugin_message);
-	}
+    switch ( err )
+    {
+        case AppletObjects.PRELOAD_TIMEDOUT:
+            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.preload_timedout_message);
+            break;
+            
+        case AppletObjects.JAVA_DISABLED:
+            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_disabled_message);
+            break;
+            
+        case AppletObjects.JAVA_PLUGIN_TOO_OLD:
+            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_version_message);
+            break;
+            
+        case AppletObjects.JAVA_PLUGIN_MISSING:
+        default:
+            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_plugin_message);
+    }
 }
 
 
 <span class="comment">/**
-		default callback from Preloading applet
-		
-		oninit() will be called once just before loading starts.
+        default callback from Preloading applet
+        
+        oninit() will be called once just before loading starts.
  */</span>
  
 AppletObject.<span class="reserved">prototype</span>.oninit = <span class="reserved">function</span>()
 {
-	<span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.loading_message);
+    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.loading_message);
 }
 
 
 
 <span class="comment">/**
-		default callback from Preloading applet
-		
-		onstep() will be called twice per jar.
+        default callback from Preloading applet
+        
+        onstep() will be called twice per jar.
  */</span>
  
 AppletObject.<span class="reserved">prototype</span>.onstep = <span class="reserved">function</span>(perc)
 {
-	<span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ),
-		<span class="literal">'&lt;b&gt;Loading applet:&lt;'</span>+<span class="literal">'/b&gt;&lt;br /&gt;&lt;br /&gt;'</span> +
-		<span class="literal">'&lt;div style="width:100px"&gt;&lt;p style="color:#ffffff;'</span> + 
-					<span class="literal">'background-color:#AAAA99;'</span> + 
-					<span class="literal">'width:'</span> + Math.floor(perc)+<span class="literal">'%;'</span> + 
-					<span class="literal">'overflow:hidden;'</span> + 
-					<span class="literal">'"&gt;'</span> +
-			perc + <span class="literal">"%"</span> +
-		<span class="literal">'&lt;'</span>+<span class="literal">'/p&gt;'</span>+<span class="literal">'&lt;'</span>+<span class="literal">'/div&gt;'</span> );
+    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ),
+        <span class="literal">'&lt;b&gt;Loading applet:&lt;'</span>+<span class="literal">'/b&gt;&lt;br /&gt;&lt;br /&gt;'</span> +
+        <span class="literal">'&lt;div style="width:100px"&gt;&lt;p style="color:#ffffff;'</span> + 
+                    <span class="literal">'background-color:#AAAA99;'</span> + 
+                    <span class="literal">'width:'</span> + Math.floor(perc)+<span class="literal">'%;'</span> + 
+                    <span class="literal">'overflow:hidden;'</span> + 
+                    <span class="literal">'"&gt;'</span> +
+            perc + <span class="literal">"%"</span> +
+        <span class="literal">'&lt;'</span>+<span class="literal">'/p&gt;'</span>+<span class="literal">'&lt;'</span>+<span class="literal">'/div&gt;'</span> );
 }
 
 
 
 <span class="comment">/**
-		default callback from Preloading applet
-		
-		onload() will be called once when preloading is finished.
+        default callback from Preloading applet
+        
+        onload() will be called once when preloading is finished.
  */</span>
  
 AppletObject.<span class="reserved">prototype</span>.onload = <span class="reserved">function</span>()
 {
-	<span class="comment">//this.debug( element_id );</span>
-	<span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
+    <span class="comment">//this.debug( element_id );</span>
+    <span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
 }
 
 
 <span class="comment">/**
-		AppletObject._checkNext()
-		
-		check preloading status in preloading loop
+        AppletObject._checkNext()
+        
+        check preloading status in preloading loop
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>._checkNext = <span class="reserved">function</span> ()
 {
-	window.clearTimeout(<span class="reserved">this</span>.timeoutFunctionID);
-	
-	<span class="reserved">if</span> ( !<span class="reserved">this</span>.preloadContainer )
-	{
-		<span class="reserved">this</span>.preloadContainer = document.createElement(<span class="literal">"div"</span>);
-		<span class="comment">// opera 9 mac won't load hidden applets, so let it</span>
-		<span class="comment">// be very tiny and sit in the upper left corner</span>
+    window.clearTimeout(<span class="reserved">this</span>.timeoutFunctionID);
+    
+    <span class="reserved">if</span> ( !<span class="reserved">this</span>.preloadContainer )
+    {
+        <span class="reserved">this</span>.preloadContainer = document.createElement(<span class="literal">"div"</span>);
+        <span class="comment">// opera 9 mac won't load hidden applets, so let it</span>
+        <span class="comment">// be very tiny and sit in the upper left corner</span>
 
-		<span class="reserved">this</span>.preloadContainer.style.position = <span class="literal">"absolute"</span>;
-		<span class="reserved">this</span>.preloadContainer.style.top  = <span class="literal">'0px'</span>;
-		<span class="reserved">this</span>.preloadContainer.style.left = <span class="literal">'0px'</span>;
-		<span class="reserved">this</span>.preloadContainer.style.width  = <span class="literal">'2px'</span>;
-		<span class="reserved">this</span>.preloadContainer.style.height = <span class="literal">'2px'</span>;
-		<span class="reserved">this</span>.preloadContainer.style.borderWidth = <span class="literal">'0px'</span>;
-		<span class="reserved">this</span>.preloadContainer.style.zIndex = 1000;
-		document.body.insertBefore( <span class="reserved">this</span>.preloadContainer, document.body.lastChild.nextSibling ); <span class="comment">// insertAfter</span>
-	}
-	
-	var loadlet = <span class="reserved">this</span>.preloadContainer.firstChild;
-	
-	var isActive = ( loadlet &amp;&amp; document.applets.length &gt; 0
-	  				 &amp;&amp; loadlet == document.applets[document.applets.length-1]
-	  				 ? true : false );
-	
-	<span class="reserved">if</span> ( !<span class="reserved">this</span>.loaded &amp;&amp; isActive )
-	{
-		<span class="reserved">if</span> ( <span class="reserved">this</span>.currentJar &gt;= <span class="reserved">this</span>.archives.length )
-		{
-			<span class="reserved">this</span>.loaded = true;
-			<span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply )
-				<span class="reserved">this</span>.timeoutFunctionID = window.setTimeout(
-							<span class="reserved">this</span>._loadCleanup.bind(<span class="reserved">this</span>), 5000 );
-							<span class="comment">// 5sec, let FF 1.5 have some time to breathe</span>
-			<span class="reserved">else</span>
-				<span class="reserved">this</span>._setTimeout( <span class="literal">'_loadCleanup()'</span>, 1000);
-				
-			<span class="reserved">return</span> <span class="reserved">this</span>.onload();
-		}
-				
-		<span class="reserved">if</span> ( <span class="reserved">this</span>.inited )
-		{
-			<span class="reserved">this</span>.inited  = false;
-			<span class="reserved">this</span>.perc++;
-			<span class="reserved">this</span>.onstep( (<span class="reserved">this</span>.perc * <span class="reserved">this</span>.stepPerc).toFixed(2) );
-		}
-	
-		<span class="reserved">if</span> ( <span class="reserved">this</span>.started )
-		{
-			<span class="reserved">this</span>.started = false;
-			<span class="reserved">this</span>.perc++;
-			<span class="reserved">this</span>.onstep( (<span class="reserved">this</span>.perc * <span class="reserved">this</span>.stepPerc).toFixed(2) );
-			<span class="reserved">this</span>._loadNext();
-		}
-		
-		<span class="reserved">if</span> ( ((new Date()).getTime() - <span class="reserved">this</span>.timeLastPreload) &gt; <span class="reserved">this</span>.preloadTimeout )
-		{
-			
-			<span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply )
-				<span class="reserved">this</span>.timeoutFunctionID = window.setTimeout(
-							<span class="reserved">this</span>._loadCleanup.bind(<span class="reserved">this</span>), 5000 );
-			<span class="reserved">else</span>
-				<span class="reserved">this</span>._setTimeout( <span class="literal">'_loadCleanup()'</span>, 1000);
-				
-			<span class="reserved">this</span>.onfail( AppletObjects.PRELOAD_TIMEDOUT );
-			
-			<span class="reserved">return</span>;
-		}
-	}
-	<span class="reserved">else</span> <span class="reserved">if</span> ( !loadlet )
-	{
-		<span class="reserved">this</span>._loadNext();
-	}
-	<span class="reserved">else</span> <span class="reserved">return</span> alert( <span class="literal">'Err.'</span> );
-	
-	<span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply ) 
-		<span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">this</span>._checkNext.bind(<span class="reserved">this</span>), <span class="reserved">this</span>.wait);
-	<span class="reserved">else</span>
-		<span class="reserved">this</span>._setTimeout( <span class="literal">'_checkNext()'</span>, 1000);
+        <span class="reserved">this</span>.preloadContainer.style.position = <span class="literal">"absolute"</span>;
+        <span class="reserved">this</span>.preloadContainer.style.top  = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.left = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.width  = <span class="literal">'2px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.height = <span class="literal">'2px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.borderWidth = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.zIndex = 1000;
+        document.body.insertBefore( <span class="reserved">this</span>.preloadContainer, document.body.lastChild.nextSibling ); <span class="comment">// insertAfter</span>
+    }
+    
+    var loadlet = <span class="reserved">this</span>.preloadContainer.firstChild;
+    
+    var isActive = ( loadlet &amp;&amp; document.applets.length &gt; 0
+                       &amp;&amp; loadlet == document.applets[document.applets.length-1]
+                       ? true : false );
+    
+    <span class="reserved">if</span> ( !<span class="reserved">this</span>.loaded &amp;&amp; isActive )
+    {
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.currentJar &gt;= <span class="reserved">this</span>.archives.length )
+        {
+            <span class="reserved">this</span>.loaded = true;
+            <span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply )
+                <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout(
+                            <span class="reserved">this</span>._loadCleanup.bind(<span class="reserved">this</span>), 5000 );
+                            <span class="comment">// 5sec, let FF 1.5 have some time to breathe</span>
+            <span class="reserved">else</span>
+                <span class="reserved">this</span>._setTimeout( <span class="literal">'_loadCleanup()'</span>, 1000);
+                
+            <span class="reserved">return</span> <span class="reserved">this</span>.onload();
+        }
+                
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.inited )
+        {
+            <span class="reserved">this</span>.inited  = false;
+            <span class="reserved">this</span>.perc++;
+            <span class="reserved">this</span>.onstep( (<span class="reserved">this</span>.perc * <span class="reserved">this</span>.stepPerc).toFixed(2) );
+        }
+    
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.started )
+        {
+            <span class="reserved">this</span>.started = false;
+            <span class="reserved">this</span>.perc++;
+            <span class="reserved">this</span>.onstep( (<span class="reserved">this</span>.perc * <span class="reserved">this</span>.stepPerc).toFixed(2) );
+            <span class="reserved">this</span>._loadNext();
+        }
+        
+        <span class="reserved">if</span> ( ((new Date()).getTime() - <span class="reserved">this</span>.timeLastPreload) &gt; <span class="reserved">this</span>.preloadTimeout )
+        {
+            
+            <span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply )
+                <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout(
+                            <span class="reserved">this</span>._loadCleanup.bind(<span class="reserved">this</span>), 5000 );
+            <span class="reserved">else</span>
+                <span class="reserved">this</span>._setTimeout( <span class="literal">'_loadCleanup()'</span>, 1000);
+                
+            <span class="reserved">this</span>.onfail( AppletObjects.PRELOAD_TIMEDOUT );
+            
+            <span class="reserved">return</span>;
+        }
+    }
+    <span class="reserved">else</span> <span class="reserved">if</span> ( !loadlet )
+    {
+        <span class="reserved">this</span>._loadNext();
+    }
+    <span class="reserved">else</span> <span class="reserved">return</span> alert( <span class="literal">'Err.'</span> );
+    
+    <span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply ) 
+        <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">this</span>._checkNext.bind(<span class="reserved">this</span>), <span class="reserved">this</span>.wait);
+    <span class="reserved">else</span>
+        <span class="reserved">this</span>._setTimeout( <span class="literal">'_checkNext()'</span>, 1000);
 }
 
 
 <span class="comment">/**
-		AppletObject._setTimeout()
-		
-		internal function to do a bound setTimeout on this AppletObject.
-		this is a fix for win IE 5.01
+        AppletObject._setTimeout()
+        
+        internal function to do a bound setTimeout on this AppletObject.
+        this is a fix for win IE 5.01
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>._setTimeout = <span class="reserved">function</span> ( _fnc, delay )
 {
-	<span class="comment">// fix win 5.01</span>
-	var __code = <span class="literal">'AppletObjects.objects['</span>+<span class="reserved">this</span>.id+<span class="literal">'].'</span>+_fnc;
-	<span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">function</span>(){eval(__code);}, delay);
+    <span class="comment">// fix win 5.01</span>
+    var __code = <span class="literal">'AppletObjects.objects['</span>+<span class="reserved">this</span>.id+<span class="literal">'].'</span>+_fnc;
+    <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">function</span>(){eval(__code);}, delay);
 }
 
 
 <span class="comment">/**
-		AppletObject._loadCleanup()
-		
-		internally called to do some cleanup after preloading
+        AppletObject._loadCleanup()
+        
+        internally called to do some cleanup after preloading
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>._loadCleanup = <span class="reserved">function</span> ()
 {
-	window.clearTimeout(<span class="reserved">this</span>.timeoutFunctionID);
-	<span class="reserved">this</span>.preloadContainer.parentNode.removeChild(<span class="reserved">this</span>.preloadContainer.parentNode.lastChild);
+    window.clearTimeout(<span class="reserved">this</span>.timeoutFunctionID);
+    <span class="reserved">this</span>.preloadContainer.parentNode.removeChild(<span class="reserved">this</span>.preloadContainer.parentNode.lastChild);
 }
 
 
 <span class="comment">/**
-		AppletObject._loadNext()
-		
-		internally called to preload one jar
-		
-		todo: maybe change to &lt;object&gt; ?
+        AppletObject._loadNext()
+        
+        internally called to preload one jar
+        
+        todo: maybe change to &lt;object&gt; ?
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>._loadNext = <span class="reserved">function</span> ()
 {
-	<span class="reserved">this</span>.preloadContainer.archives = <span class="reserved">this</span>.archives[<span class="reserved">this</span>.currentJar]+<span class="literal">','</span>+<span class="reserved">this</span>.preLoadJar;
-	<span class="reserved">this</span>.currentJar++;
-	<span class="reserved">this</span>.alterElement(         <span class="reserved">this</span>.preloadContainer, 
-							   <span class="literal">'&lt;applet '</span>+  <span class="literal">'code="'</span>+<span class="reserved">this</span>.preLoadClass+<span class="literal">'" '</span>+
-		                                     <span class="literal">'archive="'</span>+<span class="reserved">this</span>.preloadContainer.archives+<span class="literal">'" '</span>+
-            	  							 ( <span class="reserved">this</span>.codebase ? 
-            	  							 <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase + <span class="literal">'" '</span> : <span class="literal">''</span> ) +
-		                                     <span class="literal">'width="1"'</span>+
-		                                     <span class="literal">'height="1"'</span>+
-		                                     <span class="literal">'mayscript="true"&gt;'</span>+
-		                        	<span class="literal">'&lt;param name="AObject" value="'</span>+<span class="reserved">this</span>.id+<span class="literal">'" /&gt;'</span>+
-		                        <span class="literal">'&lt;/applet&gt;'</span> 
-		                        );
-	
-	<span class="reserved">this</span>.timeLastPreload = (new Date()).getTime();
-	
-	<span class="comment">//alert( this.preloadContainer.innerHTML );</span>
+    <span class="reserved">this</span>.preloadContainer.archives = <span class="reserved">this</span>.archives[<span class="reserved">this</span>.currentJar]+<span class="literal">','</span>+<span class="reserved">this</span>.preLoadJar;
+    <span class="reserved">this</span>.currentJar++;
+    <span class="reserved">this</span>.alterElement(         <span class="reserved">this</span>.preloadContainer, 
+                               <span class="literal">'&lt;applet '</span>+  <span class="literal">'code="'</span>+<span class="reserved">this</span>.preLoadClass+<span class="literal">'" '</span>+
+                                             <span class="literal">'archive="'</span>+<span class="reserved">this</span>.preloadContainer.archives+<span class="literal">'" '</span>+
+                                               ( <span class="reserved">this</span>.codebase ? 
+                                               <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase + <span class="literal">'" '</span> : <span class="literal">''</span> ) +
+                                             <span class="literal">'width="1"'</span>+
+                                             <span class="literal">'height="1"'</span>+
+                                             <span class="literal">'mayscript="true"&gt;'</span>+
+                                    <span class="literal">'&lt;param name="AObject" value="'</span>+<span class="reserved">this</span>.id+<span class="literal">'" /&gt;'</span>+
+                                <span class="literal">'&lt;/applet&gt;'</span> 
+                                );
+    
+    <span class="reserved">this</span>.timeLastPreload = (new Date()).getTime();
+    
+    <span class="comment">//alert( this.preloadContainer.innerHTML );</span>
 }
 
 
 <span class="comment">/**
-		AppletObject.preload()
-		
-		start preloading loop
+        AppletObject.preload()
+        
+        start preloading loop
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.preload = <span class="reserved">function</span> ( emlID )
 {
-	<span class="reserved">this</span>.element_id = emlID;
+    <span class="reserved">this</span>.element_id = emlID;
 
-	<span class="reserved">if</span> (<span class="reserved">this</span>.javaCheck!=true) { <span class="reserved">return</span> <span class="reserved">this</span>.onfail(<span class="reserved">this</span>.javaCheck); }
-	
-	<span class="comment">// no archives, no preload!</span>
-	<span class="reserved">if</span> ( <span class="reserved">this</span>.archives.length &lt;= 0 )
-	{
-		<span class="reserved">this</span>.oninit();
-		<span class="reserved">this</span>.onload();
-		<span class="reserved">return</span>;
-	}
-	
-	<span class="reserved">this</span>.loaded  = false;
-	<span class="reserved">this</span>.started = false;
-	<span class="reserved">this</span>.inited  = false;
-	
-	<span class="reserved">this</span>.oninit();
-	
-	<span class="reserved">this</span>.currentJar = 0;
-	<span class="reserved">this</span>.preloadContainer = null;
-	<span class="reserved">this</span>.stepPerc = (50.0/(<span class="reserved">this</span>.archives.length-1)); <span class="comment">// called twice per jar</span>
-	<span class="reserved">this</span>.perc = 0;
-	
-	<span class="reserved">this</span>._checkNext();
+    <span class="reserved">if</span> (<span class="reserved">this</span>.javaCheck!=true) { <span class="reserved">return</span> <span class="reserved">this</span>.onfail(<span class="reserved">this</span>.javaCheck); }
+    
+    <span class="comment">// no archives, no preload!</span>
+    <span class="reserved">if</span> ( <span class="reserved">this</span>.archives.length &lt;= 0 )
+    {
+        <span class="reserved">this</span>.oninit();
+        <span class="reserved">this</span>.onload();
+        <span class="reserved">return</span>;
+    }
+    
+    <span class="reserved">this</span>.loaded  = false;
+    <span class="reserved">this</span>.started = false;
+    <span class="reserved">this</span>.inited  = false;
+    
+    <span class="reserved">this</span>.oninit();
+    
+    <span class="reserved">this</span>.currentJar = 0;
+    <span class="reserved">this</span>.preloadContainer = null;
+    <span class="reserved">this</span>.stepPerc = (50.0/(<span class="reserved">this</span>.archives.length-1)); <span class="comment">// called twice per jar</span>
+    <span class="reserved">this</span>.perc = 0;
+    
+    <span class="reserved">this</span>._checkNext();
 }
 
 
 <span class="comment">/**
-		AppletObject.load()
-		
-		create tag, insert into element without preloading
+        AppletObject.load()
+        
+        create tag, insert into element without preloading
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.load = <span class="reserved">function</span> ( elementId )
 {
-	<span class="reserved">this</span>.element_id = elementId;
+    <span class="reserved">this</span>.element_id = elementId;
 
-	<span class="reserved">if</span> (<span class="reserved">this</span>.javaCheck!=true) { <span class="reserved">return</span> <span class="reserved">this</span>.onfail(<span class="reserved">this</span>.javaCheck); }
+    <span class="reserved">if</span> (<span class="reserved">this</span>.javaCheck!=true) { <span class="reserved">return</span> <span class="reserved">this</span>.onfail(<span class="reserved">this</span>.javaCheck); }
 
-	<span class="comment">//this.alterElement( getElement( this.element_id ), '&lt;img src="http://localhost/apache_pb.gif" alt="loading..."/&gt;' );</span>
-	<span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), 
-					   <span class="literal">'&lt;img src="http://ez-applet-html.sourceforge.net/qualiyassurance.php?version='</span> +
-					   AppletObjects.JREVersion.toString() + <span class="literal">'&amp;browser='</span>+<span class="reserved">this</span>.browser + <span class="literal">' alt="loading..."/&gt;'</span> );
-					
-	<span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
+    <span class="comment">//this.alterElement( getElement( this.element_id ), '&lt;img src="http://localhost/apache_pb.gif" alt="loading..."/&gt;' );</span>
+    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), 
+                       <span class="literal">'&lt;img src="http://ez-applet-html.sourceforge.net/qualiyassurance.php?version='</span> +
+                       AppletObjects.JREVersion.toString() + <span class="literal">'&amp;browser='</span>+<span class="reserved">this</span>.browser + <span class="literal">' alt="loading..."/&gt;'</span> );
+                    
+    <span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
 }
 
 
 <span class="comment">/**
-		AppletObject.create()
-		
-		called to create an applet tag based on 
-		AppletObject setting tagType
+        AppletObject.create()
+        
+        called to create an applet tag based on 
+        AppletObject setting tagType
  */</span>
-	
+    
 AppletObject.<span class="reserved">prototype</span>.create = <span class="reserved">function</span> () 
 {
-	var _str = <span class="literal">""</span>;
-	switch (<span class="reserved">this</span>.tagType) {
-		case AppletObjects.TAG_APPLET:
-			_str = <span class="reserved">this</span>.createTagApplet();
-			break;
-		case AppletObjects.TAG_OBJECT:
-			_str = <span class="reserved">this</span>.createTagObject();
-			break;
-		case AppletObjects.TAG_EMBED:
-			_str = <span class="reserved">this</span>.createTagEmbed();
-			break;
-		default:
-			_str = <span class="reserved">this</span>.createTagApplet();
-	}
-	<span class="reserved">return</span> _str;
+    var _str = <span class="literal">""</span>;
+    switch (<span class="reserved">this</span>.tagType) {
+        case AppletObjects.TAG_APPLET:
+            _str = <span class="reserved">this</span>.createTagApplet();
+            break;
+        case AppletObjects.TAG_OBJECT:
+            _str = <span class="reserved">this</span>.createTagObject();
+            break;
+        case AppletObjects.TAG_EMBED:
+            _str = <span class="reserved">this</span>.createTagEmbed();
+            break;
+        default:
+            _str = <span class="reserved">this</span>.createTagApplet();
+    }
+    <span class="reserved">return</span> _str;
 }
 
 
 <span class="comment">/**
-		AppletObject.createTagApplet()
-		
-		create the an applet applet tag
+        AppletObject.createTagApplet()
+        
+        create the an applet applet tag
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.createTagApplet = <span class="reserved">function</span> ()
 {
-	var tag = <span class="literal">'&lt;applet code="'</span>      + <span class="reserved">this</span>.code
- 				  + <span class="literal">'" archive="'</span>   + <span class="reserved">this</span>.archives.implode(<span class="literal">', '</span>) +
-            	  ( <span class="reserved">this</span>.codebase
-            	  ? <span class="literal">'codebase="'</span>    + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
-				  + <span class="literal">'" width="'</span>     + <span class="reserved">this</span>.width 
-				  + <span class="literal">'" height="'</span>    + <span class="reserved">this</span>.height
-				  + <span class="literal">'" mayscript="'</span> + <span class="reserved">this</span>.mayscript
-				  + <span class="literal">'" &gt;'</span>;
-	<span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
-	{
-		tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
-					  <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
-	}
-	tag += <span class="reserved">this</span>.fallback;
-	tag += <span class="literal">'&lt;/applet&gt;'</span>;
-	<span class="reserved">return</span> tag;
+    var tag = <span class="literal">'&lt;applet code="'</span>      + <span class="reserved">this</span>.code
+                   + <span class="literal">'" archive="'</span>   + <span class="reserved">this</span>.archives.implode(<span class="literal">', '</span>) +
+                  ( <span class="reserved">this</span>.codebase
+                  ? <span class="literal">'codebase="'</span>    + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
+                  + <span class="literal">'" width="'</span>     + <span class="reserved">this</span>.width 
+                  + <span class="literal">'" height="'</span>    + <span class="reserved">this</span>.height
+                  + <span class="literal">'" mayscript="'</span> + <span class="reserved">this</span>.mayscript
+                  + <span class="literal">'" &gt;'</span>;
+    <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
+    {
+        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
+                      <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
+    }
+    tag += <span class="reserved">this</span>.fallback;
+    tag += <span class="literal">'&lt;/applet&gt;'</span>;
+    <span class="reserved">return</span> tag;
 }
 
 
 <span class="comment">/**
-		AppletObject.createTagObject()
-		
-		create the an object applet tag,
-		this is the current default
+        AppletObject.createTagObject()
+        
+        create the an object applet tag,
+        this is the current default
  */</span>
  
 AppletObject.<span class="reserved">prototype</span>.createTagObject = <span class="reserved">function</span> ()
 {
-	<span class="reserved">if</span> ( navigator.userAgent.toLowerCase().match(<span class="literal">'msie'</span>) )
-		<span class="reserved">return</span> <span class="reserved">this</span>.createTagObjectIE();
-		
-	var jarchives = <span class="reserved">this</span>.archives.implode(<span class="literal">", "</span>);
-	
-	var tag = <span class="literal">'&lt;object classid="java:'</span>+<span class="reserved">this</span>.code+<span class="literal">'.class" '</span>+
-            		  <span class="literal">'type="application/x-java-applet" '</span>+
-            		  <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
-            	  	  ( <span class="reserved">this</span>.codebase 
-            	      ? <span class="literal">'codebase="'</span>+ <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
-				  	  <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
-				      <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
-				      <span class="literal">'standby="Loading applet ..." '</span>+
-				      <span class="literal">'&gt;'</span>+
-            	  	  ( <span class="reserved">this</span>.codebase ?
-            	  	<span class="literal">'&lt;param name="codebase"   value="'</span>+ <span class="reserved">this</span>.codebase+<span class="literal">'" /&gt;'</span> : <span class="literal">''</span> ) +
-					<span class="literal">'&lt;param name="archive"    value="'</span>+jarchives+<span class="literal">'" /&gt;'</span>+
-				    <span class="literal">'&lt;param name="mayscript"  value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>+
-				    <span class="literal">'&lt;param name="scriptable" value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>;
-	<span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
-	{
-		tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
-					  <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
-	}
-	tag += <span class="reserved">this</span>.fallback;
-	tag += <span class="literal">'&lt;/object&gt;'</span>;
-	<span class="reserved">return</span> tag;
+    <span class="reserved">if</span> ( navigator.userAgent.toLowerCase().match(<span class="literal">'msie'</span>) )
+        <span class="reserved">return</span> <span class="reserved">this</span>.createTagObjectIE();
+        
+    var jarchives = <span class="reserved">this</span>.archives.implode(<span class="literal">", "</span>);
+    
+    var tag = <span class="literal">'&lt;object classid="java:'</span>+<span class="reserved">this</span>.code+<span class="literal">'.class" '</span>+
+                      <span class="literal">'type="application/x-java-applet" '</span>+
+                      <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
+                        ( <span class="reserved">this</span>.codebase 
+                      ? <span class="literal">'codebase="'</span>+ <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
+                        <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
+                      <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
+                      <span class="literal">'standby="Loading applet ..." '</span>+
+                      <span class="literal">'&gt;'</span>+
+                        ( <span class="reserved">this</span>.codebase ?
+                      <span class="literal">'&lt;param name="codebase"   value="'</span>+ <span class="reserved">this</span>.codebase+<span class="literal">'" /&gt;'</span> : <span class="literal">''</span> ) +
+                    <span class="literal">'&lt;param name="archive"    value="'</span>+jarchives+<span class="literal">'" /&gt;'</span>+
+                    <span class="literal">'&lt;param name="mayscript"  value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>+
+                    <span class="literal">'&lt;param name="scriptable" value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>;
+    <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
+    {
+        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
+                      <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
+    }
+    tag += <span class="reserved">this</span>.fallback;
+    tag += <span class="literal">'&lt;/object&gt;'</span>;
+    <span class="reserved">return</span> tag;
 }
 
 
 <span class="comment">/**
-		AppletObject.createTagObjectIE()
-		
-		create the an object applet tag for internet explorer
+        AppletObject.createTagObjectIE()
+        
+        create the an object applet tag for internet explorer
  */</span>
 
 <span class="comment">// [fjen] this ( clsid / codebase ) needs to play together with the minimumVersion</span>
-<span class="comment">// 		  setting.</span>
+<span class="comment">//           setting.</span>
 
 AppletObject.<span class="reserved">prototype</span>.createTagObjectIE = <span class="reserved">function</span> ()
 {
-	var jarchives = <span class="reserved">this</span>.archives.implode(<span class="literal">", "</span>);
-	
-	var tag = <span class="literal">'&lt;object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" '</span>+
-            		  <span class="literal">'type="application/x-java-applet" '</span>+
-            		  <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
-            	  	  <span class="literal">'codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_09-windows-i586.cab" '</span> +
-				  	  <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
-				      <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
-				      <span class="literal">'standby="Loading applet ..." '</span>+
-				      <span class="literal">'&gt;'</span>+
-					<span class="literal">'&lt;param name="code"       value="'</span>+<span class="reserved">this</span>.code+<span class="literal">'" /&gt;'</span>+
-            	  	  ( <span class="reserved">this</span>.codebase  ?
-            	  	<span class="literal">'&lt;param name="codebase"   value="'</span>+ <span class="reserved">this</span>.codebase+<span class="literal">'" /&gt;'</span> : <span class="literal">''</span> ) +
-					<span class="literal">'&lt;param name="archive"    value="'</span>+jarchives+<span class="literal">'" /&gt;'</span>+
-				    <span class="literal">'&lt;param name="mayscript"  value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>+
-				    <span class="literal">'&lt;param name="scriptable" value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>;
-	<span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
-	{
-		tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
-					  <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
-	}
-	tag += <span class="reserved">this</span>.fallback;
-	tag += <span class="literal">'&lt;/object&gt;'</span>;
-	<span class="reserved">return</span> tag;
+    var jarchives = <span class="reserved">this</span>.archives.implode(<span class="literal">", "</span>);
+    
+    var tag = <span class="literal">'&lt;object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" '</span>+
+                      <span class="literal">'type="application/x-java-applet" '</span>+
+                      <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
+                        <span class="literal">'codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_09-windows-i586.cab" '</span> +
+                        <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
+                      <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
+                      <span class="literal">'standby="Loading applet ..." '</span>+
+                      <span class="literal">'&gt;'</span>+
+                    <span class="literal">'&lt;param name="code"       value="'</span>+<span class="reserved">this</span>.code+<span class="literal">'" /&gt;'</span>+
+                        ( <span class="reserved">this</span>.codebase  ?
+                      <span class="literal">'&lt;param name="codebase"   value="'</span>+ <span class="reserved">this</span>.codebase+<span class="literal">'" /&gt;'</span> : <span class="literal">''</span> ) +
+                    <span class="literal">'&lt;param name="archive"    value="'</span>+jarchives+<span class="literal">'" /&gt;'</span>+
+                    <span class="literal">'&lt;param name="mayscript"  value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>+
+                    <span class="literal">'&lt;param name="scriptable" value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>;
+    <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
+    {
+        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
+                      <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
+    }
+    tag += <span class="reserved">this</span>.fallback;
+    tag += <span class="literal">'&lt;/object&gt;'</span>;
+    <span class="reserved">return</span> tag;
 }
 
 
 <span class="comment">/**
-		AppletObject.createTagEmbed()
-		
-		create the an embed applet tag
+        AppletObject.createTagEmbed()
+        
+        create the an embed applet tag
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.createTagEmbed = <span class="reserved">function</span> ()
 {
-	var jarchives = <span class="reserved">this</span>.archives.implode(<span class="literal">", "</span>);
-	
-	var tag = <span class="literal">'&lt;embed code="'</span>       + <span class="reserved">this</span>.code+<span class="literal">'.class" '</span>+
-            		  <span class="literal">'type="application/x-java-applet" '</span>+
-            		  <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
-            	  	  ( <span class="reserved">this</span>.codebase 
-            	    ? <span class="literal">'codebase="'</span>  + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
-				  	  <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
-				      <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
-				      <span class="literal">'align="baseline" '</span>+
-				      <span class="literal">'pluginspage="http://java.sun.com/products/plugin/downloads/index.html" '</span>+
-				      <span class="literal">'mayscript="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>+
-				      <span class="literal">'scriptable="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>;
-	<span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
-	{
-		tag += <span class="reserved">this</span>.params[i].name + <span class="literal">'="'</span> + <span class="reserved">this</span>.params[i].value + <span class="literal">'" '</span>;
-	}
-	tag += <span class="literal">' &gt;'</span>;
-	tag += <span class="literal">'&lt;noembed&gt;'</span> + <span class="reserved">this</span>.fallback + <span class="literal">'&lt;/noembed&gt;'</span>;
-	tag += <span class="literal">'&lt;/embed&gt;'</span>;
-	<span class="reserved">return</span> tag;
+    var jarchives = <span class="reserved">this</span>.archives.implode(<span class="literal">", "</span>);
+    
+    var tag = <span class="literal">'&lt;embed code="'</span>       + <span class="reserved">this</span>.code+<span class="literal">'.class" '</span>+
+                      <span class="literal">'type="application/x-java-applet" '</span>+
+                      <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
+                        ( <span class="reserved">this</span>.codebase 
+                    ? <span class="literal">'codebase="'</span>  + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
+                        <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
+                      <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
+                      <span class="literal">'align="baseline" '</span>+
+                      <span class="literal">'pluginspage="http://java.sun.com/products/plugin/downloads/index.html" '</span>+
+                      <span class="literal">'mayscript="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>+
+                      <span class="literal">'scriptable="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>;
+    <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
+    {
+        tag += <span class="reserved">this</span>.params[i].name + <span class="literal">'="'</span> + <span class="reserved">this</span>.params[i].value + <span class="literal">'" '</span>;
+    }
+    tag += <span class="literal">' &gt;'</span>;
+    tag += <span class="literal">'&lt;noembed&gt;'</span> + <span class="reserved">this</span>.fallback + <span class="literal">'&lt;/noembed&gt;'</span>;
+    tag += <span class="literal">'&lt;/embed&gt;'</span>;
+    <span class="reserved">return</span> tag;
 }
 
 
 <span class="comment">/**
-		AppletObject.writeToElement()
-		
-		create the applet tag and insert it into the given element
+        AppletObject.writeToElement()
+        
+        create the applet tag and insert it into the given element
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.writeToElement = <span class="reserved">function</span> ( elementId )
 {
-	<span class="reserved">this</span>.element_id = elementId;
-	
-	<span class="reserved">if</span> ( typeof <span class="reserved">this</span>.getParam(<span class="literal">"image"</span>) == <span class="literal">"undefined"</span> ) {
-		<span class="comment">//TODO encode the url.</span>
-		<span class="reserved">this</span>.addParam(<span class="literal">"image"</span>, <span class="literal">'http://ez-applet-html.sourceforge.net/loading.gif'</span>);
-	}
+    <span class="reserved">this</span>.element_id = elementId;
+    
+    <span class="reserved">if</span> ( typeof <span class="reserved">this</span>.getParam(<span class="literal">"image"</span>) == <span class="literal">"undefined"</span> ) {
+        <span class="comment">//TODO encode the url.</span>
+        <span class="reserved">this</span>.addParam(<span class="literal">"image"</span>, <span class="literal">'http://ez-applet-html.sourceforge.net/loading.gif'</span>);
+    }
 
-	var tag = <span class="reserved">this</span>.create();
-	<span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), tag );
-	<span class="reserved">return</span> tag;
+    var tag = <span class="reserved">this</span>.create();
+    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), tag );
+    <span class="reserved">return</span> tag;
 }
 
 
 <span class="comment">/**
-		AppletObject.debug()
-		
-		used instead of writeToElement to see the created html source
+        AppletObject.debug()
+        
+        used instead of writeToElement to see the created html source
  */</span>
-	
+    
 AppletObject.<span class="reserved">prototype</span>.debug = <span class="reserved">function</span> ( elementId )
 {
-	<span class="reserved">this</span>.element_id = elementId;
-	
-	var tag = <span class="reserved">this</span>.create();
-	<span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="literal">'&lt;textarea style="width:400px;height:100%;"&gt;'</span> + tag + <span class="literal">'&lt;/textarea&gt;'</span> );
-	<span class="reserved">return</span> tag;
+    <span class="reserved">this</span>.element_id = elementId;
+    
+    var tag = <span class="reserved">this</span>.create();
+    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="literal">'&lt;textarea style="width:400px;height:100%;"&gt;'</span> + tag + <span class="literal">'&lt;/textarea&gt;'</span> );
+    <span class="reserved">return</span> tag;
 }
 
 
 <span class="comment">/**
-		AppletObject.addParam()
-		
-		add one parameter to the AppletObject 
+        AppletObject.addParam()
+        
+        add one parameter to the AppletObject 
  */</span>
-	
+    
 AppletObject.<span class="reserved">prototype</span>.addParam = <span class="reserved">function</span> ( _name, _value )
 {
-	<span class="reserved">if</span> ( !_name || !_value ) <span class="reserved">return</span>;
-	<span class="reserved">if</span> ( !<span class="reserved">this</span>.params ) <span class="reserved">this</span>.params = new Array();
-	<span class="reserved">this</span>.params.push( { name  : _name,
-					   value  : _value } );
+    <span class="reserved">if</span> ( !_name || !_value ) <span class="reserved">return</span>;
+    <span class="reserved">if</span> ( !<span class="reserved">this</span>.params ) <span class="reserved">this</span>.params = new Array();
+    <span class="reserved">this</span>.params.push( { name  : _name,
+                       value  : _value } );
 }
 
 
 <span class="comment">/**
-		AppletObject.addParams()
-		
-		add one or more parameters to the AppletObject 
+        AppletObject.addParams()
+        
+        add one or more parameters to the AppletObject 
  */</span>
  
 AppletObject.<span class="reserved">prototype</span>.addParams = <span class="reserved">function</span> ( )
 {
-	<span class="reserved">if</span> ( arguments.length &lt;= 0 ) <span class="reserved">return</span>;
-	<span class="reserved">for</span> ( var i=0; i &lt; arguments.length; i++ )
-	{
-		<span class="reserved">this</span>.addParam( arguments[i][0], arguments[i][1] );
-	}
+    <span class="reserved">if</span> ( arguments.length &lt;= 0 ) <span class="reserved">return</span>;
+    <span class="reserved">for</span> ( var i=0; i &lt; arguments.length; i++ )
+    {
+        <span class="reserved">this</span>.addParam( arguments[i][0], arguments[i][1] );
+    }
 }
 
 
 <span class="comment">/**
-		AppletObject.getParam()
-		
-		return a param from AppletObject by name
+        AppletObject.getParam()
+        
+        return a param from AppletObject by name
  */</span>
  
 AppletObject.<span class="reserved">prototype</span>.getParam = <span class="reserved">function</span> ( _name )
 {
-	<span class="reserved">return</span> <span class="reserved">this</span>.params[_name];
+    <span class="reserved">return</span> <span class="reserved">this</span>.params[_name];
 }
 
 
 <span class="comment">/**
-		AppletObject.addLibrary()
-		
-		add one or more libraries to the AppletObject
-		
-		<span class="attrib">@param</span>: single or multiple strings or one array
+        AppletObject.addLibrary()
+        
+        add one or more libraries to the AppletObject
+        
+        <span class="attrib">@param</span>: single or multiple strings or one array
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class="reserved">function</span> ( )
 {
-	<span class="reserved">if</span> ( arguments.length == 1 )
-	{
-		<span class="reserved">if</span> ( typeof arguments[0] == <span class="literal">'string'</span> )
-			<span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[0];
-	
-		<span class="reserved">else</span> <span class="reserved">if</span> ( arguments[0].length &gt; 0 ) <span class="comment">// array</span>
-		{
-			<span class="reserved">for</span> ( var i = 0; i &lt; arguments[0].length; i++ )
-			{
-				<span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[0][i];
-			}
-		}
-	}
-	<span class="reserved">else</span> <span class="reserved">if</span> ( arguments.length &gt; 0 )
-	{
-		<span class="reserved">for</span> ( var i = 0; i &lt; arguments.length; i++ )
-		{
-			<span class="reserved">if</span> ( typeof arguments[i] == <span class="literal">'string'</span> )
-				<span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[i];
-		}
-	}
+    <span class="reserved">if</span> ( arguments.length == 1 )
+    {
+        <span class="reserved">if</span> ( typeof arguments[0] == <span class="literal">'string'</span> )
+            <span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[0];
+    
+        <span class="reserved">else</span> <span class="reserved">if</span> ( arguments[0].length &gt; 0 ) <span class="comment">// array</span>
+        {
+            <span class="reserved">for</span> ( var i = 0; i &lt; arguments[0].length; i++ )
+            {
+                <span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[0][i];
+            }
+        }
+    }
+    <span class="reserved">else</span> <span class="reserved">if</span> ( arguments.length &gt; 0 )
+    {
+        <span class="reserved">for</span> ( var i = 0; i &lt; arguments.length; i++ )
+        {
+            <span class="reserved">if</span> ( typeof arguments[i] == <span class="literal">'string'</span> )
+                <span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[i];
+        }
+    }
 }
 
 
@@ -1581,6 +1581,6 @@ AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class=
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 20 15:48:21 2007</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Feb 21 12:19:37 2007</div>
 </body>
 </html>

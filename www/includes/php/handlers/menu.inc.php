@@ -17,14 +17,13 @@
 				'-',
 				'source' => "index.php?q=source",
 				'docs' => "index.php?q=docs",
-				//'cvs' => "http://svn.sourceforge.net/viewvc/ez-applet-html/trunk/",
-				//'svn' => "http://svn.sourceforge.net/svnroot/ez-applet-html/trunk/",
 				'-',
 				'examples' => "index.php?q=examples",
 				'-',
 				'contact' => "index.php?q=contact",
 				'-',
-				'project-page' => "http://appletobject.projectpath.com/projects/871799/"
+				'trac' => "http://trac.appletobject.org/appletobject/",
+				'project page' => "http://appletobject.projectpath.com/projects/871799/"
 			);
 			
 			$s = 0;

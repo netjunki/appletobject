@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>appletobject.js</title>
+</head>
+<body>
+<script type="text/javascript" src="../js/appletobject.js"></script>
+<script type="text/javascript" >
+//<![CDATA[
+/*
+			// check for Java plugin in installed plugins
+			if(navigator.mimeTypes) {
+				for (i=0; i < navigator.mimeTypes.length; i++) {
+					mimeType = navigator.mimeTypes[i].type;
+					if( (mimeType != null)
+						&& (mimeType.indexOf(
+						"application/x-java-applet;jpi-version=") != -1) ) {
+							var versionIndex = mimeType.indexOf("version=");
+							javaVersion = new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
+							pluginDetected = true;
+							alert(mimeType);
+					}
+				}
+			}
+
+*/
+	function loadApplet ( element_id ) {
+		var ao = new AppletObject(	'xhtml1', 
+									['candy.jar' , 
+									 'itext.jar' , 
+									 'pdf.jar'   , 
+									 'dxf.jar'   , 
+									 'xml.jar'   , 
+									 'xhtml1.jar', 
+									 'core.jar'  ], 
+									'100', '100', 
+									'1.4.1',
+									'true', 
+									'', 
+									[],
+									AppletObjects.TAG_OBJECT);
+	AppletObjects.JREVersion.show();
+		// add some params
+		//
+		ao.addParams( ['boxmessage','Loading Processing software...'],
+					  ['boxbgcolor','#FFFFFF'],
+					  ['progressbar','true'],
+					  ['test_string','foobar'] );
+		
+		// now, all set, start loading!
+		//
+		ao.load( element_id );
+}
+
+//]]>
+</script>
+<div id="content">
+
+	<div id="div_applet" style="height:100px;">
+		<!-- use appletobject.js if javascript is enabled -->
+		<script type="text/javascript" >
+		//<![CDATA[
+			document.write(
+				'<a href="javascript:loadApplet(\'div_applet\')">'+// or this.parentNode.id
+				'Run'+
+				'<'+'/a>');
+		//]]>
+		</script>
+		<!-- no-javascript fallback -->
+		<noscript>
+			Please turn on Java Script
+		</noscript>
+	</div>
+</div>
+</body>
+</html>

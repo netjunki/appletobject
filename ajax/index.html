@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>appletobject.js</title>
+	
+	<style type="text/css">
+/* <![CDATA[ */
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+	font-family: helvetica, arial, verdana, geneva, sans-serif;
+	font-size: 11px;
+	background-color: #666;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: normal;
+	color: #eee;
+	letter-spacing: 0.1em;
+}
+ 
+a,
+a:link,
+a:visited,
+a:active,
+a:hover
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#sketch
+{
+	margin: 0 50% 0 10%;
+}
+
+#title
+{
+	margin: 10% 0 3% 0;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#comment
+{
+	margin-bottom: 3%;
+	font-size: 12px;
+}
+
+#sources,
+#footer
+{
+	color: #aaa;
+}
+
+#sources
+{
+	font-size: 10px;
+	border-bottom: 1px solid #aaa;
+	height: 20px;
+	padding: 0;
+	margin: 0px;
+}
+
+#sources ul
+{
+	float: right;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#sources li
+{
+	float: left;
+    margin:0;
+    padding:0;
+}
+
+#sources a
+{
+	display: block;
+	border: 1px solid #aaa;
+	border-bottom: 0px;
+	margin: 0px;
+	margin: 0px 0px 0px 6px;
+	padding: 4px 8px 4px 8px;
+}
+
+#applet
+{
+	clear: both;
+	padding: 10% 0 10% 0;
+	border-bottom: 1px solid #aaa;
+	text-align: center;
+}
+
+
+#footer
+{
+	margin-top: 2%;
+	font-size: 11px;
+}
+
+/* ]]> */
+</style>
+
+<script type="text/javascript" src="js/appletobject_005.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushProcessing.js"></script>
+
+</head>
+<body>
+<div id="sketch">
+		<div id="title">
+			xhtml1
+		</div>
+		<div id="comment">
+			Sketch code comments here.
+		</div>
+		<div id="sources">
+			Source code:
+			<ul>
+			<li><a href="../xhtml1.pde">xhtml1</a></li>
+			<li><a href="../Callback.java">Callback</a></li>
+			</ul>
+		</div>
+	
+		<div id="applet" style="height:100px;">
+				<!-- use appletobject.js if javascript is enabled -->
+				<!--script type="text/javascript" >
+				//<![CDATA[
+					document.write(
+						'<a href="javascript:loadApplet(\'div_applet\')">'+// or this.parentNode.id
+						'Load applet.'+
+						'<'+'/a>');
+				//]]>
+				</script>
+				< !-- no-javascript fallback -- >
+			<noscript-->
+			<div>
+					<!--[if !IE]> -->
+			<object classid="java:Preloader.class" 
+					type="application/x-java-applet"
+					archive="ZZZZZZ.jar, xhtml1.jar, core.jar"
+					height="100" width="100"
+					standby="Loading 1a ..." >
+				<param name="codebase" value="../" />
+				<param name="archive" value="ZZZZZZ.jar, xhtml1.jar, core.jar" />
+				<param name="mayscript" value="true" />
+				<param name="scriptable" value="true" />
+				<param name="image" value="loading.gif" />
+				<param name="boxmessage" value="Loading 1b ..." />
+				<param name="boxbgcolor" value="#FFFFFF" />
+				<param name="test_string" value="outer" />
+			<!--<![endif]-->
+				<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" 
+						codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_03-windows-i586.cab"
+						height="100" width="100"
+						standby="Loading 2a ..."  > 
+					<param name="code" value="Preloader" />
+					<param name="codebase" value="../" />
+					<param name="archive" value="ZZZZZZ.jar, xhtml1.jar, core.jar" />
+					<param name="mayscript" value="true" />
+					<param name="scriptable" value="true" />
+					<param name="image" value="loading.gif" />
+					<param name="boxmessage" value="Loading 2b ..." />
+					<param name="boxbgcolor" value="#FFFFFF" />
+					<param name="test_string" value="inner" />
+					<div>
+						<strong>
+						This browser does not have a Java Plug-in.
+						<br />
+						<a href="http://java.sun.com/products/plugin/downloads/index.html">
+						  Get the latest Java Plug-in here.
+						</a>
+						</strong>
+					</div>
+				</object>
+			<!--[if !IE]> close outer object -->
+			</object>
+			<!--<![endif]-->
+			</div>
+			<!-- /noscript -->
+		</div>
+		<div id="footer">
+			Built with <a href="http://processing.org" title="Processing.org">Processing</a> | <a href="http://validator.w3.org/check/referrer">w3c-validate</a>
+		</div>
+</div>
+<script type="text/javascript" >
+//<![CDATA[
+
+function loadApplet ( element_id ) {
+
+		// these jars are not really all needed ...
+		// and i filled them with a little clutter to
+		// generate a really bad case ...
+		
+		// create and init object
+		//
+		var ao = new AppletObject(	'xhtml1', 
+									['candy.jar' , 
+									 'itext.jar' , 
+									 'pdf.jar'   , 
+									 'dxf.jar'   , 
+									 'xml.jar'   , 
+									 'xhtml1.jar', 
+									 'core.jar'  ], 
+									'100', '100', 
+									'true', 
+									'../', 
+									[],
+									AppletObjects.TAG_OBJECT);
+	
+		// add some params
+		//
+		ao.addParams( ['boxmessage','Loading Processing software...'],
+					  ['boxbgcolor','#FFFFFF'],
+					  ['progressbar','true'],
+					  ['test_string','foobar'] );
+					  
+		// callback if java is missing or disabled
+		//
+		ao.onfail = function( level )
+		{
+			switch ( level ) {
+				case AppletObjects.JAVA_DISABLED:
+					getElement(element_id).innerHTML = '<p><strong>'+
+														'Java is disabled in your browsers preferences.<br />'+
+														'You need to activate it to view this applet.'+
+														'<'+'/strong><'+'/p>'+
+														'Reload this page once you enabled Java.';
+					break;
+				case AppletObjects.JAVA_PLUGIN_MISSING:
+				default:
+					getElement(element_id).innerHTML = '<p><strong>'+
+														'This browser does not have a Java Plug-in.'+
+														'<'+'/strong><'+'/p>'+
+														'<a href="http://java.sun.com/products/plugin/downloads/index.html">'+
+														'Get the latest Java Plug-in here.'+
+														'<'+'/a>';
+			}
+		}
+		
+		// callback: loading started
+		//
+		ao.oninit = function()
+		{
+			getElement(element_id).innerHTML = '<b>Loading applet ...<'+'/'+'b>';
+		}
+		
+		// callback: loading progressed, perc is percent loaded
+		//
+		ao.onstep = function(perc)
+		{
+			getElement(element_id).innerHTML = 
+				'<b>Loading applet:<'+'/b><br /><br />' +
+				'<div style="width:100px"><div style="color:#ffffff;' + 
+							'background-color:#AAAA99;' + 
+							'height:12px;' + 
+							'width:' + Math.floor(perc)+'%;' + 
+							'">' +
+					perc +
+				'<'+'/div>'+'<'+'/div>';
+		}
+	    
+	    // callback: loading finished
+		//
+		ao.onload = function()
+		{
+			//ao.debug( element_id );
+			ao.writeToElement( element_id );
+		}
+		
+		// now, all set, start loading!
+		//
+		ao.preload( element_id );
+}
+
+//]]>
+</script>
+</body>
+</html>

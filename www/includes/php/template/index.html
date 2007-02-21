@@ -1,0 +1,30 @@
+<p>
+This project tries to ease, improve and foster the use of applets embedded into websites. We mainly target better user-friendliness by giving developers tools at hand that let them generate multi-browser-compatible standards-compliant xHTML-code and inform the user about the loading status of the needed applet-resources. To sum up, AppletObject is a customizable xHTML generator, Java-check and preloader built with Java, JavaScript and PHP.
+</p>
+<p>
+Make sure to read <a href="http://www.alistapart.com/articles/flashembedcagematch/" title="Flash Embedding Cage Match">this article</a> by Bobby van der Sluis on embedding Flash. It nicely outlines the problems with embedding non-standard content and we share almost all goals with <a href="http://www.swffix.org/devblog/" title="SWFfix.org">them</a>.
+</p>
+<h6>The situation</h6>
+<p>
+Applets embedded into websites fall short compared to other elements like Flash or QuickTime in many ways. One aspect is the long time the Java-plugin and with it the JavaVM needs to start up. Another is the missing or barely custimizable feedback when then Java-plugin loads elements like classes or jar-archives needed to run the applet.<br />
+With the introduction of xHTML-1.0-strict the long time favorite &#x3C;applet&#x3E; tag is now deprecated. Today the only way to stay standards compliant when embedding applets is the &#x3C;object&#x3E; tag, which quadruples the XHTML-code one needs to write to make it work across most current browsers.
+</p>
+<h6>AppletObject</h6>
+<p>
+We are using different approaches to tackle the problems outlined above, some are already implemented others are on the way:<br />
+<ul>
+<li>an intensive tested, standards-compliant &#x3C;object&#x3E; tag to support as many current browsers as possible (have it)</li>
+<li>a javascript library which generates a version of your preferred applet-tag from just one line of code while keeping it as compliant as possible (<a href="test/index.html" title="check out the simple example">ready to use</a>)</li>
+<li>the library also includes a Java detection (enabled-check and plugin-version) (we're still improving this)</li>
+<li>the library also implements a jar-preloader which you can customize to fit your DHTML needs (already in)</li>
+<li>a non-JavaScript PHP-based system to preload in an &#x3C;iframe&#x3E; (on the list)</li>
+<li>... actually the list is pretty long.</li>
+</ul>
+</p>
+<h6>History</h6>
+<p>
+The original version of the JavaScript library is based on the idea of <a href="http://robotacid.com/" title="visit Robotacid.com">Aaron Steed</a>, who was himself inspired by the <a href="http://blog.deconcept.com/" title="visit SWFObjects website">SWFObject</a> project. Being a heavy <a href="http://processing.org/" title="visit Processing.org">Processing</a> user, he decided to write an applet-oriented version of the <a href="http://blog.deconcept.com/" title="visit SWFObjects website">SWFObject</a> &#x2013; called AppletObject &#x2013; to ease the dynamic generation of applet-tags on his personal website <a href="http://robotacid.com/" title="visit Robotacid.com">robotacid.com</a>.<br />
+While working on a solid version of the &#x3C;object&#x3E; tag for Processing I (Florian Jenett) ran into Aarons script. He offered me to take over from him and i added the preloader and customizable callbacks. After i reported back to the Processing forum i got a post from Stephen Williams saying that he was working on a similar project named EZAppletHTML:<br />
+<em class="citation">EZAppletHTML is a JavaScript script that enables you to display applets in a web-page with ease. It checks the installed Java Plug-in version and writes HTML code to your page depending on how you wish the existence of an old version to be handled.</em><br />
+He offered to include his Java-detection into our script and join forces. That's where we're at now.
+</p>

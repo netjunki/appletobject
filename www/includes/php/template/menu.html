@@ -1,0 +1,14 @@
+<ul>
+<?php
+	$s = 0;
+	foreach ( $this->menuitems as $k => $v )
+	{
+		echo $v == '-' ? '<li class="divider" />' : 
+						 '<li>'.'<a href="'.$v.'" title="'.$k.'"'.
+						 ( $s == $this->menuitemSelected ? ' class="active" ' : '' ) 
+						 .'>'.$k.'</a>' . '</li>';
+		$s++;
+	}
+?>
+</ul>
+<!--content-->

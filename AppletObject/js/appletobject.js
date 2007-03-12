@@ -442,6 +442,7 @@ AppletObjects =
                                             "HKEY_LOCAL_MACHINE\\Software\\"+
                                             "JavaSoft\\Java Runtime Environment\\CurrentVersion"));
                             registryBeenRead = true;
+                            pluginDetected = true;
                         } catch(e) {
                             // handle exceptions raised by 'shell.regRead(...)' here
                             // so that the outer try-catch block would receive only
@@ -472,8 +473,16 @@ AppletObjects =
             if ( !registryBeenRead && this.useBrutForceDetectionForIE )
             {
                 javaVersion = this.getJavaVersionWithBrutForce( this.minimumVersion ); // where does this arg end up?
+                pluginDetected = javaVersion.isGreater(AppletObjects.JavaVersion("0.0.0_0"));
             }
         }
+        if(!pluginDetected){
+        	// if the plugin can't be detected we probably have a script error
+        	// and should just write the applet code to the browser and 
+        	// hope that the version is infact new enough
+			javaVersion = new AppletObjects.JavaVersion("99.99.99_99");
+		}
+		
         this.JREVersion = javaVersion;
         if (this.debugLevel==0){
             this.saveJavaVersionToCookie(javaVersion);

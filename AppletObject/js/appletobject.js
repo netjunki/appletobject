@@ -1179,14 +1179,14 @@ AppletObject.prototype.create = function ()
 
 AppletObject.prototype.createTagApplet = function ()
 {
-    var tag = '<applet code="'      + this.code
-                   + '" archive="'   + this.archives.implode(', ') +
-                  ( this.codebase
-                  ? 'codebase="'    + this.codebase+'" ' : '' ) +
-                  + '" width="'     + this.width 
-                  + '" height="'    + this.height
-                  + '" mayscript="' + this.mayscript
-                  + '" >';
+	var codebaseString = ( this.codebase )? 'codebase="' + this.codebase+'" ' : '' ;
+	var tag = '<applet code="'      + this.code
+ 				  + '" archive="'   + this.archives.implode(', ')
+            	  + '" ' 			+ codebaseString
+				  + '  width="'     + this.width 
+				  + '" height="'    + this.height
+				  + '" mayscript="' + this.mayscript
+				  + '" >';
     for(var i = 0; i < this.params.length; i++)
     {
         tag += '<param  name="' + this.params[i].name + '" ' + 

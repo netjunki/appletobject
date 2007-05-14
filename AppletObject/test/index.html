@@ -46,7 +46,10 @@ function loadApplet ( element_id ) {
 									['candy.jar' , 
 									 'itext.jar' , 
 									 'pdf.jar'   , 
-									 'dxf.jar'   ], 
+									 'dxf.jar'   ,
+									 'core.jar'  ,
+									 'xml.jar'   ,
+									 'xhtml1.jar'], 
 									'100', '100', 
 									'true', 
 									'', 
@@ -59,61 +62,6 @@ function loadApplet ( element_id ) {
 					  ['boxbgcolor','#FFFFFF'],
 					  ['progressbar','true'],
 					  ['test_string','foobar'] );
-					  
-		ao.addLibraries( 'xml.jar', 'xhtml1.jar', 'core.jar' );
-					  
-		// callback if java is missing or disabled
-		//
-		/*ao.onfail = function( err )
-		{
-			switch ( err ) {
-				case AppletObjects.JAVA_DISABLED:
-					getElement(element_id).innerHTML = '<p><strong>'+
-														'Java is disabled in your browsers preferences.<br />'+
-														'You need to activate it to view this applet.'+
-														'<'+'/strong><'+'/p>'+
-														'Reload this page once you enabled Java.';
-					break;
-				case AppletObjects.JAVA_PLUGIN_MISSING:
-				default:
-					getElement(element_id).innerHTML = '<p><strong>'+
-														'This browser does not have a Java Plug-in.'+
-														'<'+'/strong><'+'/p>'+
-														'<a href="http://java.sun.com/products/plugin/downloads/index.html">'+
-														'Get the latest Java Plug-in here.'+
-														'<'+'/a>';
-			}
-		}*/
-		
-		// callback: loading started
-		//
-		/*ao.oninit = function()
-		{
-			getElement(element_id).innerHTML = '<b>Loading applet ...<'+'/'+'b>';
-		}*/
-		
-		// callback: loading progressed, perc is percent loaded
-		//
-		/*ao.onstep = function(perc)
-		{
-			getElement(element_id).innerHTML = 
-				'<b>Loading applet:<'+'/b><br /><br />' +
-				'<div style="width:100px"><div style="color:#ffffff;' + 
-							'background-color:#AAAA99;' + 
-							'height:12px;' + 
-							'width:' + Math.floor(perc)+'%;' + 
-							'">' +
-					perc +
-				'<'+'/div>'+'<'+'/div>';
-		}*/
-	    
-	    // callback: loading finished
-		//
-		/*ao.onload = function()
-		{
-			//ao.debug( element_id );
-			ao.writeToElement( element_id );
-		}*/
 		
 		// now, all set, start loading!
 		//
@@ -136,46 +84,46 @@ function loadApplet ( element_id ) {
 		</script>
 		<!-- no-javascript fallback -->
 		<noscript>
-		<div>
-			<!--[if !IE]> -->
-	<object classid="java:xhtml1.class" 
-            type="application/x-java-applet"
-            archive="xhtml1.jar,core.jar"
-            height="100" width="100"
-            standby="Loading 1a ..." >
-		<param name="archive" value="xhtml1.jar,core.jar" />
-		<param name="mayscript" value="true" />
-		<param name="scriptable" value="true" />
-		<param name="image" value="loading.gif" />
-		<param name="boxmessage" value="Loading 1b ..." />
-		<param name="boxbgcolor" value="#FFFFFF" />
-		<param name="test_string" value="outer" />
-	<!--<![endif]-->
-        <object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" 
-                codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_09-windows-i586.cab"
-                height="100" width="100"
-                standby="Loading 2a ..."  > 
-			<param name="code" value="xhtml1" />
-       		<param name="archive" value="xhtml1.jar,core.jar" />
-			<param name="mayscript" value="true" />
-		    <param name="scriptable" value="true" />
-			<param name="image" value="loading.gif" />
-			<param name="boxmessage" value="Loading 2b ..." />
-			<param name="boxbgcolor" value="#FFFFFF" />
-			<param name="test_string" value="inner" />
 			<div>
-				<strong>
-				This browser does not have a Java Plug-in.
-				<br />
-				<a href="http://java.sun.com/products/plugin/downloads/index.html">
-				  Get the latest Java Plug-in here.
-				</a>
-				</strong>
-        	</div>
-        </object>
-    <!--[if !IE]> close outer object -->
-    </object>
-    <!--<![endif]-->
+			<!--[if !IE]> -->
+			<object classid="java:xhtml1.class" 
+					type="application/x-java-applet"
+					archive="xhtml1.jar,core.jar"
+					height="100" width="100"
+					standby="Loading 1a ..." >
+				<param name="archive" value="xhtml1.jar,core.jar" />
+				<param name="mayscript" value="true" />
+				<param name="scriptable" value="true" />
+				<param name="image" value="loading.gif" />
+				<param name="boxmessage" value="Loading 1b ..." />
+				<param name="boxbgcolor" value="#FFFFFF" />
+				<param name="test_string" value="outer" />
+			<!--<![endif]-->
+				<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" 
+						codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_09-windows-i586.cab"
+						height="100" width="100"
+						standby="Loading 2a ..."  > 
+					<param name="code" value="xhtml1" />
+					<param name="archive" value="xhtml1.jar,core.jar" />
+					<param name="mayscript" value="true" />
+					<param name="scriptable" value="true" />
+					<param name="image" value="loading.gif" />
+					<param name="boxmessage" value="Loading 2b ..." />
+					<param name="boxbgcolor" value="#FFFFFF" />
+					<param name="test_string" value="inner" />
+					<div>
+						<strong>
+						This browser does not have a Java Plug-in.
+						<br />
+						<a href="http://java.sun.com/products/plugin/downloads/index.html">
+						  Get the latest Java Plug-in here.
+						</a>
+						</strong>
+					</div>
+				</object>
+			<!--[if !IE]> close outer object -->
+			</object>
+    		<!--<![endif]-->
     	</div>
 		</noscript>
 	</div>

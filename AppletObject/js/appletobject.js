@@ -1,16 +1,14 @@
 /*
  *  AppletObject
  *
- *    Florian Jenett, Stephen Williams, Aaron Steed
+ *  Florian Jenett, Stephen Williams, Aaron Steed
  *
- *    http://ez-applet-html.sourceforge.net/
- *    http://svn.sourceforge.net/viewvc/ez-applet-html/trunk/
- *    http://sourceforge.net/projects/ez-applet-html/
+ *  http://appletobject.org/
  *
  *  -----------------------------------------------------------
  *
- *    changed: 2007-02-20 15:51:27 - fjenett
- *  version: 0.0.6
+ *	changed: 2007-05-14 15:46:45 - fjenett
+ *	version: 0.0.6
  *
  *  -----------------------------------------------------------
  *
@@ -334,7 +332,7 @@ AppletObjects =
             var JREVersionFromCookie = this.getCookie("JREVersion");
             if (JREVersionFromCookie)
             {
-                alert("from cookie: "+JREVersionFromCookie);
+                //alert("from cookie: "+JREVersionFromCookie);
                 this.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
                 return JREVersionFromCookie;
             }
@@ -557,7 +555,7 @@ AppletObjects =
                             
                             if (this.debugLevel==0) 
                             {
-                                alert(regVersion);
+                                //alert(regVersion);
                                 javaVersion.show();
                             }
                         }
@@ -627,7 +625,7 @@ AppletObjects =
             var randomnumber = Math.floor(Math.random() * 10000);
             userid = "aouser_id" + now.getTime() +"r"+ randomnumber
         };
-        alert(JREVersion);
+        //alert(JREVersion);
         this.setCookie("AOUSER_ID", userid, 10000);
         this.setCookie("JREVersion", JREVersion, 10000);
         userid="";
@@ -703,7 +701,7 @@ AppletObjects.JavaVersion.prototype.isGreater = function (fv)
 
 AppletObjects.JavaVersion.prototype.show = function ()
 {
-    alert(this.toString());
+    //alert(this.toString());
 }
 
 
@@ -1021,7 +1019,7 @@ AppletObject.prototype._checkNext = function ()
     {
         this._loadNext();
     }
-    else return alert( 'Err.' );
+    else return alert( 'Error: preloading class is missing.' );
     
     if ( Function.prototype.apply ) 
         this.timeoutFunctionID = window.setTimeout( this._checkNext.bind(this), this.wait);

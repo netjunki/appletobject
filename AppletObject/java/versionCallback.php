@@ -1,7 +1,13 @@
 <?php
 
 /**
- *		Dump any variables passed in by the applet into the session array.
+ *		this file is part of appletobject.js, please see:
+ *		http://appletobject.org/
+ *
+ *		------------------------------------------------------------------
+ *
+ *
+ *		------------------------------------------------------------------
  *
  *		2007-02-11 11:07:07 - fjenett
  */

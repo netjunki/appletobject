@@ -111,16 +111,14 @@ function asd() {
         <pre class="sourceview"><span class="comment">/*
  *  AppletObject
  *
- *    Florian Jenett, Stephen Williams, Aaron Steed
+ *  Florian Jenett, Stephen Williams, Aaron Steed
  *
- *    http://ez-applet-html.sourceforge.net/
- *    http://svn.sourceforge.net/viewvc/ez-applet-html/trunk/
- *    http://sourceforge.net/projects/ez-applet-html/
+ *  http://appletobject.org/
  *
  *  -----------------------------------------------------------
  *
- *    changed: 2007-02-20 15:51:27 - fjenett
- *  version: 0.0.6
+ *	changed: 2007-05-14 15:46:45 - fjenett
+ *	version: 0.0.6
  *
  *  -----------------------------------------------------------
  *
@@ -444,7 +442,7 @@ AppletObjects =
             var JREVersionFromCookie = <span class="reserved">this</span>.getCookie(<span class="literal">"JREVersion"</span>);
             <span class="reserved">if</span> (JREVersionFromCookie)
             {
-                alert(<span class="literal">"from cookie: "</span>+JREVersionFromCookie);
+                <span class="comment">//alert("from cookie: "+JREVersionFromCookie);</span>
                 <span class="reserved">this</span>.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
                 <span class="reserved">return</span> JREVersionFromCookie;
             }
@@ -552,6 +550,7 @@ AppletObjects =
                                             <span class="literal">"HKEY_LOCAL_MACHINE\\Software\\"</span>+
                                             <span class="literal">"JavaSoft\\Java Runtime Environment\\CurrentVersion"</span>));
                             registryBeenRead = true;
+                            pluginDetected = true;
                         } catch(e) {
                             <span class="comment">// handle exceptions raised by 'shell.regRead(...)' here</span>
                             <span class="comment">// so that the outer try-catch block would receive only</span>
@@ -582,8 +581,16 @@ AppletObjects =
             <span class="reserved">if</span> ( !registryBeenRead &amp;&amp; <span class="reserved">this</span>.useBrutForceDetectionForIE )
             {
                 javaVersion = <span class="reserved">this</span>.getJavaVersionWithBrutForce( <span class="reserved">this</span>.minimumVersion ); <span class="comment">// where does this arg end up?</span>
+                pluginDetected = javaVersion.isGreater(AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>));
             }
         }
+        <span class="reserved">if</span>(!pluginDetected){
+        	<span class="comment">// if the plugin can't be detected we probably have a script error</span>
+        	<span class="comment">// and should just write the applet code to the browser and </span>
+        	<span class="comment">// hope that the version is infact new enough</span>
+			javaVersion = new AppletObjects.JavaVersion(<span class="literal">"99.99.99_99"</span>);
+		}
+		
         <span class="reserved">this</span>.JREVersion = javaVersion;
         <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0){
             <span class="reserved">this</span>.saveJavaVersionToCookie(javaVersion);
@@ -658,7 +665,7 @@ AppletObjects =
                             
                             <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0) 
                             {
-                                alert(regVersion);
+                                <span class="comment">//alert(regVersion);</span>
                                 javaVersion.show();
                             }
                         }
@@ -728,7 +735,7 @@ AppletObjects =
             var randomnumber = Math.floor(Math.random() * 10000);
             userid = <span class="literal">"aouser_id"</span> + now.getTime() +<span class="literal">"r"</span>+ randomnumber
         };
-        alert(JREVersion);
+        <span class="comment">//alert(JREVersion);</span>
         <span class="reserved">this</span>.setCookie(<span class="literal">"AOUSER_ID"</span>, userid, 10000);
         <span class="reserved">this</span>.setCookie(<span class="literal">"JREVersion"</span>, JREVersion, 10000);
         userid=<span class="literal">""</span>;
@@ -804,7 +811,7 @@ AppletObjects.JavaVersion.<span class="reserved">prototype</span>.isGreater = <s
 
 AppletObjects.JavaVersion.<span class="reserved">prototype</span>.show = <span class="reserved">function</span> ()
 {
-    alert(<span class="reserved">this</span>.toString());
+    <span class="comment">//alert(this.toString());</span>
 }
 
 
@@ -1122,7 +1129,7 @@ AppletObject.<span class="reserved">prototype</span>._checkNext = <span class="r
     {
         <span class="reserved">this</span>._loadNext();
     }
-    <span class="reserved">else</span> <span class="reserved">return</span> alert( <span class="literal">'Err.'</span> );
+    <span class="reserved">else</span> <span class="reserved">return</span> alert( <span class="literal">'Error: preloading class is missing.'</span> );
     
     <span class="reserved">if</span> ( Function.<span class="reserved">prototype</span>.apply ) 
         <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">this</span>._checkNext.bind(<span class="reserved">this</span>), <span class="reserved">this</span>.wait);
@@ -1280,14 +1287,14 @@ AppletObject.<span class="reserved">prototype</span>.create = <span class="reser
 
 AppletObject.<span class="reserved">prototype</span>.createTagApplet = <span class="reserved">function</span> ()
 {
-    var tag = <span class="literal">'&lt;applet code="'</span>      + <span class="reserved">this</span>.code
-                   + <span class="literal">'" archive="'</span>   + <span class="reserved">this</span>.archives.implode(<span class="literal">', '</span>) +
-                  ( <span class="reserved">this</span>.codebase
-                  ? <span class="literal">'codebase="'</span>    + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
-                  + <span class="literal">'" width="'</span>     + <span class="reserved">this</span>.width 
-                  + <span class="literal">'" height="'</span>    + <span class="reserved">this</span>.height
-                  + <span class="literal">'" mayscript="'</span> + <span class="reserved">this</span>.mayscript
-                  + <span class="literal">'" &gt;'</span>;
+	var codebaseString = ( <span class="reserved">this</span>.codebase )? <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ;
+	var tag = <span class="literal">'&lt;applet code="'</span>      + <span class="reserved">this</span>.code
+ 				  + <span class="literal">'" archive="'</span>   + <span class="reserved">this</span>.archives.implode(<span class="literal">', '</span>)
+            	  + <span class="literal">'" '</span> 			+ codebaseString
+				  + <span class="literal">'  width="'</span>     + <span class="reserved">this</span>.width 
+				  + <span class="literal">'" height="'</span>    + <span class="reserved">this</span>.height
+				  + <span class="literal">'" mayscript="'</span> + <span class="reserved">this</span>.mayscript
+				  + <span class="literal">'" &gt;'</span>;
     <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
     {
         tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
@@ -1581,6 +1588,6 @@ AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class=
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Feb 21 12:19:37 2007</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon May 14 15:55:12 2007</div>
 </body>
 </html>

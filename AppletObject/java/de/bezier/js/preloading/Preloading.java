@@ -1,5 +1,7 @@
 /*
- *	this file is part of appletobject.js
+ *	this file is part of appletobject.js,
+ *	please see:
+ *	http://appletobject.org/
  *
  *  ----------------------------------------------------------------------------
  *	
@@ -7,7 +9,7 @@
  *
  *  ----------------------------------------------------------------------------
  *	
- *  changed: 2007-01-14 11:00:08 - fjenett
+ *  changed: 2007-05-14 15:48:49 - fjenett
  *
  */
 

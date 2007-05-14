@@ -1,3 +1,18 @@
+/*
+ *	this file is part of appletobject.js,
+ *	please see:
+ *	http://appletobject.org/
+ *
+ *  ----------------------------------------------------------------------------
+ *	
+ *	register the java-version with users cookie / session
+ *
+ *  ----------------------------------------------------------------------------
+ *	
+ *  changed: 2007-05-14 15:48:49 - fjenett
+ *
+ */
+
 package de.bezier.js.version;
 
 import java.applet.Applet;

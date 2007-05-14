@@ -1,3 +1,18 @@
+/*
+ *	this file is part of appletobject.js,
+ *	please see:
+ *	http://appletobject.org/
+ *
+ *  ----------------------------------------------------------------------------
+ *	
+ *	...
+ *
+ *  ----------------------------------------------------------------------------
+ *	
+ *  changed: 2007-xx-xx stephen
+ *
+ */
+
 package com.algodes.utils;
 /*
  to compile so that java 1.1 can play the applet use...

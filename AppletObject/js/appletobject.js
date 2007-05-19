@@ -7,7 +7,7 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-19 13:22:00 - fjenett
+ *	changed: 2007-05-19 13:35:45 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -1137,9 +1137,9 @@ AppletObject.prototype.load = function ( elementId )
     if (this.javaCheck!=true) { return this.onfail(this.javaCheck); }
 
     //this.alterElement( getElement( this.element_id ), '<img src="http://localhost/apache_pb.gif" alt="loading..."/>' );
-    this.alterElement( getElement( this.element_id ), 
+    /*this.alterElement( getElement( this.element_id ), 
                        '<img src="http://ez-applet-html.sourceforge.net/qualiyassurance.php?version=' +
-                       AppletObjects.JREVersion.toString() + '&browser='+this.browser + ' alt="loading..."/>' );
+                       AppletObjects.JREVersion.toString() + '&browser='+this.browser + ' alt="loading..."/>' );*/
                     
     this.writeToElement( this.element_id );
 };
@@ -1320,7 +1320,7 @@ AppletObject.prototype.writeToElement = function ( elementId )
     
     if ( typeof this.getParam("image") == "undefined" ) {
         //TODO encode the url.
-        this.addParam("image", 'http://ez-applet-html.sourceforge.net/loading.gif');
+        //this.addParam("image", 'http://ez-applet-html.sourceforge.net/loading.gif');
     }
 
     var tag = this.create();

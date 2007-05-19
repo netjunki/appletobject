@@ -7,7 +7,7 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-14 15:46:45 - fjenett
+ *	changed: 2007-05-19 13:22:00 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -25,9 +25,9 @@
  
 var getElement = function (aID)
 { 
-     return (document.getElementById) ? document.getElementById(aID)
-                                      : document.all[aID];
-}
+     return ((document.getElementById) ? document.getElementById(aID)
+                                      : document.all[aID]);
+};
 
 
 if ( !Array.prototype.push ) {
@@ -43,8 +43,8 @@ Array.prototype.push = function()
         this[this.length] = arguments[j];
     }
     return this.length;
-}
-}
+};
+};
 
 
 
@@ -64,8 +64,8 @@ Array.prototype.shift = function ()
     for ( var i= 0; i < this.length-1; i++) this[i] = arr[i+1];
     this[this.length-1] = null;
     return val;
-}
-}
+};
+};
 
 
 if ( !Array.prototype.concat ) {
@@ -78,8 +78,8 @@ if ( !Array.prototype.concat ) {
 Array.prototype.concat = function ()
 {
     for ( var i=0; i< arguments[0].length; i++ ) this[this.length+i] = arguments[0][i];
-}
-}
+};
+};
 
 
 if ( !Number.prototype.toFixed ) {
@@ -95,8 +95,8 @@ Number.prototype.toFixed = function ( fractionDigits )
    var len = fStr.lastIndexOf('.') + fractionDigits + 1;
    if ( len == fractionDigits ) return this;
    return (1.0 * fStr.substring(0,len));
-}
-}
+};
+};
 
 //  Function.prototype.bind , $A
 //  taken from:
@@ -121,8 +121,8 @@ Function.prototype.bind = function()
   var __method = this, args = $A(arguments), object = args.shift();
   return function() {
     return __method.apply(object, args.concat(arguments));
-  }
-}
+  };
+};
 
 /**
         $A
@@ -141,7 +141,7 @@ var $A = function(iterable) {
       results.push(iterable[i]);
     return results;
   }
-}
+};
 
 
 /**
@@ -162,7 +162,7 @@ Array.prototype.implode = function ( _sep )
     var i = 0;    var _str = this[0];
     while ( this[i+1] ) _str = _str + _sep + this[++i];
     return _str;
-}
+};
 
 
 
@@ -638,7 +638,7 @@ AppletObjects =
     
     
     PRELOAD_TIMEDOUT : -13
-}
+};
 
 
 /**
@@ -673,7 +673,7 @@ AppletObjects.JavaVersion = function (version)
     
     this.superMajor = arrVersion[0] != null ? parseInt(arrVersion[0]) : 0;
     this.major = arrVersion[1] != null ? parseInt(arrVersion[1]) : 0;
-}
+};
 
 
 /**
@@ -690,7 +690,7 @@ AppletObjects.JavaVersion.prototype.isGreater = function (fv)
     if(this.minor > fv.minor) return true;
     if(this.rev < fv.rev) return false;
     return true;
-}
+};
 
 
 /**
@@ -702,7 +702,7 @@ AppletObjects.JavaVersion.prototype.isGreater = function (fv)
 AppletObjects.JavaVersion.prototype.show = function ()
 {
     //alert(this.toString());
-}
+};
 
 
 /**
@@ -729,7 +729,7 @@ AppletObjects.JavaVersion.prototype.toString = function ()
         }
     }
     return versionString;
-}
+};
 
 
 var AppletObject = 
@@ -829,7 +829,7 @@ function AppletObject ( )
     }
     
     this.id = AppletObjects.push(this);
-}
+};
 
 
 /**
@@ -843,7 +843,7 @@ AppletObject.prototype.getContainer = function (elmID)
     if (!elmID && this.container) return this.container;
     if (this.container == null ) this.container = getElement(elmID);
     return this.container;
-}
+};
 
 
 
@@ -860,7 +860,7 @@ AppletObject.prototype.getContainer = function (elmID)
 AppletObject.prototype.alterElement = function ( element, html_snip )
 {
     setTimeout( function(){ element.innerHTML=html_snip; }, 10 );
-}
+};
 
 
 /**
@@ -889,7 +889,7 @@ AppletObject.prototype.onfail = function( err, element_id )
         default:
             this.alterElement(getElement( this.element_id ), this.java_plugin_message);
     }
-}
+};
 
 
 /**
@@ -901,7 +901,7 @@ AppletObject.prototype.onfail = function( err, element_id )
 AppletObject.prototype.oninit = function()
 {
     this.alterElement( getElement( this.element_id ), this.loading_message);
-}
+};
 
 
 
@@ -922,7 +922,7 @@ AppletObject.prototype.onstep = function(perc)
                     '">' +
             perc + "%" +
         '<'+'/p>'+'<'+'/div>' );
-}
+};
 
 
 
@@ -936,7 +936,7 @@ AppletObject.prototype.onload = function()
 {
     //this.debug( element_id );
     this.writeToElement( this.element_id );
-}
+};
 
 
 /**
@@ -1025,7 +1025,7 @@ AppletObject.prototype._checkNext = function ()
         this.timeoutFunctionID = window.setTimeout( this._checkNext.bind(this), this.wait);
     else
         this._setTimeout( '_checkNext()', 1000);
-}
+};
 
 
 /**
@@ -1040,7 +1040,7 @@ AppletObject.prototype._setTimeout = function ( _fnc, delay )
     // fix win 5.01
     var __code = 'AppletObjects.objects['+this.id+'].'+_fnc;
     this.timeoutFunctionID = window.setTimeout( function(){eval(__code);}, delay);
-}
+};
 
 
 /**
@@ -1052,8 +1052,11 @@ AppletObject.prototype._setTimeout = function ( _fnc, delay )
 AppletObject.prototype._loadCleanup = function ()
 {
     window.clearTimeout(this.timeoutFunctionID);
+    this.preloadContainer.style.top  = '-10px';
+    this.preloadContainer.style.left = '-10px';
+    this.preloadContainer.style.display = 'none';
     this.preloadContainer.parentNode.removeChild(this.preloadContainer.parentNode.lastChild);
-}
+};
 
 
 /**
@@ -1083,7 +1086,7 @@ AppletObject.prototype._loadNext = function ()
     this.timeLastPreload = (new Date()).getTime();
     
     //alert( this.preloadContainer.innerHTML );
-}
+};
 
 
 /**
@@ -1118,7 +1121,7 @@ AppletObject.prototype.preload = function ( emlID )
     this.perc = 0;
     
     this._checkNext();
-}
+};
 
 
 /**
@@ -1139,7 +1142,7 @@ AppletObject.prototype.load = function ( elementId )
                        AppletObjects.JREVersion.toString() + '&browser='+this.browser + ' alt="loading..."/>' );
                     
     this.writeToElement( this.element_id );
-}
+};
 
 
 /**
@@ -1166,7 +1169,7 @@ AppletObject.prototype.create = function ()
             _str = this.createTagApplet();
     }
     return _str;
-}
+};
 
 
 /**
@@ -1193,7 +1196,7 @@ AppletObject.prototype.createTagApplet = function ()
     tag += this.fallback;
     tag += '</applet>';
     return tag;
-}
+};
 
 
 /**
@@ -1232,7 +1235,7 @@ AppletObject.prototype.createTagObject = function ()
     tag += this.fallback;
     tag += '</object>';
     return tag;
-}
+};
 
 
 /**
@@ -1270,7 +1273,7 @@ AppletObject.prototype.createTagObjectIE = function ()
     tag += this.fallback;
     tag += '</object>';
     return tag;
-}
+};
 
 
 /**
@@ -1302,7 +1305,7 @@ AppletObject.prototype.createTagEmbed = function ()
     tag += '<noembed>' + this.fallback + '</noembed>';
     tag += '</embed>';
     return tag;
-}
+};
 
 
 /**
@@ -1323,7 +1326,7 @@ AppletObject.prototype.writeToElement = function ( elementId )
     var tag = this.create();
     this.alterElement( getElement( this.element_id ), tag );
     return tag;
-}
+};
 
 
 /**
@@ -1339,7 +1342,7 @@ AppletObject.prototype.debug = function ( elementId )
     var tag = this.create();
     this.alterElement( getElement( this.element_id ), '<textarea style="width:400px;height:100%;">' + tag + '</textarea>' );
     return tag;
-}
+};
 
 
 /**
@@ -1354,7 +1357,7 @@ AppletObject.prototype.addParam = function ( _name, _value )
     if ( !this.params ) this.params = new Array();
     this.params.push( { name  : _name,
                        value  : _value } );
-}
+};
 
 
 /**
@@ -1370,7 +1373,7 @@ AppletObject.prototype.addParams = function ( )
     {
         this.addParam( arguments[i][0], arguments[i][1] );
     }
-}
+};
 
 
 /**
@@ -1382,7 +1385,7 @@ AppletObject.prototype.addParams = function ( )
 AppletObject.prototype.getParam = function ( _name )
 {
     return this.params[_name];
-}
+};
 
 
 /**
@@ -1416,7 +1419,7 @@ AppletObject.prototype.addLibraries = function ( )
                 this.archives[this.archives.length] = arguments[i];
         }
     }
-}
+};
 
 
 

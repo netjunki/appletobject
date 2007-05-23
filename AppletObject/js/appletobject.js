@@ -7,7 +7,7 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-19 13:35:45 - fjenett
+ *	changed: 2007-05-23 14:58:22 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -958,8 +958,8 @@ AppletObject.prototype._checkNext = function ()
         this.preloadContainer.style.position = "absolute";
         this.preloadContainer.style.top  = '0px';
         this.preloadContainer.style.left = '0px';
-        this.preloadContainer.style.width  = '2px';
-        this.preloadContainer.style.height = '2px';
+        this.preloadContainer.style.width  = '1px';
+        this.preloadContainer.style.height = '1px';
         this.preloadContainer.style.borderWidth = '0px';
         this.preloadContainer.style.zIndex = 1000;
         document.body.insertBefore( this.preloadContainer, document.body.lastChild.nextSibling ); // insertAfter
@@ -1076,8 +1076,8 @@ AppletObject.prototype._loadNext = function ()
 									 'archive="'+this.preloadContainer.archives+'" '+
 									   ( this.codebase ? 
 									   'codebase="' + this.codebase + '" ' : '' ) +
-									 'width="10"'+
-									 'height="10"'+
+									 'width="1"'+
+									 'height="1"'+
 									 'mayscript="true">'+
 							'<param name="AObject" value="'+this.id+'" />'+
 							'<param name="boxbgcolor" value="'+this.getParam('boxbgcolor').value+'" />'+

@@ -750,12 +750,12 @@ function AppletObject ( )
                           : arguments[1].split(',');
     }
                       
-    this.width         = arguments[2] > 0 ? arguments[2] : 100; // [fjen] alert? read from element?
+    this.width      = arguments[2] > 0 ? arguments[2] : 100; // [fjen] alert? read from element?
     this.height     = arguments[3] > 0 ? arguments[3] : 100;
     
     var minimumVersionString = arguments[4] ? arguments[4] : 0;
                       
-    this.mayscript     = arguments[5] ? arguments[5] : 'true';
+    this.mayscript  = arguments[5] ? arguments[5] : 'true';
     
     this.codebase   = arguments[6] != '' ? arguments[6] : null;
     
@@ -1071,17 +1071,18 @@ AppletObject.prototype._loadNext = function ()
 {
     this.preloadContainer.archives = this.archives[this.currentJar]+','+this.preLoadJar;
     this.currentJar++;
-    this.alterElement(         this.preloadContainer, 
-                               '<applet '+  'code="'+this.preLoadClass+'" '+
-                                             'archive="'+this.preloadContainer.archives+'" '+
-                                               ( this.codebase ? 
-                                               'codebase="' + this.codebase + '" ' : '' ) +
-                                             'width="1"'+
-                                             'height="1"'+
-                                             'mayscript="true">'+
-                                    '<param name="AObject" value="'+this.id+'" />'+
-                                '</applet>' 
-                                );
+    this.alterElement( this.preloadContainer, 
+					   '<applet '+  'code="'+this.preLoadClass+'" '+
+									 'archive="'+this.preloadContainer.archives+'" '+
+									   ( this.codebase ? 
+									   'codebase="' + this.codebase + '" ' : '' ) +
+									 'width="10"'+
+									 'height="10"'+
+									 'mayscript="true">'+
+							'<param name="AObject" value="'+this.id+'" />'+
+							'<param name="boxbgcolor" value="'+this.getParam('boxbgcolor').value+'" />'+
+						'</applet>' 
+						);
     
     this.timeLastPreload = (new Date()).getTime();
     
@@ -1190,8 +1191,8 @@ AppletObject.prototype.createTagApplet = function ()
 				  + '" >';
     for(var i = 0; i < this.params.length; i++)
     {
-        tag += '<param  name="' + this.params[i].name + '" ' + 
-                      'value="'+this.params[i].value+'" />';
+        tag += '<param  name="' + this.params[i].name  + '" ' + 
+                      'value="' + this.params[i].value + '" />';
     }
     tag += this.fallback;
     tag += '</applet>';
@@ -1229,8 +1230,8 @@ AppletObject.prototype.createTagObject = function ()
                     '<param name="scriptable" value="'+this.mayscript+'" />';
     for(var i = 0; i < this.params.length; i++)
     {
-        tag += '<param  name="' + this.params[i].name + '" ' + 
-                      'value="'+this.params[i].value+'" />';
+        tag += '<param  name="' + this.params[i].name  + '" ' + 
+                      'value="' + this.params[i].value +'" />';
     }
     tag += this.fallback;
     tag += '</object>';
@@ -1267,8 +1268,8 @@ AppletObject.prototype.createTagObjectIE = function ()
                     '<param name="scriptable" value="'+this.mayscript+'" />';
     for(var i = 0; i < this.params.length; i++)
     {
-        tag += '<param  name="' + this.params[i].name + '" ' + 
-                      'value="'+this.params[i].value+'" />';
+        tag += '<param  name="' + this.params[i].name  + '" ' + 
+                      'value="' + this.params[i].value +'" />';
     }
     tag += this.fallback;
     tag += '</object>';
@@ -1295,7 +1296,7 @@ AppletObject.prototype.createTagEmbed = function ()
                       'height="'    + this.height +'" '+
                       'align="baseline" '+
                       'pluginspage="http://java.sun.com/products/plugin/downloads/index.html" '+
-                      'mayscript="'+this.mayscript+'" '+
+                      'mayscript="' +this.mayscript+'" '+
                       'scriptable="'+this.mayscript+'" ';
     for(var i = 0; i < this.params.length; i++)
     {
@@ -1355,8 +1356,10 @@ AppletObject.prototype.addParam = function ( _name, _value )
 {
     if ( !_name || !_value ) return;
     if ( !this.params ) this.params = new Array();
-    this.params.push( { name  : _name,
-                       value  : _value } );
+    this.params.push( {  name  : _name,
+                        value  : _value } );
+// this.params[_name] = { name  : _name,
+//                            value  : _value };
 };
 
 
@@ -1384,7 +1387,13 @@ AppletObject.prototype.addParams = function ( )
  
 AppletObject.prototype.getParam = function ( _name )
 {
-    return this.params[_name];
+    // return this.params[_name];
+    for( var i = 0; i < this.params.length; i++ )
+    {
+    	if ( this.params[i].name == _name )
+    		return this.params[i].value;
+    }
+    return undefined;
 };
 
 

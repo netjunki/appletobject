@@ -7,7 +7,7 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-23 14:58:22 - fjenett
+ *	changed: 2007-05-24 07:36:41 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -1080,7 +1080,7 @@ AppletObject.prototype._loadNext = function ()
 									 'height="1"'+
 									 'mayscript="true">'+
 							'<param name="AObject" value="'+this.id+'" />'+
-							'<param name="boxbgcolor" value="'+this.getParam('boxbgcolor').value+'" />'+
+							'<param name="boxbgcolor" value="'+this.getParam('boxbgcolor')+'" />'+
 						'</applet>' 
 						);
     

@@ -59,9 +59,38 @@ function loadApplet ( element_id ) {
 		// add some params
 		//
 		ao.addParams( ['boxmessage','Loading Processing software...'],
-					  ['boxbgcolor','#FFFFFF'],
+					  ['boxbgcolor','#DDDDCC'], // HTML background color
 					  ['progressbar','true'],
-					  ['test_string','foobar'] );
+					  ['test_string','hurray!'] );
+					  
+		/*	
+			you can define your own callbacks here, 
+			overriding the default ones in appletobject.js.
+			
+			for example:
+			
+			ao.onstep = function ( perc )
+			{
+				ao.alterElement( getElement( ao.element_id ),
+								 '<b>Loading applet:<'+'/b>' +
+								 '<br /><br />' +
+        						 '<div style="width:100px">'+
+        						 	'<p style="color:#ffffff;' + 
+                    				'background-color:#AAAA99;' + 
+                    				'width:' + Math.floor(perc)+'%;' + 
+                    				'overflow:hidden;' + 
+                    				'">' +
+            						perc + "%" +
+        						 '<'+'/p>' +
+        						 '<'+'/div>' );
+			}
+			
+			other callbacks to override are:
+			
+			ao.onfail = function ( err ) { ... }
+			ao.oninit = function () { ... }
+			ao.onload = function () { ... }
+		*/
 		
 		// now, all set, start loading!
 		//

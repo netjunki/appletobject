@@ -9,7 +9,7 @@
  *
  *  ----------------------------------------------------------------------------
  *	
- *  changed: 2007-05-14 15:48:49 - fjenett
+ *  changed: 2007-05-24 07:44:09 - fjenett
  *
  */
 
@@ -17,13 +17,37 @@ package de.bezier.js.preloading;
 
 // http://www.rgagnon.com/javadetails/java-0240.html
 
-public class Preloading extends java.applet.Applet
+public class Preloading
+extends java.applet.Applet
 {
-	public void init () {
+	public int width, height;
+	public java.awt.Color color;
+	
+	public void init ()
+	{
+		width  = getSize().width;
+    	height = getSize().height;
+    	
+    	String boxbgcolor = getParameter("boxbgcolor");
+    	
+    	if (     boxbgcolor != null
+    		 && !boxbgcolor.equals("") )
+    	{
+    		boxbgcolor = boxbgcolor.substring( 1, 7 ); // strip # from web-hex #FF00FF
+    		try {
+    			color = new java.awt.Color(Integer.parseInt(boxbgcolor, 16));
+    		} catch ( java.lang.NumberFormatException nfe ) {
+    			color = java.awt.Color.white;
+    		}
+    	}
+    	else
+    		color = java.awt.Color.white;
+		
 		callback( "inited" );
 	}
 	
-	public void start () {
+	public void start ()
+	{
 		callback( "started" );
 	}
 	
@@ -74,6 +98,17 @@ public class Preloading extends java.applet.Applet
   		}
   		catch (Exception e) {;}
 	}
+	
+	public void update ( java.awt.Graphics g )
+	{
+		paint(g);
+	}
+	
+	public void paint ( java.awt.Graphics g )
+	{
+    	g.setColor( color );
+    	g.fillRect(0,0,width,height);
+    }
 	
 	// sadly callbacks don't work inside these ...
 	//

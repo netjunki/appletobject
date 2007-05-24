@@ -117,7 +117,7 @@ function asd() {
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-14 15:46:45 - fjenett
+ *	changed: 2007-05-24 07:36:41 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -135,9 +135,9 @@ function asd() {
  
 var getElement = <span class="reserved">function</span> (aID)
 { 
-     <span class="reserved">return</span> (document.getElementById) ? document.getElementById(aID)
-                                      : document.all[aID];
-}
+     <span class="reserved">return</span> ((document.getElementById) ? document.getElementById(aID)
+                                      : document.all[aID]);
+};
 
 
 <span class="reserved">if</span> ( !Array.<span class="reserved">prototype</span>.push ) {
@@ -153,8 +153,8 @@ Array.<span class="reserved">prototype</span>.push = <span class="reserved">func
         <span class="reserved">this</span>[<span class="reserved">this</span>.length] = arguments[j];
     }
     <span class="reserved">return</span> <span class="reserved">this</span>.length;
-}
-}
+};
+};
 
 
 
@@ -174,8 +174,8 @@ Array.<span class="reserved">prototype</span>.shift = <span class="reserved">fun
     <span class="reserved">for</span> ( var i= 0; i &lt; <span class="reserved">this</span>.length-1; i++) <span class="reserved">this</span>[i] = arr[i+1];
     <span class="reserved">this</span>[<span class="reserved">this</span>.length-1] = null;
     <span class="reserved">return</span> val;
-}
-}
+};
+};
 
 
 <span class="reserved">if</span> ( !Array.<span class="reserved">prototype</span>.concat ) {
@@ -188,8 +188,8 @@ Array.<span class="reserved">prototype</span>.shift = <span class="reserved">fun
 Array.<span class="reserved">prototype</span>.concat = <span class="reserved">function</span> ()
 {
     <span class="reserved">for</span> ( var i=0; i&lt; arguments[0].length; i++ ) <span class="reserved">this</span>[<span class="reserved">this</span>.length+i] = arguments[0][i];
-}
-}
+};
+};
 
 
 <span class="reserved">if</span> ( !Number.<span class="reserved">prototype</span>.toFixed ) {
@@ -205,8 +205,8 @@ Number.<span class="reserved">prototype</span>.toFixed = <span class="reserved">
    var len = fStr.lastIndexOf(<span class="literal">'.'</span>) + fractionDigits + 1;
    <span class="reserved">if</span> ( len == fractionDigits ) <span class="reserved">return</span> <span class="reserved">this</span>;
    <span class="reserved">return</span> (1.0 * fStr.substring(0,len));
-}
-}
+};
+};
 
 <span class="comment">//  Function.prototype.bind , $A</span>
 <span class="comment">//  taken from:</span>
@@ -231,8 +231,8 @@ Function.<span class="reserved">prototype</span>.bind = <span class="reserved">f
   var __method = <span class="reserved">this</span>, args = $A(arguments), object = args.shift();
   <span class="reserved">return</span> <span class="reserved">function</span>() {
     <span class="reserved">return</span> __method.apply(object, args.concat(arguments));
-  }
-}
+  };
+};
 
 <span class="comment">/**
         $A
@@ -251,7 +251,7 @@ var $A = <span class="reserved">function</span>(iterable) {
       results.push(iterable[i]);
     <span class="reserved">return</span> results;
   }
-}
+};
 
 
 <span class="comment">/**
@@ -272,7 +272,7 @@ Array.<span class="reserved">prototype</span>.implode = <span class="reserved">f
     var i = 0;    var _str = <span class="reserved">this</span>[0];
     <span class="reserved">while</span> ( <span class="reserved">this</span>[i+1] ) _str = _str + _sep + <span class="reserved">this</span>[++i];
     <span class="reserved">return</span> _str;
-}
+};
 
 
 
@@ -748,7 +748,7 @@ AppletObjects =
     
     
     PRELOAD_TIMEDOUT : -13
-}
+};
 
 
 <span class="comment">/**
@@ -783,7 +783,7 @@ AppletObjects.JavaVersion = <span class="reserved">function</span> (version)
     
     <span class="reserved">this</span>.superMajor = arrVersion[0] != null ? parseInt(arrVersion[0]) : 0;
     <span class="reserved">this</span>.major = arrVersion[1] != null ? parseInt(arrVersion[1]) : 0;
-}
+};
 
 
 <span class="comment">/**
@@ -800,7 +800,7 @@ AppletObjects.JavaVersion.<span class="reserved">prototype</span>.isGreater = <s
     <span class="reserved">if</span>(<span class="reserved">this</span>.minor &gt; fv.minor) <span class="reserved">return</span> true;
     <span class="reserved">if</span>(<span class="reserved">this</span>.rev &lt; fv.rev) <span class="reserved">return</span> false;
     <span class="reserved">return</span> true;
-}
+};
 
 
 <span class="comment">/**
@@ -812,7 +812,7 @@ AppletObjects.JavaVersion.<span class="reserved">prototype</span>.isGreater = <s
 AppletObjects.JavaVersion.<span class="reserved">prototype</span>.show = <span class="reserved">function</span> ()
 {
     <span class="comment">//alert(this.toString());</span>
-}
+};
 
 
 <span class="comment">/**
@@ -839,7 +839,7 @@ AppletObjects.JavaVersion.<span class="reserved">prototype</span>.toString = <sp
         }
     }
     <span class="reserved">return</span> versionString;
-}
+};
 
 
 var AppletObject = 
@@ -860,12 +860,12 @@ var AppletObject =
                           : arguments[1].split(<span class="literal">','</span>);
     }
                       
-    <span class="reserved">this</span>.width         = arguments[2] &gt; 0 ? arguments[2] : 100; <span class="comment">// [fjen] alert? read from element?</span>
+    <span class="reserved">this</span>.width      = arguments[2] &gt; 0 ? arguments[2] : 100; <span class="comment">// [fjen] alert? read from element?</span>
     <span class="reserved">this</span>.height     = arguments[3] &gt; 0 ? arguments[3] : 100;
     
     var minimumVersionString = arguments[4] ? arguments[4] : 0;
                       
-    <span class="reserved">this</span>.mayscript     = arguments[5] ? arguments[5] : <span class="literal">'true'</span>;
+    <span class="reserved">this</span>.mayscript  = arguments[5] ? arguments[5] : <span class="literal">'true'</span>;
     
     <span class="reserved">this</span>.codebase   = arguments[6] != <span class="literal">''</span> ? arguments[6] : null;
     
@@ -939,7 +939,7 @@ var AppletObject =
     }
     
     <span class="reserved">this</span>.id = AppletObjects.push(<span class="reserved">this</span>);
-}
+};
 
 
 <span class="comment">/**
@@ -953,7 +953,7 @@ AppletObject.<span class="reserved">prototype</span>.getContainer = <span class=
     <span class="reserved">if</span> (!elmID &amp;&amp; <span class="reserved">this</span>.container) <span class="reserved">return</span> <span class="reserved">this</span>.container;
     <span class="reserved">if</span> (<span class="reserved">this</span>.container == null ) <span class="reserved">this</span>.container = getElement(elmID);
     <span class="reserved">return</span> <span class="reserved">this</span>.container;
-}
+};
 
 
 
@@ -970,7 +970,7 @@ AppletObject.<span class="reserved">prototype</span>.getContainer = <span class=
 AppletObject.<span class="reserved">prototype</span>.alterElement = <span class="reserved">function</span> ( element, html_snip )
 {
     setTimeout( <span class="reserved">function</span>(){ element.innerHTML=html_snip; }, 10 );
-}
+};
 
 
 <span class="comment">/**
@@ -999,7 +999,7 @@ AppletObject.<span class="reserved">prototype</span>.onfail = <span class="reser
         default:
             <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_plugin_message);
     }
-}
+};
 
 
 <span class="comment">/**
@@ -1011,7 +1011,7 @@ AppletObject.<span class="reserved">prototype</span>.onfail = <span class="reser
 AppletObject.<span class="reserved">prototype</span>.oninit = <span class="reserved">function</span>()
 {
     <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.loading_message);
-}
+};
 
 
 
@@ -1032,7 +1032,7 @@ AppletObject.<span class="reserved">prototype</span>.onstep = <span class="reser
                     <span class="literal">'"&gt;'</span> +
             perc + <span class="literal">"%"</span> +
         <span class="literal">'&lt;'</span>+<span class="literal">'/p&gt;'</span>+<span class="literal">'&lt;'</span>+<span class="literal">'/div&gt;'</span> );
-}
+};
 
 
 
@@ -1046,7 +1046,7 @@ AppletObject.<span class="reserved">prototype</span>.onload = <span class="reser
 {
     <span class="comment">//this.debug( element_id );</span>
     <span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
-}
+};
 
 
 <span class="comment">/**
@@ -1068,8 +1068,8 @@ AppletObject.<span class="reserved">prototype</span>._checkNext = <span class="r
         <span class="reserved">this</span>.preloadContainer.style.position = <span class="literal">"absolute"</span>;
         <span class="reserved">this</span>.preloadContainer.style.top  = <span class="literal">'0px'</span>;
         <span class="reserved">this</span>.preloadContainer.style.left = <span class="literal">'0px'</span>;
-        <span class="reserved">this</span>.preloadContainer.style.width  = <span class="literal">'2px'</span>;
-        <span class="reserved">this</span>.preloadContainer.style.height = <span class="literal">'2px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.width  = <span class="literal">'1px'</span>;
+        <span class="reserved">this</span>.preloadContainer.style.height = <span class="literal">'1px'</span>;
         <span class="reserved">this</span>.preloadContainer.style.borderWidth = <span class="literal">'0px'</span>;
         <span class="reserved">this</span>.preloadContainer.style.zIndex = 1000;
         document.body.insertBefore( <span class="reserved">this</span>.preloadContainer, document.body.lastChild.nextSibling ); <span class="comment">// insertAfter</span>
@@ -1135,7 +1135,7 @@ AppletObject.<span class="reserved">prototype</span>._checkNext = <span class="r
         <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">this</span>._checkNext.bind(<span class="reserved">this</span>), <span class="reserved">this</span>.wait);
     <span class="reserved">else</span>
         <span class="reserved">this</span>._setTimeout( <span class="literal">'_checkNext()'</span>, 1000);
-}
+};
 
 
 <span class="comment">/**
@@ -1150,7 +1150,7 @@ AppletObject.<span class="reserved">prototype</span>._setTimeout = <span class="
     <span class="comment">// fix win 5.01</span>
     var __code = <span class="literal">'AppletObjects.objects['</span>+<span class="reserved">this</span>.id+<span class="literal">'].'</span>+_fnc;
     <span class="reserved">this</span>.timeoutFunctionID = window.setTimeout( <span class="reserved">function</span>(){eval(__code);}, delay);
-}
+};
 
 
 <span class="comment">/**
@@ -1162,8 +1162,11 @@ AppletObject.<span class="reserved">prototype</span>._setTimeout = <span class="
 AppletObject.<span class="reserved">prototype</span>._loadCleanup = <span class="reserved">function</span> ()
 {
     window.clearTimeout(<span class="reserved">this</span>.timeoutFunctionID);
+    <span class="reserved">this</span>.preloadContainer.style.top  = <span class="literal">'-10px'</span>;
+    <span class="reserved">this</span>.preloadContainer.style.left = <span class="literal">'-10px'</span>;
+    <span class="reserved">this</span>.preloadContainer.style.display = <span class="literal">'none'</span>;
     <span class="reserved">this</span>.preloadContainer.parentNode.removeChild(<span class="reserved">this</span>.preloadContainer.parentNode.lastChild);
-}
+};
 
 
 <span class="comment">/**
@@ -1178,22 +1181,23 @@ AppletObject.<span class="reserved">prototype</span>._loadNext = <span class="re
 {
     <span class="reserved">this</span>.preloadContainer.archives = <span class="reserved">this</span>.archives[<span class="reserved">this</span>.currentJar]+<span class="literal">','</span>+<span class="reserved">this</span>.preLoadJar;
     <span class="reserved">this</span>.currentJar++;
-    <span class="reserved">this</span>.alterElement(         <span class="reserved">this</span>.preloadContainer, 
-                               <span class="literal">'&lt;applet '</span>+  <span class="literal">'code="'</span>+<span class="reserved">this</span>.preLoadClass+<span class="literal">'" '</span>+
-                                             <span class="literal">'archive="'</span>+<span class="reserved">this</span>.preloadContainer.archives+<span class="literal">'" '</span>+
-                                               ( <span class="reserved">this</span>.codebase ? 
-                                               <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase + <span class="literal">'" '</span> : <span class="literal">''</span> ) +
-                                             <span class="literal">'width="1"'</span>+
-                                             <span class="literal">'height="1"'</span>+
-                                             <span class="literal">'mayscript="true"&gt;'</span>+
-                                    <span class="literal">'&lt;param name="AObject" value="'</span>+<span class="reserved">this</span>.id+<span class="literal">'" /&gt;'</span>+
-                                <span class="literal">'&lt;/applet&gt;'</span> 
-                                );
+    <span class="reserved">this</span>.alterElement( <span class="reserved">this</span>.preloadContainer, 
+					   <span class="literal">'&lt;applet '</span>+  <span class="literal">'code="'</span>+<span class="reserved">this</span>.preLoadClass+<span class="literal">'" '</span>+
+									 <span class="literal">'archive="'</span>+<span class="reserved">this</span>.preloadContainer.archives+<span class="literal">'" '</span>+
+									   ( <span class="reserved">this</span>.codebase ? 
+									   <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase + <span class="literal">'" '</span> : <span class="literal">''</span> ) +
+									 <span class="literal">'width="1"'</span>+
+									 <span class="literal">'height="1"'</span>+
+									 <span class="literal">'mayscript="true"&gt;'</span>+
+							<span class="literal">'&lt;param name="AObject" value="'</span>+<span class="reserved">this</span>.id+<span class="literal">'" /&gt;'</span>+
+							<span class="literal">'&lt;param name="boxbgcolor" value="'</span>+<span class="reserved">this</span>.getParam(<span class="literal">'boxbgcolor'</span>)+<span class="literal">'" /&gt;'</span>+
+						<span class="literal">'&lt;/applet&gt;'</span> 
+						);
     
     <span class="reserved">this</span>.timeLastPreload = (new Date()).getTime();
     
     <span class="comment">//alert( this.preloadContainer.innerHTML );</span>
-}
+};
 
 
 <span class="comment">/**
@@ -1228,7 +1232,7 @@ AppletObject.<span class="reserved">prototype</span>.preload = <span class="rese
     <span class="reserved">this</span>.perc = 0;
     
     <span class="reserved">this</span>._checkNext();
-}
+};
 
 
 <span class="comment">/**
@@ -1244,12 +1248,12 @@ AppletObject.<span class="reserved">prototype</span>.load = <span class="reserve
     <span class="reserved">if</span> (<span class="reserved">this</span>.javaCheck!=true) { <span class="reserved">return</span> <span class="reserved">this</span>.onfail(<span class="reserved">this</span>.javaCheck); }
 
     <span class="comment">//this.alterElement( getElement( this.element_id ), '&lt;img src="http://localhost/apache_pb.gif" alt="loading..."/&gt;' );</span>
-    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), 
-                       <span class="literal">'&lt;img src="http://ez-applet-html.sourceforge.net/qualiyassurance.php?version='</span> +
-                       AppletObjects.JREVersion.toString() + <span class="literal">'&amp;browser='</span>+<span class="reserved">this</span>.browser + <span class="literal">' alt="loading..."/&gt;'</span> );
+    <span class="comment">/*this.alterElement( getElement( this.element_id ), 
+                       '&lt;img src="http://ez-applet-html.sourceforge.net/qualiyassurance.php?version=' +
+                       AppletObjects.JREVersion.toString() + '&amp;browser='+this.browser + ' alt="loading..."/&gt;' );*/</span>
                     
     <span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
-}
+};
 
 
 <span class="comment">/**
@@ -1276,7 +1280,7 @@ AppletObject.<span class="reserved">prototype</span>.create = <span class="reser
             _str = <span class="reserved">this</span>.createTagApplet();
     }
     <span class="reserved">return</span> _str;
-}
+};
 
 
 <span class="comment">/**
@@ -1297,13 +1301,13 @@ AppletObject.<span class="reserved">prototype</span>.createTagApplet = <span cla
 				  + <span class="literal">'" &gt;'</span>;
     <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
     {
-        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
-                      <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
+        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name  + <span class="literal">'" '</span> + 
+                      <span class="literal">'value="'</span> + <span class="reserved">this</span>.params[i].value + <span class="literal">'" /&gt;'</span>;
     }
     tag += <span class="reserved">this</span>.fallback;
     tag += <span class="literal">'&lt;/applet&gt;'</span>;
     <span class="reserved">return</span> tag;
-}
+};
 
 
 <span class="comment">/**
@@ -1336,13 +1340,13 @@ AppletObject.<span class="reserved">prototype</span>.createTagObject = <span cla
                     <span class="literal">'&lt;param name="scriptable" value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>;
     <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
     {
-        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
-                      <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
+        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name  + <span class="literal">'" '</span> + 
+                      <span class="literal">'value="'</span> + <span class="reserved">this</span>.params[i].value +<span class="literal">'" /&gt;'</span>;
     }
     tag += <span class="reserved">this</span>.fallback;
     tag += <span class="literal">'&lt;/object&gt;'</span>;
     <span class="reserved">return</span> tag;
-}
+};
 
 
 <span class="comment">/**
@@ -1374,13 +1378,13 @@ AppletObject.<span class="reserved">prototype</span>.createTagObjectIE = <span c
                     <span class="literal">'&lt;param name="scriptable" value="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" /&gt;'</span>;
     <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
     {
-        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name + <span class="literal">'" '</span> + 
-                      <span class="literal">'value="'</span>+<span class="reserved">this</span>.params[i].value+<span class="literal">'" /&gt;'</span>;
+        tag += <span class="literal">'&lt;param  name="'</span> + <span class="reserved">this</span>.params[i].name  + <span class="literal">'" '</span> + 
+                      <span class="literal">'value="'</span> + <span class="reserved">this</span>.params[i].value +<span class="literal">'" /&gt;'</span>;
     }
     tag += <span class="reserved">this</span>.fallback;
     tag += <span class="literal">'&lt;/object&gt;'</span>;
     <span class="reserved">return</span> tag;
-}
+};
 
 
 <span class="comment">/**
@@ -1402,7 +1406,7 @@ AppletObject.<span class="reserved">prototype</span>.createTagEmbed = <span clas
                       <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
                       <span class="literal">'align="baseline" '</span>+
                       <span class="literal">'pluginspage="http://java.sun.com/products/plugin/downloads/index.html" '</span>+
-                      <span class="literal">'mayscript="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>+
+                      <span class="literal">'mayscript="'</span> +<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>+
                       <span class="literal">'scriptable="'</span>+<span class="reserved">this</span>.mayscript+<span class="literal">'" '</span>;
     <span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++)
     {
@@ -1412,7 +1416,7 @@ AppletObject.<span class="reserved">prototype</span>.createTagEmbed = <span clas
     tag += <span class="literal">'&lt;noembed&gt;'</span> + <span class="reserved">this</span>.fallback + <span class="literal">'&lt;/noembed&gt;'</span>;
     tag += <span class="literal">'&lt;/embed&gt;'</span>;
     <span class="reserved">return</span> tag;
-}
+};
 
 
 <span class="comment">/**
@@ -1427,13 +1431,13 @@ AppletObject.<span class="reserved">prototype</span>.writeToElement = <span clas
     
     <span class="reserved">if</span> ( typeof <span class="reserved">this</span>.getParam(<span class="literal">"image"</span>) == <span class="literal">"undefined"</span> ) {
         <span class="comment">//TODO encode the url.</span>
-        <span class="reserved">this</span>.addParam(<span class="literal">"image"</span>, <span class="literal">'http://ez-applet-html.sourceforge.net/loading.gif'</span>);
+        <span class="comment">//this.addParam("image", 'http://ez-applet-html.sourceforge.net/loading.gif');</span>
     }
 
     var tag = <span class="reserved">this</span>.create();
     <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), tag );
     <span class="reserved">return</span> tag;
-}
+};
 
 
 <span class="comment">/**
@@ -1449,7 +1453,7 @@ AppletObject.<span class="reserved">prototype</span>.debug = <span class="reserv
     var tag = <span class="reserved">this</span>.create();
     <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="literal">'&lt;textarea style="width:400px;height:100%;"&gt;'</span> + tag + <span class="literal">'&lt;/textarea&gt;'</span> );
     <span class="reserved">return</span> tag;
-}
+};
 
 
 <span class="comment">/**
@@ -1462,9 +1466,11 @@ AppletObject.<span class="reserved">prototype</span>.addParam = <span class="res
 {
     <span class="reserved">if</span> ( !_name || !_value ) <span class="reserved">return</span>;
     <span class="reserved">if</span> ( !<span class="reserved">this</span>.params ) <span class="reserved">this</span>.params = new Array();
-    <span class="reserved">this</span>.params.push( { name  : _name,
-                       value  : _value } );
-}
+    <span class="reserved">this</span>.params.push( {  name  : _name,
+                        value  : _value } );
+<span class="comment">// this.params[_name] = { name  : _name,</span>
+<span class="comment">//                            value  : _value };</span>
+};
 
 
 <span class="comment">/**
@@ -1480,7 +1486,7 @@ AppletObject.<span class="reserved">prototype</span>.addParams = <span class="re
     {
         <span class="reserved">this</span>.addParam( arguments[i][0], arguments[i][1] );
     }
-}
+};
 
 
 <span class="comment">/**
@@ -1491,8 +1497,14 @@ AppletObject.<span class="reserved">prototype</span>.addParams = <span class="re
  
 AppletObject.<span class="reserved">prototype</span>.getParam = <span class="reserved">function</span> ( _name )
 {
-    <span class="reserved">return</span> <span class="reserved">this</span>.params[_name];
-}
+    <span class="comment">// return this.params[_name];</span>
+    <span class="reserved">for</span>( var i = 0; i &lt; <span class="reserved">this</span>.params.length; i++ )
+    {
+    	<span class="reserved">if</span> ( <span class="reserved">this</span>.params[i].name == _name )
+    		<span class="reserved">return</span> <span class="reserved">this</span>.params[i].value;
+    }
+    <span class="reserved">return</span> undefined;
+};
 
 
 <span class="comment">/**
@@ -1526,7 +1538,7 @@ AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class=
                 <span class="reserved">this</span>.archives[<span class="reserved">this</span>.archives.length] = arguments[i];
         }
     }
-}
+};
 
 
 
@@ -1588,6 +1600,6 @@ AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class=
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon May 14 15:55:12 2007</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 24 07:55:38 2007</div>
 </body>
 </html>

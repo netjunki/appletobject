@@ -117,7 +117,7 @@ function asd() {
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-24 07:36:41 - fjenett
+ *	changed: 2007-06-18 11:52:25 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -319,8 +319,8 @@ AppletObjects =
     
     readRegistry : false,
     useBrutForceDetectionForIE : true,
-    IEDetectUnder13 : true, <span class="comment">// see not in getJavaVersionWithBrutForce()</span>
-    debugLevel : 0,
+    IEDetectUnder13 : true, <span class="comment">// see note in getJavaVersionWithBrutForce()</span>
+    debugLevel : -1,
     
     JAVA_PLUGIN_MISSING : -1,
     JAVA_DISABLED : -2,
@@ -437,16 +437,17 @@ AppletObjects =
     
     getJavaVersion : <span class="reserved">function</span> ()
     {
-        <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0)
+        <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel == -1)
         {
             var JREVersionFromCookie = <span class="reserved">this</span>.getCookie(<span class="literal">"JREVersion"</span>);
-            <span class="reserved">if</span> (JREVersionFromCookie)
+            <span class="reserved">if</span> (JREVersionFromCookie) 
             {
                 <span class="comment">//alert("from cookie: "+JREVersionFromCookie);</span>
                 <span class="reserved">this</span>.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
                 <span class="reserved">return</span> JREVersionFromCookie;
             }
         }
+        
         <span class="reserved">if</span> ( <span class="reserved">this</span>.JREVersion ) <span class="reserved">return</span> <span class="reserved">this</span>.JREVersion;
 
         var javaVersion = new AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>);
@@ -456,12 +457,12 @@ AppletObjects =
         
         var is_major = parseInt(navigator.appVersion);
     
-        var is_nav = (      (agt.indexOf(<span class="literal">'mozilla'</span>)!=-1)
-                       &amp;&amp; (agt.indexOf(<span class="literal">'spoofer'</span>)==-1)
+        var is_nav = (    (agt.indexOf(<span class="literal">'mozilla'</span>) !=-1)
+                       &amp;&amp; (agt.indexOf(<span class="literal">'spoofer'</span>) ==-1)
                        &amp;&amp; (agt.indexOf(<span class="literal">'compatible'</span>) == -1) 
-                       &amp;&amp; (agt.indexOf(<span class="literal">'opera'</span>)==-1)
-                       &amp;&amp; (agt.indexOf(<span class="literal">'webtv'</span>)==-1) 
-                       &amp;&amp; (agt.indexOf(<span class="literal">'hotjava'</span>)==-1)  );
+                       &amp;&amp; (agt.indexOf(<span class="literal">'opera'</span>) ==-1)
+                       &amp;&amp; (agt.indexOf(<span class="literal">'webtv'</span>) ==-1) 
+                       &amp;&amp; (agt.indexOf(<span class="literal">'hotjava'</span>) ==-1)  );
                        
         var is_nav4up= (is_nav &amp;&amp; (is_major &gt;= 4));
         
@@ -581,7 +582,8 @@ AppletObjects =
             <span class="reserved">if</span> ( !registryBeenRead &amp;&amp; <span class="reserved">this</span>.useBrutForceDetectionForIE )
             {
                 javaVersion = <span class="reserved">this</span>.getJavaVersionWithBrutForce( <span class="reserved">this</span>.minimumVersion ); <span class="comment">// where does this arg end up?</span>
-                pluginDetected = javaVersion.isGreater(AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>));
+up?
+                pluginDetected = javaVersion.isGreater(new AppletObjects.JavaVersion(<span class="literal">"0.0.0_0"</span>));
             }
         }
         <span class="reserved">if</span>(!pluginDetected){
@@ -592,7 +594,7 @@ AppletObjects =
 		}
 		
         <span class="reserved">this</span>.JREVersion = javaVersion;
-        <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0){
+        <span class="reserved">if</span> ( <span class="reserved">this</span>.debugLevel == 0 ) {
             <span class="reserved">this</span>.saveJavaVersionToCookie(javaVersion);
         }
         <span class="reserved">return</span> javaVersion;
@@ -663,7 +665,7 @@ AppletObjects =
                             var version = <span class="literal">""</span>+(major/10) + <span class="literal">"."</span> + minor+subVersion;
                             javaVersion = new AppletObjects.JavaVersion(version);
                             
-                            <span class="reserved">if</span> (<span class="reserved">this</span>.debugLevel==0) 
+                            <span class="reserved">if</span> ( <span class="reserved">this</span>.debugLevel == 0 ) 
                             {
                                 <span class="comment">//alert(regVersion);</span>
                                 javaVersion.show();
@@ -1600,6 +1602,6 @@ AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class=
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 24 07:55:38 2007</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Jun 18 12:25:48 2007</div>
 </body>
 </html>

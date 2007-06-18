@@ -7,7 +7,7 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-05-24 07:36:41 - fjenett
+ *	changed: 2007-06-18 11:52:25 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -209,8 +209,8 @@ AppletObjects =
     
     readRegistry : false,
     useBrutForceDetectionForIE : true,
-    IEDetectUnder13 : true, // see not in getJavaVersionWithBrutForce()
-    debugLevel : 0,
+    IEDetectUnder13 : true, // see note in getJavaVersionWithBrutForce()
+    debugLevel : -1,
     
     JAVA_PLUGIN_MISSING : -1,
     JAVA_DISABLED : -2,
@@ -327,16 +327,17 @@ AppletObjects =
     
     getJavaVersion : function ()
     {
-        if (this.debugLevel==0)
+        if (this.debugLevel == -1)
         {
             var JREVersionFromCookie = this.getCookie("JREVersion");
-            if (JREVersionFromCookie)
+            if (JREVersionFromCookie) 
             {
                 //alert("from cookie: "+JREVersionFromCookie);
                 this.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
                 return JREVersionFromCookie;
             }
         }
+        
         if ( this.JREVersion ) return this.JREVersion;
 
         var javaVersion = new AppletObjects.JavaVersion("0.0.0_0");
@@ -346,12 +347,12 @@ AppletObjects =
         
         var is_major = parseInt(navigator.appVersion);
     
-        var is_nav = (      (agt.indexOf('mozilla')!=-1)
-                       && (agt.indexOf('spoofer')==-1)
+        var is_nav = (    (agt.indexOf('mozilla') !=-1)
+                       && (agt.indexOf('spoofer') ==-1)
                        && (agt.indexOf('compatible') == -1) 
-                       && (agt.indexOf('opera')==-1)
-                       && (agt.indexOf('webtv')==-1) 
-                       && (agt.indexOf('hotjava')==-1)  );
+                       && (agt.indexOf('opera') ==-1)
+                       && (agt.indexOf('webtv') ==-1) 
+                       && (agt.indexOf('hotjava') ==-1)  );
                        
         var is_nav4up= (is_nav && (is_major >= 4));
         
@@ -471,7 +472,8 @@ AppletObjects =
             if ( !registryBeenRead && this.useBrutForceDetectionForIE )
             {
                 javaVersion = this.getJavaVersionWithBrutForce( this.minimumVersion ); // where does this arg end up?
-                pluginDetected = javaVersion.isGreater(AppletObjects.JavaVersion("0.0.0_0"));
+up?
+                pluginDetected = javaVersion.isGreater(new AppletObjects.JavaVersion("0.0.0_0"));
             }
         }
         if(!pluginDetected){
@@ -482,7 +484,7 @@ AppletObjects =
 		}
 		
         this.JREVersion = javaVersion;
-        if (this.debugLevel==0){
+        if ( this.debugLevel == 0 ) {
             this.saveJavaVersionToCookie(javaVersion);
         }
         return javaVersion;
@@ -553,7 +555,7 @@ AppletObjects =
                             var version = ""+(major/10) + "." + minor+subVersion;
                             javaVersion = new AppletObjects.JavaVersion(version);
                             
-                            if (this.debugLevel==0) 
+                            if ( this.debugLevel == 0 ) 
                             {
                                 //alert(regVersion);
                                 javaVersion.show();

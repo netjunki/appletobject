@@ -472,7 +472,6 @@ AppletObjects =
             if ( !registryBeenRead && this.useBrutForceDetectionForIE )
             {
                 javaVersion = this.getJavaVersionWithBrutForce( this.minimumVersion ); // where does this arg end up?
-up?
                 pluginDetected = javaVersion.isGreater(new AppletObjects.JavaVersion("0.0.0_0"));
             }
         }

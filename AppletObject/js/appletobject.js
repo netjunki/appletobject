@@ -7,7 +7,7 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-06-18 11:52:25 - fjenett
+ *	changed: 2007-06-19 10:20:19 - fjenett
  *	version: 0.0.6
  *
  *  -----------------------------------------------------------
@@ -208,8 +208,8 @@ AppletObjects =
     },
     
     readRegistry : false,
-    useBrutForceDetectionForIE : true,
-    IEDetectUnder13 : true, // see note in getJavaVersionWithBrutForce()
+    useBrutForceDetectionForIE : false,
+    IEDetectUnder13 : false, // see note in getJavaVersionWithBrutForce()
     debugLevel : -1,
     
     JAVA_PLUGIN_MISSING : -1,
@@ -405,10 +405,10 @@ AppletObjects =
                             var versionIndex = mimeType.indexOf("version=");
                             var tmpJavaVersion = 
                                 new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
-                            if ( tmpJavaVersion.isGreater(javaVersion) )
+                            if ( javaVersion.major != 0 && tmpJavaVersion.isGreater(javaVersion) )
                             {
                                 javaVersion = 
-                                new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
+                                	new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
                             }
                             pluginDetected = true;
                     }
@@ -685,11 +685,11 @@ AppletObjects.JavaVersion = function (version)
 
 AppletObjects.JavaVersion.prototype.isGreater = function (fv)
 {
-    if(this.major < fv.major) return false;
-    if(this.major > fv.major) return true;
-    if(this.minor < fv.minor) return false;
-    if(this.minor > fv.minor) return true;
-    if(this.rev < fv.rev) return false;
+    if ( this.major < fv.major ) return false;
+    if ( this.major > fv.major ) return true;
+    if ( this.minor < fv.minor ) return false;
+    if ( this.minor > fv.minor ) return true;
+    if ( this.rev   < fv.rev   ) return false;
     return true;
 };
 
@@ -814,7 +814,7 @@ function AppletObject ( )
     
     // [fjen] should fork, but 0 would strangle konqeror 3.x
     this.wait         = 500;
-    this.loadChecks = 0;
+    this.loadChecks   = 0;
     
     this.javaCheck = AppletObjects.hasJava();
     
@@ -823,7 +823,8 @@ function AppletObject ( )
         AppletObjects.getJavaVersion();
         this.minimumVersion = new AppletObjects.JavaVersion( minimumVersionString );
         
-        if ( !AppletObjects.JREVersion.isGreater( this.minimumVersion ) )
+        if (     AppletObjects.JREVersion.major != 0
+        	 && !AppletObjects.JREVersion.isGreater( this.minimumVersion ) )
         {
             this.javaCheck = AppletObjects.JAVA_PLUGIN_TOO_OLD;
         }

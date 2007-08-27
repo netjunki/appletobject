@@ -167,10 +167,9 @@ Array.prototype.implode = function ( _sep )
 
 
 /**
-        singleton prototype AppletObjects
+        singleton AppletObjects
         
-        a wrapper around all AppletObjects, it does:
-        - java detection
+        a wrapper around all applet objects, it does:
         - handles callbacks from the preloader-applet
         - maintains access to all appletobjects
  */
@@ -196,25 +195,58 @@ AppletObjects =
                                  opt.tagType );
     },
     
-    // Preloading-applet callbacks
+    // AppletObjectHelper.class callbacks
     //
     inited : function ( _id )
     {
         if ( this.objects[_id] ) this.objects[_id].inited = true;
     },
+    
     started : function ( _id )
     {
         if ( this.objects[_id] ) this.objects[_id].started = true;
     },
     
-    readRegistry : false,
-    useBrutForceDetectionForIE : false,
-    IEDetectUnder13 : false, // see note in getJavaVersionWithBrutForce()
+    setJavaVersion : function ( _id, jVersion )
+    {
+    	jVersion = jVersion.replace(/[\._]/g, "");
+	
+        if ( this.objects[_id] )
+        {
+        	if ( this.objects[_id].minimumVersion != undefined )
+        	{
+        		var minVersion = this.objects[_id].minimumVersion;
+        		
+        		if ( this.compareJavaVersions( minVersion, jVersion ) )
+        			this.objects[_id].javaCheck = true;
+        		else
+        			this.objects[_id].javaCheck = this.JAVA_PLUGIN_TOO_OLD;
+        	}
+        	else
+        		this.objects[_id].javaCheck = true;
+        }
+    },
+    
+    compareJavaVersions : function ( vers1, vers2 )
+    {
+    	for ( i=0; i<vers1.length && i<vers2.length; i++ )
+        {
+			if ( vers1[i] > vers2[i] )
+			{
+				return false;
+			}
+        }
+        return true;
+    },
+    
     debugLevel : -1,
+    
+    JREVersion : '0',
     
     JAVA_PLUGIN_MISSING : -1,
     JAVA_DISABLED : -2,
     JAVA_PLUGIN_TOO_OLD : -3,
+    
     hasJava : function ()
     {
         // refresh() is not working properly ..
@@ -232,8 +264,7 @@ AppletObjects =
                          ? true
                          : navigator.javaEnabled());
         
-        // [fjen] i read that actually VBScript is more compatible on IE.
-        //          we should think / talk about switching over to that ...
+        // [fjen] switch to VB for that?
         
         if (    window.ActiveXObject
              && navigator.plugins.length == 0 ) // msIE
@@ -257,11 +288,7 @@ AppletObjects =
                                                  (n1 - 10) + '.' +
                                                  (n2+'_'+(n3<10?'0'+n3:n3));
                                 
-                                this.JREVersion =  
-                                    new AppletObjects.JavaVersion( versString );
-                                
-                                if ( this.debugLevel == 0 ) 
-                                    this.saveJavaVersionToCookie( javaVersion );
+                                this.JREVersion = versString.replace(/\._/g,"");
                             }
                         } catch (e) {}
                     }
@@ -286,21 +313,20 @@ AppletObjects =
         }
         
         // [fjen] this is an opera fix, java will not be in plugins[],
-        //          but in mimetypes[]
-        //          sidenote: after deinstalling java on winXP, opera 8.51
-        //          kept the mimetype around.
+        //        but in mimetypes[]
+        //        sidenote: after deinstalling java on winXP, opera 8.51
+        //        kept the mimetype around.
         //
         for (i = 0;    i < navigator.mimeTypes.length 
                     && !hasPlugin; i++)
         {
             hasPlugin = navigator.mimeTypes[i].type.toLowerCase().match(jMimeType);
-            //if ( hasPlugin )  alert( navigator.mimeTypes[i].type );
         }
         
         
         // [fjen] opera is not registering the java-plugin with 
-        //          navigator.plugins, we try to rely on isEnabled
-        //          for that ...
+        //        navigator.plugins, we try to rely on isEnabled
+        //        for that ...
         //
         var returnValue = true;
         
@@ -316,420 +342,11 @@ AppletObjects =
         return returnValue;
     },
     
-    /**
-     *  This code is based on some code posted to the Java Forum. 
-     *  Have another look to find the authors details.
-     *
-     *    http://forum.java.sun.com/thread.jspa?threadID=168544
-     */
-    
-    JREVersion : null,
-    
-    getJavaVersion : function ()
-    {
-        if (this.debugLevel == -1)
-        {
-            var JREVersionFromCookie = this.getCookie("JREVersion");
-            if (JREVersionFromCookie) 
-            {
-                //alert("from cookie: "+JREVersionFromCookie);
-                this.JREVersion = new AppletObjects.JavaVersion(JREVersionFromCookie);
-                return JREVersionFromCookie;
-            }
-        }
-        
-        if ( this.JREVersion ) return this.JREVersion;
-
-        var javaVersion = new AppletObjects.JavaVersion("0.0.0_0");
-        var agt=navigator.userAgent.toLowerCase();
-        
-        this.browser = agt;
-        
-        var is_major = parseInt(navigator.appVersion);
-    
-        var is_nav = (    (agt.indexOf('mozilla') !=-1)
-                       && (agt.indexOf('spoofer') ==-1)
-                       && (agt.indexOf('compatible') == -1) 
-                       && (agt.indexOf('opera') ==-1)
-                       && (agt.indexOf('webtv') ==-1) 
-                       && (agt.indexOf('hotjava') ==-1)  );
-                       
-        var is_nav4up= (is_nav && (is_major >= 4));
-        
-        var is_ie    = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1));
-        
-        var is_ie5   = (is_ie && (is_major == 4) && (agt.indexOf("msie 5.0") !=-1) );
-        var is_ie5_5 = (is_ie && (is_major == 4) && (agt.indexOf("msie 5.5") !=-1));
-        var is_ie6   = (is_ie && (is_major == 4) && (agt.indexOf("msie 6.0") !=-1));
-        var is_ie7   = (is_ie && (is_major == 4) && (agt.indexOf("msie 7.0") !=-1));
-        var is_ie5up = (is_ie && (is_major == 4) 
-                       && (    (agt.indexOf("msie 5.0")!=-1)
-                            || (agt.indexOf("msie 5.5")!=-1)
-                            || (agt.indexOf("msie 6.0")!=-1) 
-                            || (agt.indexOf("msie 7.0")!=-1) 
-                        ) );
-    
-        var pluginDetected = false;
-        var activeXDisabled = false;
-        
-        // we can check for plugin existence only when browser is 'is_ie5up' or 'is_nav4up'
-        if (is_nav4up)
-        {
-            // Refresh 'navigator.plugins' to get newly installed plugins.
-            // Use 'navigator.plugins.refresh(false)' to refresh plugins
-            // without refreshing open documents (browser windows)
-            //
-            // [fjen] this is actually not working in some cases .. opera i think had problems.
-            //          have to recheck which browsers ignore it though.
-            
-            if (navigator.plugins) 
-            {
-                navigator.plugins.refresh(false);
-            }
-        
-            // check for Java plugin in installed plugins
-            if ( navigator.mimeTypes )
-            {
-                for ( var i=0; i < navigator.mimeTypes.length; i++ )
-                {
-                    mimeType = navigator.mimeTypes[i].type;
-                    
-                    // [fjen]
-                    // ";jpi-version="
-                    // i wonder if all browsers actually report the mimetypes in this format.
-                    // - safari mac will not have jpi-version in mimetype
-                    
-                    if( (mimeType != null)
-                        && (mimeType.indexOf( "application/x-java-applet;jpi-version=") != -1) )
-                    {
-                            var versionIndex = mimeType.indexOf("version=");
-                            var tmpJavaVersion = 
-                                new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
-                            if ( javaVersion.major != 0 && tmpJavaVersion.isGreater(javaVersion) )
-                            {
-                                javaVersion = 
-                                	new AppletObjects.JavaVersion(mimeType.substring(versionIndex+8));
-                            }
-                            pluginDetected = true;
-                    }
-                }
-            }
-        }
-        else if (is_ie5up)     // [fjen] what about IE 5.2 Mac? came installed until osx 10.3
-        {
-            registryBeenRead = false;
-            if ( this.readRegistry )
-            {
-                /*
-                 * Using the shell causes IE to display a warning that the script
-                 * may not be safe.
-                 *
-                 */
-                var shell;
-                try
-                {
-                    // Create WSH(WindowsScriptHost) shell, available on Windows only
-                    shell = new ActiveXObject("WScript.Shell");
-            
-                    if (shell != null) 
-                    {
-                        // Read JRE version from Window Registry
-                        try
-                        {
-                            javaVersion = 
-                                new AppletObjects.JavaVersion( shell.regRead(
-                                            "HKEY_LOCAL_MACHINE\\Software\\"+
-                                            "JavaSoft\\Java Runtime Environment\\CurrentVersion"));
-                            registryBeenRead = true;
-                            pluginDetected = true;
-                        } catch(e) {
-                            // handle exceptions raised by 'shell.regRead(...)' here
-                            // so that the outer try-catch block would receive only
-                            // exceptions raised by 'shell = new ActiveXObject(...)'
-                        }
-                    } else { 
-                        //alert("Couldn t get shell");
-                    }
-                } catch(e) {
-                    // Creating ActiveX controls thru script is disabled
-                    // in InternetExplorer security options
-                    
-                    // To enable it:
-                    // a. Go to the 'Tools --> Internet Options' menu
-                    // b. Select the 'Security' tab
-                    // c. Select zone (Internet/Intranet)
-                    // d. Click the 'Custom Level..' button which will display the
-                    // 'Security Settings' window.
-                    // e. Enable the option 'Initialize and script ActiveX controls
-                    // not marked as safe'
-                
-                    activeXDisabled = true;
-                }
-            }
-            
-            // so, this is only IE5+ ?
-            
-            if ( !registryBeenRead && this.useBrutForceDetectionForIE )
-            {
-                javaVersion = this.getJavaVersionWithBrutForce( this.minimumVersion ); // where does this arg end up?
-                pluginDetected = javaVersion.isGreater(new AppletObjects.JavaVersion("0.0.0_0"));
-            }
-        }
-        if(!pluginDetected){
-        	// if the plugin can't be detected we probably have a script error
-        	// and should just write the applet code to the browser and 
-        	// hope that the version is infact new enough
-			javaVersion = new AppletObjects.JavaVersion("99.99.99_99");
-		}
-		
-        this.JREVersion = javaVersion;
-        if ( this.debugLevel == 0 ) {
-            this.saveJavaVersionToCookie(javaVersion);
-        }
-        return javaVersion;
-    },
-
-    /**
-     * This function tries to instantiate JavaPlugin.??? objects.
-     * JRE versions 1.1.1_06 through to 1.3.1 installed a JavaSoft.JavaBeansBridge object.
-     */
-     
-    getJavaVersionWithBrutForce: function ()
-    {
-        var javaVersion = new AppletObjects.JavaVersion("0.0.0_0");
-        startOfRegistryClasses = new AppletObjects.JavaVersion("1.3.1_1");
-        try
-        {
-//            if(!this.minimumVersion.isGreater(startOfRegistryClasses)){
-            if (this.IEDetectUnder13)
-            {
-                /* this call caused the java console to load, which takes 1 or two seconds.
-                * If you are going to display an applet anyway this is no problem otherwise
-                * you might want to avoid using it.
-                *
-                * [fjen] so, the java-console will open no matter what?
-                */
-                result = new ActiveXObject("JavaSoft.JavaBeansBridge");
-                if (result)
-                {
-                    javaVersion = new AppletObjects.JavaVersion("1.1.1_06");
-                }
-            }
-        } catch (e) {}
-//        }
-// if I check every time I write an applet 
-// then I can start looking from the supplied min version
-//        major = 10+this.minimumVersion.major;
-
-        major = 13;
-        for (; major <= 16; major++)            //major  1.3 - 1.6
-        {            
-            for (minor=0; minor <= 2; minor++)    //minor 0  - 2;  I have also seen Java version 1.1.4 to 1.1.8
-            {    
-                for (sub=0; sub <= 20; sub++)    //major  0 - 20???
-                {
-                    subVersion = "";
-                    if (sub > 0)
-                    {
-                        subVersion = "_";
-                        if (sub < 10)
-                        {
-                            subVersion = subVersion + "0" + sub;
-                        } 
-                        else
-                        {
-                            subVersion = subVersion + "" + sub;
-                        }
-                    }
-                    regVersion = major+""+minor+subVersion;
-                    if (major==15)
-                    {
-//                        alert(regVersion);
-                    }
-                    try 
-                    {
-                        result = new ActiveXObject("JavaPlugin."+regVersion);
-                        if (result) 
-                        {
-                            var version = ""+(major/10) + "." + minor+subVersion;
-                            javaVersion = new AppletObjects.JavaVersion(version);
-                            
-                            if ( this.debugLevel == 0 ) 
-                            {
-                                //alert(regVersion);
-                                javaVersion.show();
-                            }
-                        }
-                    } catch(e) {}
-//                    if(!this.minimumVersion.isGreater(javaVersion)){
-//                        return javaVersion;
-//                    }
-                }
-            }
-        }
-        return javaVersion;
-    },
-    
-    /**
-     *         setCookie(nameOfCookie, value, expireHours);
-     *         
-     *         used to save something in a cookie on the client machine
-     */
-
-    setCookie: function (nameOfCookie, value, expireHours)
-    {
-        var expireDate = new Date ();
-          expireDate.setTime(expireDate.getTime() + (expireHours * 3600 * 1000));
-          document.cookie = nameOfCookie + "=" + escape(value) + "; path=/" + ((expireHours == null) ? "" : "; expires=" + expireDate.toGMTString());
-    },
-
-    /**
-     *         getCookie(nameOfCookie);
-     *         
-     *         used to get something from a cookie on the client machine
-     */
-
-    getCookie: function(nameOfCookie)
-    {
-        if (document.cookie.length > 0)
-        {
-            var begin = document.cookie.indexOf(nameOfCookie+"=");
-            if (begin != -1)
-            {
-                begin += nameOfCookie.length+1; 
-                var end = document.cookie.indexOf(";", begin);
-                if (end == -1)
-                    end = document.cookie.length;
-            
-                return unescape(document.cookie.substring(begin, end));
-            }
-            return null; 
-          }
-        return null; 
-    },
-
-
-    /**
-     *         saveJavaVersionToCookie();
-     *         
-     *         used to save the java version so we don't have to retest it 
-     *         next time the user wants to load an applet.
-     */
-    
-    saveJavaVersionToCookie : function(JREVersion)
-    {
-        var now = new Date();
-
-        userid = this.getCookie("AOUSER_ID");
-        if (userid == null || (userid==""))
-        {
-            var randomnumber = Math.floor(Math.random() * 10000);
-            userid = "aouser_id" + now.getTime() +"r"+ randomnumber
-        };
-        //alert(JREVersion);
-        this.setCookie("AOUSER_ID", userid, 10000);
-        this.setCookie("JREVersion", JREVersion, 10000);
-        userid="";
-        userid=this.getCookie("AOUSER_ID");
-    },
-    
     TAG_APPLET : 1,
     TAG_OBJECT : 2,
     TAG_EMBED  : 4,
     
-    
     PRELOAD_TIMEDOUT : -13
-};
-
-
-/**
-        prototype JavaVersion()
-        
-        represents a java version
- */
-
-AppletObjects.JavaVersion = function (version)
-{
-    this.minor = 0;
-    this.rev = 0;
-    arrVersion = version.split(".");
-    
-    if (arrVersion[2] != null) 
-    {
-        arrMinorAndRev = arrVersion[2].split("_");
-        this.minor = arrMinorAndRev[0] != null ? parseInt(arrMinorAndRev[0]) : 0;
-        
-        if (arrMinorAndRev[1] != null)
-        {
-            if (arrMinorAndRev[1].substring(0,1)=="0")
-            {
-                this.rev = parseInt(arrMinorAndRev[1].substring(1,2));
-            }
-            else
-            {
-                this.rev = parseInt(arrMinorAndRev[1]);
-            }
-        }
-    }
-    
-    this.superMajor = arrVersion[0] != null ? parseInt(arrVersion[0]) : 0;
-    this.major = arrVersion[1] != null ? parseInt(arrVersion[1]) : 0;
-};
-
-
-/**
-        AppletObjects.JavaVersion.isGreater()
-        
-        compare two JavaVersion objects
- */
-
-AppletObjects.JavaVersion.prototype.isGreater = function (fv)
-{
-    if ( this.major < fv.major ) return false;
-    if ( this.major > fv.major ) return true;
-    if ( this.minor < fv.minor ) return false;
-    if ( this.minor > fv.minor ) return true;
-    if ( this.rev   < fv.rev   ) return false;
-    return true;
-};
-
-
-/**
-        AppletObjects.JavaVersion.show()
-        
-        used for debugging
- */
-
-AppletObjects.JavaVersion.prototype.show = function ()
-{
-    //alert(this.toString());
-};
-
-
-/**
-        AppletObjects.JavaVersion.toString()
-        
-        return a string representation of this JavaVersion object
- */
-
-AppletObjects.JavaVersion.prototype.toString = function ()
-{
-    var versionString = ""+this.superMajor+
-            "."+this.major+
-            "."+this.minor;
-
-    if ( this.rev )
-    {
-        if( this.rev >= 10 )
-        {
-            versionString += "_"+this.rev;
-        }
-        else
-        {
-            versionString += "_0"+this.rev;
-        }
-    }
-    return versionString;
 };
 
 
@@ -739,22 +356,22 @@ var AppletObject =
         
         represents an applet object
  */
-function AppletObject ( ) 
+function AppletObject ( )
 {
-    this.code         = arguments[0];
+    this.code		= arguments[0];
     
     this.archives = new Array();
     if ( arguments[1] )
     {
         this.archives     = (arguments[1][0].length > 1)
-                          ? arguments[1]
-                          : arguments[1].split(',');
+                            ? arguments[1]
+                            : arguments[1].replace(/[ \n\r\t\b\f]/g,"").split(',');
     }
                       
-    this.width      = arguments[2] > 0 ? arguments[2] : 100; // [fjen] alert? read from element?
+    this.width      = arguments[2] > 0 ? arguments[2] : 100;
     this.height     = arguments[3] > 0 ? arguments[3] : 100;
     
-    var minimumVersionString = arguments[4] ? arguments[4] : 0;
+    this.minimumVersion = arguments[4] ? arguments[4].replace(/\._/g,"") : undefined;
                       
     this.mayscript  = arguments[5] ? arguments[5] : 'true';
     
@@ -767,7 +384,7 @@ function AppletObject ( )
     
     this.tagType    = arguments[8] && arguments[8] > 0 && arguments[8] < 5
                       ? arguments[8]
-                      : AppletObjects.TAG_OBJECT; // [fjen] changed that to object as default
+                      : AppletObjects.TAG_OBJECT;
     
     this.fallback    = 'To view this content, you need to install '+
                        'Java from <A HREF="http://java.com">java.com</A>';
@@ -800,35 +417,22 @@ function AppletObject ( )
     
     this.loaded     = false;
     this.inited     = false;
-    this.started     = false;
+    this.started    = false;
     
-    this.container     = null;
-    this.preloadContainer = null;
-    this.preLoadClass = "de.bezier.js.preloading.Preloading.class";
-    this.preLoadJar   = "ZZZZZZ.jar";
-    this.timeoutFunctionID     = null;
-    this.timeLastPreload = 0;
+    this.container     	   = null;
+    this.preloadContainer  = null;
+    this.preLoadClass 	   = "org.appletobject.AppletObjectHelper.class";
+    this.preLoadJar   	   = "ZZZZZZ.jar";
+    this.timeoutFunctionID = null;
+    this.timeLastPreload   = 0;
     
     // [fjenett 20070219] 1 minute, timeout if preloader fails (no callbacks)
     this.preloadTimeout = 1000*60*1;
     
     // [fjen] should fork, but 0 would strangle konqeror 3.x
     this.wait         = 500;
-    this.loadChecks   = 0;
     
     this.javaCheck = AppletObjects.hasJava();
-    
-    if ( minimumVersionString.length > 0 )
-    {        
-        AppletObjects.getJavaVersion();
-        this.minimumVersion = new AppletObjects.JavaVersion( minimumVersionString );
-        
-        if (     AppletObjects.JREVersion.major != 0
-        	 && !AppletObjects.JREVersion.isGreater( this.minimumVersion ) )
-        {
-            this.javaCheck = AppletObjects.JAVA_PLUGIN_TOO_OLD;
-        }
-    }
     
     this.id = AppletObjects.push(this);
 };
@@ -837,7 +441,7 @@ function AppletObject ( )
 /**
         AppletObject.getContainer()
         
-        set and return the DOMElement into which the applet will be created
+        set and return the DOMElement in which the applet will be created
  */
 
 AppletObject.prototype.getContainer = function (elmID)
@@ -846,6 +450,9 @@ AppletObject.prototype.getContainer = function (elmID)
     if (this.container == null ) this.container = getElement(elmID);
     return this.container;
 };
+ 
+
+AppletObject.prototype.isCamino = navigator.userAgent.toLowerCase().match("camino");
 
 
 
@@ -853,15 +460,16 @@ AppletObject.prototype.getContainer = function (elmID)
         AppletObject.alterElement()
         
         2007-02-10 17:38:49 - fjenett
-        this is a fix for camino 1.0.3 mac,
-        which will flicker when using Element.innerHTML = ...
-        
-        todo: check element is !null and DOM
+        this is a "fix" for camino 1.x mac,
+        which does flicker when using Element.innerHTML = ...
  */
 
 AppletObject.prototype.alterElement = function ( element, html_snip )
 {
-    setTimeout( function(){ element.innerHTML=html_snip; }, 10 );
+	if ( this.isCamino )
+    	setTimeout( function(){ element.innerHTML=html_snip; }, 20 );
+    else
+    	element.innerHTML=html_snip;
 };
 
 
@@ -916,14 +524,17 @@ AppletObject.prototype.oninit = function()
 AppletObject.prototype.onstep = function(perc)
 {
     this.alterElement( getElement( this.element_id ),
-        '<b>Loading applet:<'+'/b><br /><br />' +
-        '<div style="width:100px"><p style="color:#ffffff;' + 
+        '<b>Loading applet:<'+'/b>' +
+        '<div style="width:100px">'+
+        	'<p style="color:#ffffff;' + 
                     'background-color:#AAAA99;' + 
                     'width:' + Math.floor(perc)+'%;' + 
-                    'overflow:hidden;' + 
+                    '' + 
                     '">' +
-            perc + "%" +
-        '<'+'/p>'+'<'+'/div>' );
+            	perc + "%" +
+        	'<'+'/p>'+
+        '<'+'/div>'
+    );
 };
 
 
@@ -1065,30 +676,33 @@ AppletObject.prototype._loadCleanup = function ()
         AppletObject._loadNext()
         
         internally called to preload one jar
-        
-        todo: maybe change to <object> ?
  */
 
 AppletObject.prototype._loadNext = function ()
 {
-    this.preloadContainer.archives = this.archives[this.currentJar]+','+this.preLoadJar;
+	if (this.javaCheck!=true) { return this.onfail(this.javaCheck); }
+    
+    if ( this.currentJar == -1 )
+    	this.preloadContainer.archives = this.preLoadJar;
+    else
+    	this.preloadContainer.archives = this.archives[this.currentJar]+','+this.preLoadJar;
+    	
     this.currentJar++;
-    this.alterElement( this.preloadContainer, 
-					   '<applet '+  'code="'+this.preLoadClass+'" '+
-									 'archive="'+this.preloadContainer.archives+'" '+
-									   ( this.codebase ? 
-									   'codebase="' + this.codebase + '" ' : '' ) +
-									 'width="1"'+
-									 'height="1"'+
-									 'mayscript="true">'+
-							'<param name="AObject" value="'+this.id+'" />'+
+    
+    var appletHTML = '<applet ' + 'code="'+this.preLoadClass+'" '+
+								  'archive="'+this.preloadContainer.archives+'" '+
+								   ( this.codebase ?  'codebase="' + this.codebase + '" ' : '' ) +
+								  'width="1"'+
+								  'height="1"'+
+								  'mayscript="true">'+
+							'<param name="appletobjectid" value="'+this.id+'" />'+
 							'<param name="boxbgcolor" value="'+this.getParam('boxbgcolor')+'" />'+
-						'</applet>' 
-						);
+							( this.minimumVersion != undefined ? '<param name="getjavaversion" value="checkit" />' : '' ) +
+						'</applet>';
+						
+    this.alterElement( this.preloadContainer, appletHTML );
     
     this.timeLastPreload = (new Date()).getTime();
-    
-    //alert( this.preloadContainer.innerHTML );
 };
 
 
@@ -1098,9 +712,9 @@ AppletObject.prototype._loadNext = function ()
         start preloading loop
  */
 
-AppletObject.prototype.preload = function ( emlID )
+AppletObject.prototype.preload = function ( elmID )
 {
-    this.element_id = emlID;
+    this.element_id = elmID;
 
     if (this.javaCheck!=true) { return this.onfail(this.javaCheck); }
     
@@ -1118,9 +732,9 @@ AppletObject.prototype.preload = function ( emlID )
     
     this.oninit();
     
-    this.currentJar = 0;
+    this.currentJar = -1;
     this.preloadContainer = null;
-    this.stepPerc = (50.0/(this.archives.length-1)); // called twice per jar
+    this.stepPerc = (50.0/(this.archives.length)); // called twice per jar
     this.perc = 0;
     
     this._checkNext();
@@ -1139,11 +753,6 @@ AppletObject.prototype.load = function ( elementId )
 
     if (this.javaCheck!=true) { return this.onfail(this.javaCheck); }
 
-    //this.alterElement( getElement( this.element_id ), '<img src="http://localhost/apache_pb.gif" alt="loading..."/>' );
-    /*this.alterElement( getElement( this.element_id ), 
-                       '<img src="http://ez-applet-html.sourceforge.net/qualiyassurance.php?version=' +
-                       AppletObjects.JREVersion.toString() + '&browser='+this.browser + ' alt="loading..."/>' );*/
-                    
     this.writeToElement( this.element_id );
 };
 

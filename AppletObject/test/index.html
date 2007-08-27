@@ -34,7 +34,8 @@ a:hover    { color: #3399CC; text-decoration: underline; }
 <script type="text/javascript" >
 //<![CDATA[
 
-function loadApplet ( element_id ) {
+function loadApplet ( element_id )
+{
 
 		// these jars are not really all needed ...
 		// and i filled them with a little clutter to
@@ -42,18 +43,20 @@ function loadApplet ( element_id ) {
 		
 		// create and init object
 		//
-		var ao = new AppletObject(	'xhtml1', 
-									['candy.jar' , 
-									 'itext.jar' , 
+		var ao = new AppletObject(	'xhtml1',		// main class to start
+									['candy.jar' , 	// all jars needed by
+									 'itext.jar' , 	// the applet
 									 'pdf.jar'   , 
 									 'dxf.jar'   ,
 									 'core.jar'  ,
 									 'xml.jar'   ,
 									 'xhtml1.jar'], 
-									'100', '100', 
-									'true', 
-									'', 
-									[],
+									'100', '100',	// width, height
+									'0', 			// java version: 1.4.2_13
+									'true', 		// mayscript
+									'', 			// codebase
+									[],				// additional params
+													// tag style to generate
 									AppletObjects.TAG_OBJECT );
 	
 		// add some params
@@ -71,18 +74,7 @@ function loadApplet ( element_id ) {
 			
 			ao.onstep = function ( perc )
 			{
-				ao.alterElement( getElement( ao.element_id ),
-								 '<b>Loading applet:<'+'/b>' +
-								 '<br /><br />' +
-        						 '<div style="width:100px">'+
-        						 	'<p style="color:#ffffff;' + 
-                    				'background-color:#AAAA99;' + 
-                    				'width:' + Math.floor(perc)+'%;' + 
-                    				'overflow:hidden;' + 
-                    				'">' +
-            						perc + "%" +
-        						 '<'+'/p>' +
-        						 '<'+'/div>' );
+				ao.alterElement( getElement( ao.element_id ), '<html-goes-here>' );
 			}
 			
 			other callbacks to override are:

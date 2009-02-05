@@ -117,8 +117,8 @@ function asd() {
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-06-19 10:20:19 - fjenett
- *	version: 0.0.6
+ *	changed: 2009-02-05 08:04:02 - fjenett
+ *	version: 0.0.7
  *
  *  -----------------------------------------------------------
  *
@@ -130,7 +130,7 @@ function asd() {
 <span class="comment">/**
         getElement()
         
-        return an DOMElement by ID
+        return an DOMElement by ID for every browser
  */</span>
  
 var getElement = <span class="reserved">function</span> (aID)
@@ -284,7 +284,7 @@ Array.<span class="reserved">prototype</span>.implode = <span class="reserved">f
         - maintains access to all appletobjects
  */</span>
  
-AppletObjects =
+var AppletObjects =
 {
     objects : [], <span class="comment">// array containing all appletobjects</span>
     push : <span class="reserved">function</span> ( _obj )
@@ -356,6 +356,8 @@ AppletObjects =
     JAVA_PLUGIN_MISSING : -1,
     JAVA_DISABLED : -2,
     JAVA_PLUGIN_TOO_OLD : -3,
+    
+    DOMELEMENT_NULL : -4,
     
     hasJava : <span class="reserved">function</span> ()
     {
@@ -541,7 +543,6 @@ var AppletObject =
     
     <span class="comment">// [fjen] should fork, but 0 would strangle konqeror 3.x</span>
     <span class="reserved">this</span>.wait         = 500;
-    <span class="reserved">this</span>.loadChecks   = 0;
     
     <span class="reserved">this</span>.javaCheck = AppletObjects.hasJava();
     
@@ -550,17 +551,41 @@ var AppletObject =
 
 
 <span class="comment">/**
-        AppletObject.getContainer()
+        AppletObject.setContainer()
         
-        set and return the DOMElement in which the applet will be created
+        set and return the DOMElement in which the applet will be created.
  */</span>
 
-AppletObject.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span> (elmID)
+AppletObject.<span class="reserved">prototype</span>.setContainer = <span class="reserved">function</span> ( element )
 {
-    <span class="reserved">if</span> (!elmID &amp;&amp; <span class="reserved">this</span>.container) <span class="reserved">return</span> <span class="reserved">this</span>.container;
-    <span class="reserved">if</span> (<span class="reserved">this</span>.container == null ) <span class="reserved">this</span>.container = getElement(elmID);
+    <span class="reserved">if</span> (typeof element == <span class="literal">"string"</span> &amp;&amp; element != <span class="reserved">this</span>.element_id &amp;&amp; element != <span class="literal">''</span>)
+    {
+		<span class="reserved">this</span>.container = getElement(element);
+		<span class="reserved">this</span>.element_id = element;
+	}
+	<span class="reserved">else</span> <span class="reserved">if</span> (typeof element == <span class="literal">"object"</span> &amp;&amp; element != <span class="reserved">this</span>.container &amp;&amp; element.innerHTML)
+	{
+   		<span class="reserved">this</span>.container = element;
+   		<span class="reserved">this</span>.element_id = <span class="reserved">this</span>.container.id;
+   	}
+    	
     <span class="reserved">return</span> <span class="reserved">this</span>.container;
 };
+
+
+<span class="comment">/**
+        AppletObject.getContainer()
+        
+        return the DOMElement in which the applet will be created
+ */</span>
+
+AppletObject.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.container;
+};
+ 
+
+AppletObject.<span class="reserved">prototype</span>.isCamino = navigator.userAgent.toLowerCase().match(<span class="literal">"camino"</span>);
 
 
 
@@ -568,15 +593,16 @@ AppletObject.<span class="reserved">prototype</span>.getContainer = <span class=
         AppletObject.alterElement()
         
         2007-02-10 17:38:49 - fjenett
-        this is a fix for camino 1.0.3 mac,
-        which will flicker when using Element.innerHTML = ...
-        
-        todo: check element is !null and DOM
+        this is a "fix" for camino 1.x mac,
+        which does flicker when using Element.innerHTML = ...
  */</span>
 
 AppletObject.<span class="reserved">prototype</span>.alterElement = <span class="reserved">function</span> ( element, html_snip )
 {
-    setTimeout( <span class="reserved">function</span>(){ element.innerHTML=html_snip; }, 10 );
+	<span class="reserved">if</span> ( <span class="reserved">this</span>.isCamino )
+    	setTimeout( <span class="reserved">function</span>(){ element.innerHTML=html_snip; }, 20 );
+    <span class="reserved">else</span>
+    	element.innerHTML=html_snip;
 };
 
 
@@ -588,88 +614,98 @@ AppletObject.<span class="reserved">prototype</span>.alterElement = <span class=
 
 AppletObject.<span class="reserved">prototype</span>.onfail = <span class="reserved">function</span>( err, element_id )
 {
+	<span class="reserved">if</span> ( err != AppletObjects.DOMELEMENT_NULL )
+		<span class="reserved">this</span>.setContainer( element_id );
+
     switch ( err )
     {
         case AppletObjects.PRELOAD_TIMEDOUT:
-            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.preload_timedout_message);
+            <span class="reserved">this</span>.alterElement(<span class="reserved">this</span>.container, <span class="reserved">this</span>.preload_timedout_message);
             break;
             
         case AppletObjects.JAVA_DISABLED:
-            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_disabled_message);
+            <span class="reserved">this</span>.alterElement(<span class="reserved">this</span>.container, <span class="reserved">this</span>.java_disabled_message);
             break;
             
         case AppletObjects.JAVA_PLUGIN_TOO_OLD:
-            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_version_message);
+            <span class="reserved">this</span>.alterElement(<span class="reserved">this</span>.container, <span class="reserved">this</span>.java_version_message);
+            break;
+            
+        case AppletObjects.DOMELEMENT_NULL:
+            alert( <span class="literal">'AppletObject: Can\'</span>t get DOMElement from id <span class="literal">"' + element_id + '"</span><span class="literal">' );
             break;
             
         case AppletObjects.JAVA_PLUGIN_MISSING:
         default:
-            <span class="reserved">this</span>.alterElement(getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.java_plugin_message);
+            this.alterElement(this.container, this.java_plugin_message);
     }
 };
 
 
-<span class="comment">/**
+/**
         default callback from Preloading applet
         
         oninit() will be called once just before loading starts.
- */</span>
+ */
  
-AppletObject.<span class="reserved">prototype</span>.oninit = <span class="reserved">function</span>()
+AppletObject.prototype.oninit = function()
 {
-    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="reserved">this</span>.loading_message);
+    this.alterElement( this.container, this.loading_message);
 };
 
 
 
-<span class="comment">/**
+/**
         default callback from Preloading applet
         
         onstep() will be called twice per jar.
- */</span>
+ */
  
-AppletObject.<span class="reserved">prototype</span>.onstep = <span class="reserved">function</span>(perc)
+AppletObject.prototype.onstep = function(perc)
 {
-    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ),
-        <span class="literal">'&lt;b&gt;Loading applet:&lt;'</span>+<span class="literal">'/b&gt;&lt;br /&gt;&lt;br /&gt;'</span> +
-        <span class="literal">'&lt;div style="width:100px"&gt;&lt;p style="color:#ffffff;'</span> + 
-                    <span class="literal">'background-color:#AAAA99;'</span> + 
-                    <span class="literal">'width:'</span> + Math.floor(perc)+<span class="literal">'%;'</span> + 
-                    <span class="literal">'overflow:hidden;'</span> + 
-                    <span class="literal">'"&gt;'</span> +
-            perc + <span class="literal">"%"</span> +
-        <span class="literal">'&lt;'</span>+<span class="literal">'/p&gt;'</span>+<span class="literal">'&lt;'</span>+<span class="literal">'/div&gt;'</span> );
+    this.alterElement( this.container,
+        '</span>&lt;b&gt;Loading applet:&lt;<span class="literal">'+'</span>/b&gt;<span class="literal">' +
+        '</span>&lt;div style=<span class="literal">"width:100px"</span>&gt;<span class="literal">'+
+        	'</span>&lt;p style=<span class="literal">"color:#ffffff;' + 
+                    'background-color:#AAAA99;' + 
+                    'width:' + Math.floor(perc)+'%;' + 
+                    '' + 
+                    '"</span>&gt;<span class="literal">' +
+            	perc + "%" +
+        	'</span>&lt;<span class="literal">'+'</span>/p&gt;<span class="literal">'+
+        '</span>&lt;<span class="literal">'+'</span>/div&gt;<span class="literal">'
+    );
 };
 
 
 
-<span class="comment">/**
+/**
         default callback from Preloading applet
         
         onload() will be called once when preloading is finished.
- */</span>
+ */
  
-AppletObject.<span class="reserved">prototype</span>.onload = <span class="reserved">function</span>()
+AppletObject.prototype.onload = function()
 {
-    <span class="comment">//this.debug( element_id );</span>
-    <span class="reserved">this</span>.writeToElement( <span class="reserved">this</span>.element_id );
+    //this.debug( element_id );
+    this.writeToElement( this.element_id );
 };
 
 
-<span class="comment">/**
+/**
         AppletObject._checkNext()
         
         check preloading status in preloading loop
- */</span>
+ */
 
-AppletObject.<span class="reserved">prototype</span>._checkNext = <span class="reserved">function</span> ()
+AppletObject.prototype._checkNext = function ()
 {
-    window.clearTimeout(<span class="reserved">this</span>.timeoutFunctionID);
+    window.clearTimeout(this.timeoutFunctionID);
     
-    <span class="reserved">if</span> ( !<span class="reserved">this</span>.preloadContainer )
+    if ( !this.preloadContainer )
     {
-        <span class="reserved">this</span>.preloadContainer = document.createElement(<span class="literal">"div"</span>);
-        <span class="comment">// opera 9 mac won't load hidden applets, so let it</span>
+        this.preloadContainer = document.createElement("div");
+        // opera 9 mac won'</span>t load hidden applets, so let it
         <span class="comment">// be very tiny and sit in the upper left corner</span>
 
         <span class="reserved">this</span>.preloadContainer.style.position = <span class="literal">"absolute"</span>;
@@ -679,7 +715,9 @@ AppletObject.<span class="reserved">prototype</span>._checkNext = <span class="r
         <span class="reserved">this</span>.preloadContainer.style.height = <span class="literal">'1px'</span>;
         <span class="reserved">this</span>.preloadContainer.style.borderWidth = <span class="literal">'0px'</span>;
         <span class="reserved">this</span>.preloadContainer.style.zIndex = 1000;
-        document.body.insertBefore( <span class="reserved">this</span>.preloadContainer, document.body.lastChild.nextSibling ); <span class="comment">// insertAfter</span>
+        <span class="comment">// insertAfter</span>
+        document.body.insertBefore( <span class="reserved">this</span>.preloadContainer, 
+        							document.body.lastChild.nextSibling );
     }
     
     var loadlet = <span class="reserved">this</span>.preloadContainer.firstChild;
@@ -793,15 +831,16 @@ AppletObject.<span class="reserved">prototype</span>._loadNext = <span class="re
     	
     <span class="reserved">this</span>.currentJar++;
     
-    var appletHTML = <span class="literal">'&lt;applet '</span>+  <span class="literal">'code="'</span>+<span class="reserved">this</span>.preLoadClass+<span class="literal">'" '</span>+
-									<span class="literal">'archive="'</span>+<span class="reserved">this</span>.preloadContainer.archives+<span class="literal">'" '</span>+
-									( <span class="reserved">this</span>.codebase ?  <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase + <span class="literal">'" '</span> : <span class="literal">''</span> ) +
-									<span class="literal">'width="1"'</span>+
-									<span class="literal">'height="1"'</span>+
-									<span class="literal">'mayscript="true"&gt;'</span>+
+    var appletHTML = <span class="literal">'&lt;applet '</span> + <span class="literal">'code="'</span>+<span class="reserved">this</span>.preLoadClass+<span class="literal">'" '</span>+
+								  <span class="literal">'archive="'</span>+<span class="reserved">this</span>.preloadContainer.archives+<span class="literal">'" '</span>+
+								   ( <span class="reserved">this</span>.codebase ?  <span class="literal">'codebase="'</span> + <span class="reserved">this</span>.codebase + <span class="literal">'" '</span> : <span class="literal">''</span> ) +
+								  <span class="literal">'width="1"'</span>+
+								  <span class="literal">'height="1"'</span>+
+								  <span class="literal">'mayscript="true"&gt;'</span>+
 							<span class="literal">'&lt;param name="appletobjectid" value="'</span>+<span class="reserved">this</span>.id+<span class="literal">'" /&gt;'</span>+
 							<span class="literal">'&lt;param name="boxbgcolor" value="'</span>+<span class="reserved">this</span>.getParam(<span class="literal">'boxbgcolor'</span>)+<span class="literal">'" /&gt;'</span>+
-							( <span class="reserved">this</span>.minimumVersion != undefined ? <span class="literal">'&lt;param name="getjavaversion" value="checkit" /&gt;'</span> : <span class="literal">''</span> ) +
+							( <span class="reserved">this</span>.minimumVersion != undefined ? 
+								<span class="literal">'&lt;param name="getjavaversion" value="checkit" /&gt;'</span> : <span class="literal">''</span> ) +
 						<span class="literal">'&lt;/applet&gt;'</span>;
 						
     <span class="reserved">this</span>.alterElement( <span class="reserved">this</span>.preloadContainer, appletHTML );
@@ -813,12 +852,15 @@ AppletObject.<span class="reserved">prototype</span>._loadNext = <span class="re
 <span class="comment">/**
         AppletObject.preload()
         
-        start preloading loop
+        start preloading into a given element
  */</span>
 
-AppletObject.<span class="reserved">prototype</span>.preload = <span class="reserved">function</span> ( emlID )
+AppletObject.<span class="reserved">prototype</span>.preload = <span class="reserved">function</span> ( element_id )
 {
-    <span class="reserved">this</span>.element_id = emlID;
+    <span class="reserved">this</span>.setContainer( element_id );
+    
+    <span class="reserved">if</span> ( !<span class="reserved">this</span>.container )
+    	<span class="reserved">return</span> <span class="reserved">this</span>.onfail(AppletObjects.DOMELEMENT_NULL, element_id);
 
     <span class="reserved">if</span> (<span class="reserved">this</span>.javaCheck!=true) { <span class="reserved">return</span> <span class="reserved">this</span>.onfail(<span class="reserved">this</span>.javaCheck); }
     
@@ -838,7 +880,7 @@ AppletObject.<span class="reserved">prototype</span>.preload = <span class="rese
     
     <span class="reserved">this</span>.currentJar = -1;
     <span class="reserved">this</span>.preloadContainer = null;
-    <span class="reserved">this</span>.stepPerc = (50.0/(<span class="reserved">this</span>.archives.length-1)); <span class="comment">// called twice per jar</span>
+    <span class="reserved">this</span>.stepPerc = (50.0/(<span class="reserved">this</span>.archives.length)); <span class="comment">// called twice per jar</span>
     <span class="reserved">this</span>.perc = 0;
     
     <span class="reserved">this</span>._checkNext();
@@ -971,7 +1013,7 @@ AppletObject.<span class="reserved">prototype</span>.createTagObjectIE = <span c
                       <span class="literal">'type="application/x-java-applet" '</span>+
                       <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
                         <span class="literal">'codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_09-windows-i586.cab" '</span> +
-                        <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
+                        <span class="literal">'width="'</span>   + <span class="reserved">this</span>.width  +<span class="literal">'" '</span>+
                       <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
                       <span class="literal">'standby="Loading applet ..." '</span>+
                       <span class="literal">'&gt;'</span>+
@@ -1007,7 +1049,7 @@ AppletObject.<span class="reserved">prototype</span>.createTagEmbed = <span clas
                       <span class="literal">'archive="'</span>   + jarchives+<span class="literal">'" '</span>+
                         ( <span class="reserved">this</span>.codebase 
                     ? <span class="literal">'codebase="'</span>  + <span class="reserved">this</span>.codebase+<span class="literal">'" '</span> : <span class="literal">''</span> ) +
-                        <span class="literal">'width="'</span>     + <span class="reserved">this</span>.width +<span class="literal">'" '</span>+
+                        <span class="literal">'width="'</span>   + <span class="reserved">this</span>.width  +<span class="literal">'" '</span>+
                       <span class="literal">'height="'</span>    + <span class="reserved">this</span>.height +<span class="literal">'" '</span>+
                       <span class="literal">'align="baseline" '</span>+
                       <span class="literal">'pluginspage="http://java.sun.com/products/plugin/downloads/index.html" '</span>+
@@ -1032,7 +1074,7 @@ AppletObject.<span class="reserved">prototype</span>.createTagEmbed = <span clas
 
 AppletObject.<span class="reserved">prototype</span>.writeToElement = <span class="reserved">function</span> ( elementId )
 {
-    <span class="reserved">this</span>.element_id = elementId;
+    <span class="reserved">this</span>.setContainer( elementId )
     
     <span class="reserved">if</span> ( typeof <span class="reserved">this</span>.getParam(<span class="literal">"image"</span>) == <span class="literal">"undefined"</span> ) {
         <span class="comment">//TODO encode the url.</span>
@@ -1040,7 +1082,7 @@ AppletObject.<span class="reserved">prototype</span>.writeToElement = <span clas
     }
 
     var tag = <span class="reserved">this</span>.create();
-    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), tag );
+    <span class="reserved">this</span>.alterElement( <span class="reserved">this</span>.container, tag );
     <span class="reserved">return</span> tag;
 };
 
@@ -1053,10 +1095,11 @@ AppletObject.<span class="reserved">prototype</span>.writeToElement = <span clas
     
 AppletObject.<span class="reserved">prototype</span>.debug = <span class="reserved">function</span> ( elementId )
 {
-    <span class="reserved">this</span>.element_id = elementId;
+    <span class="reserved">this</span>.setContainer( elementId );
     
     var tag = <span class="reserved">this</span>.create();
-    <span class="reserved">this</span>.alterElement( getElement( <span class="reserved">this</span>.element_id ), <span class="literal">'&lt;textarea style="width:400px;height:100%;"&gt;'</span> + tag + <span class="literal">'&lt;/textarea&gt;'</span> );
+    <span class="reserved">this</span>.alterElement( <span class="reserved">this</span>.container, 
+    				   <span class="literal">'&lt;textarea style="width:400px;height:100%;"&gt;'</span> + tag + <span class="literal">'&lt;/textarea&gt;'</span> );
     <span class="reserved">return</span> tag;
 };
 
@@ -1205,6 +1248,6 @@ AppletObject.<span class="reserved">prototype</span>.addLibraries = <span class=
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Aug 27 07:17:05 2007</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Feb  5 09:04:43 2009</div>
 </body>
 </html>

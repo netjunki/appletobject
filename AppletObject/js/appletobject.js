@@ -7,8 +7,8 @@
  *
  *  -----------------------------------------------------------
  *
- *	changed: 2007-06-19 10:20:19 - fjenett
- *	version: 0.0.6
+ *	changed: 2009-02-05 08:04:02 - fjenett
+ *	version: 0.0.7
  *
  *  -----------------------------------------------------------
  *
@@ -20,7 +20,7 @@
 /**
         getElement()
         
-        return an DOMElement by ID
+        return an DOMElement by ID for every browser
  */
  
 var getElement = function (aID)
@@ -174,7 +174,7 @@ Array.prototype.implode = function ( _sep )
         - maintains access to all appletobjects
  */
  
-AppletObjects =
+var AppletObjects =
 {
     objects : [], // array containing all appletobjects
     push : function ( _obj )
@@ -246,6 +246,8 @@ AppletObjects =
     JAVA_PLUGIN_MISSING : -1,
     JAVA_DISABLED : -2,
     JAVA_PLUGIN_TOO_OLD : -3,
+    
+    DOMELEMENT_NULL : -4,
     
     hasJava : function ()
     {
@@ -439,16 +441,37 @@ function AppletObject ( )
 
 
 /**
-        AppletObject.getContainer()
+        AppletObject.setContainer()
         
-        set and return the DOMElement in which the applet will be created
+        set and return the DOMElement in which the applet will be created.
  */
 
-AppletObject.prototype.getContainer = function (elmID)
+AppletObject.prototype.setContainer = function ( element )
 {
-    if (!elmID && this.container) return this.container;
-    if (this.container == null ) this.container = getElement(elmID);
+    if (typeof element == "string" && element != this.element_id && element != '')
+    {
+		this.container = getElement(element);
+		this.element_id = element;
+	}
+	else if (typeof element == "object" && element != this.container && element.innerHTML)
+	{
+   		this.container = element;
+   		this.element_id = this.container.id;
+   	}
+    	
     return this.container;
+};
+
+
+/**
+        AppletObject.getContainer()
+        
+        return the DOMElement in which the applet will be created
+ */
+
+AppletObject.prototype.getContainer = function ()
+{
+	return this.container;
 };
  
 
@@ -481,23 +504,30 @@ AppletObject.prototype.alterElement = function ( element, html_snip )
 
 AppletObject.prototype.onfail = function( err, element_id )
 {
+	if ( err != AppletObjects.DOMELEMENT_NULL )
+		this.setContainer( element_id );
+
     switch ( err )
     {
         case AppletObjects.PRELOAD_TIMEDOUT:
-            this.alterElement(getElement( this.element_id ), this.preload_timedout_message);
+            this.alterElement(this.container, this.preload_timedout_message);
             break;
             
         case AppletObjects.JAVA_DISABLED:
-            this.alterElement(getElement( this.element_id ), this.java_disabled_message);
+            this.alterElement(this.container, this.java_disabled_message);
             break;
             
         case AppletObjects.JAVA_PLUGIN_TOO_OLD:
-            this.alterElement(getElement( this.element_id ), this.java_version_message);
+            this.alterElement(this.container, this.java_version_message);
+            break;
+            
+        case AppletObjects.DOMELEMENT_NULL:
+            alert( 'AppletObject: Can\'t get DOMElement from id "' + element_id + '"' );
             break;
             
         case AppletObjects.JAVA_PLUGIN_MISSING:
         default:
-            this.alterElement(getElement( this.element_id ), this.java_plugin_message);
+            this.alterElement(this.container, this.java_plugin_message);
     }
 };
 
@@ -510,7 +540,7 @@ AppletObject.prototype.onfail = function( err, element_id )
  
 AppletObject.prototype.oninit = function()
 {
-    this.alterElement( getElement( this.element_id ), this.loading_message);
+    this.alterElement( this.container, this.loading_message);
 };
 
 
@@ -523,7 +553,7 @@ AppletObject.prototype.oninit = function()
  
 AppletObject.prototype.onstep = function(perc)
 {
-    this.alterElement( getElement( this.element_id ),
+    this.alterElement( this.container,
         '<b>Loading applet:<'+'/b>' +
         '<div style="width:100px">'+
         	'<p style="color:#ffffff;' + 
@@ -575,7 +605,9 @@ AppletObject.prototype._checkNext = function ()
         this.preloadContainer.style.height = '1px';
         this.preloadContainer.style.borderWidth = '0px';
         this.preloadContainer.style.zIndex = 1000;
-        document.body.insertBefore( this.preloadContainer, document.body.lastChild.nextSibling ); // insertAfter
+        // insertAfter
+        document.body.insertBefore( this.preloadContainer, 
+        							document.body.lastChild.nextSibling );
     }
     
     var loadlet = this.preloadContainer.firstChild;
@@ -697,7 +729,8 @@ AppletObject.prototype._loadNext = function ()
 								  'mayscript="true">'+
 							'<param name="appletobjectid" value="'+this.id+'" />'+
 							'<param name="boxbgcolor" value="'+this.getParam('boxbgcolor')+'" />'+
-							( this.minimumVersion != undefined ? '<param name="getjavaversion" value="checkit" />' : '' ) +
+							( this.minimumVersion != undefined ? 
+								'<param name="getjavaversion" value="checkit" />' : '' ) +
 						'</applet>';
 						
     this.alterElement( this.preloadContainer, appletHTML );
@@ -709,12 +742,15 @@ AppletObject.prototype._loadNext = function ()
 /**
         AppletObject.preload()
         
-        start preloading loop
+        start preloading into a given element
  */
 
-AppletObject.prototype.preload = function ( elmID )
+AppletObject.prototype.preload = function ( element_id )
 {
-    this.element_id = elmID;
+    this.setContainer( element_id );
+    
+    if ( !this.container )
+    	return this.onfail(AppletObjects.DOMELEMENT_NULL, element_id);
 
     if (this.javaCheck!=true) { return this.onfail(this.javaCheck); }
     
@@ -867,7 +903,7 @@ AppletObject.prototype.createTagObjectIE = function ()
                       'type="application/x-java-applet" '+
                       'archive="'   + jarchives+'" '+
                         'codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_09-windows-i586.cab" ' +
-                        'width="'     + this.width +'" '+
+                        'width="'   + this.width  +'" '+
                       'height="'    + this.height +'" '+
                       'standby="Loading applet ..." '+
                       '>'+
@@ -903,7 +939,7 @@ AppletObject.prototype.createTagEmbed = function ()
                       'archive="'   + jarchives+'" '+
                         ( this.codebase 
                     ? 'codebase="'  + this.codebase+'" ' : '' ) +
-                        'width="'     + this.width +'" '+
+                        'width="'   + this.width  +'" '+
                       'height="'    + this.height +'" '+
                       'align="baseline" '+
                       'pluginspage="http://java.sun.com/products/plugin/downloads/index.html" '+
@@ -928,7 +964,7 @@ AppletObject.prototype.createTagEmbed = function ()
 
 AppletObject.prototype.writeToElement = function ( elementId )
 {
-    this.element_id = elementId;
+    this.setContainer( elementId )
     
     if ( typeof this.getParam("image") == "undefined" ) {
         //TODO encode the url.
@@ -936,7 +972,7 @@ AppletObject.prototype.writeToElement = function ( elementId )
     }
 
     var tag = this.create();
-    this.alterElement( getElement( this.element_id ), tag );
+    this.alterElement( this.container, tag );
     return tag;
 };
 
@@ -949,10 +985,11 @@ AppletObject.prototype.writeToElement = function ( elementId )
     
 AppletObject.prototype.debug = function ( elementId )
 {
-    this.element_id = elementId;
+    this.setContainer( elementId );
     
     var tag = this.create();
-    this.alterElement( getElement( this.element_id ), '<textarea style="width:400px;height:100%;">' + tag + '</textarea>' );
+    this.alterElement( this.container, 
+    				   '<textarea style="width:400px;height:100%;">' + tag + '</textarea>' );
     return tag;
 };
 

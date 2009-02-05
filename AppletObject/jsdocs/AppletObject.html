@@ -185,6 +185,14 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <TR BGCOLOR="white" CLASS="TableRowColor">
    <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
    <CODE>&nbsp;Object</CODE></FONT></TD>
+   <TD><CODE><B><A HREF="#isCamino">isCamino</A></B></CODE>
+   <BR>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+   </TR>
+   
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+   <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+   <CODE>&nbsp;Object</CODE></FONT></TD>
    <TD><CODE><B><A HREF="#java_disabled_message">java_disabled_message</A></B></CODE>
    <BR>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -210,14 +218,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
    <CODE>&nbsp;Object</CODE></FONT></TD>
    <TD><CODE><B><A HREF="#javaCheck">javaCheck</A></B></CODE>
-   <BR>
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-   </TR>
-   
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-   <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-   <CODE>&nbsp;Object</CODE></FONT></TD>
-   <TD><CODE><B><A HREF="#loadChecks">loadChecks</A></B></CODE>
    <BR>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
    </TR>
@@ -546,8 +546,8 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 AppletObject.alterElement()
         
         2007-02-10 17:38:49 - fjenett
-        this is a fix for camino 1.0.3 mac,
-        which will flicker when using Element.innerHTML = ...
+        this is a "fix" for camino 1.x mac,
+        which does flicker when using Element.innerHTML = ...
       </TD>
    </TR>
 
@@ -676,13 +676,13 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#getContainer">getContainer</A></B>(elmID)
+	       <A HREF="#getContainer">getContainer</A></B>()
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	 AppletObject.getContainer()
         
-        set and return the DOMElement in which the applet will be created
+        return the DOMElement in which the applet will be created
       </TD>
    </TR>
 
@@ -809,13 +809,32 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#preload">preload</A></B>( emlID )
+	       <A HREF="#preload">preload</A></B>( element_id )
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	 AppletObject.preload()
         
-        start preloading loop
+        start preloading into a given element
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;Object</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#setContainer">setContainer</A></B>( element )
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 AppletObject.setContainer()
+        
+        set and return the DOMElement in which the applet will be created.
       </TD>
    </TR>
 
@@ -938,6 +957,15 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    </UL>
    <HR>
    
+   <A NAME="isCamino"><!-- --></A>
+   <H3>isCamino</H3>
+   <PRE>Object&nbsp;<B>isCamino</B></PRE>
+   <UL>
+   
+   
+   </UL>
+   <HR>
+   
    <A NAME="java_disabled_message"><!-- --></A>
    <H3>java_disabled_message</H3>
    <PRE>Object&nbsp;<B>java_disabled_message</B></PRE>
@@ -968,15 +996,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <A NAME="javaCheck"><!-- --></A>
    <H3>javaCheck</H3>
    <PRE>Object&nbsp;<B>javaCheck</B></PRE>
-   <UL>
-   
-   
-   </UL>
-   <HR>
-   
-   <A NAME="loadChecks"><!-- --></A>
-   <H3>loadChecks</H3>
-   <PRE>Object&nbsp;<B>loadChecks</B></PRE>
    <UL>
    
    
@@ -1339,10 +1358,8 @@ AppletObject</H3>
       <UL>AppletObject.alterElement()
         
         2007-02-10 17:38:49 - fjenett
-        this is a fix for camino 1.0.3 mac,
-        which will flicker when using Element.innerHTML = ...
-        
-        todo: check element is !null and DOM</UL>
+        this is a "fix" for camino 1.x mac,
+        which does flicker when using Element.innerHTML = ...</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1480,11 +1497,11 @@ AppletObject</H3>
 
    <A NAME="getContainer"><!-- --></A>
    <H3>getContainer</H3>
-   <PRE>Object <B>getContainer</B>(elmID)</PRE>
+   <PRE>Object <B>getContainer</B>()</PRE>
    
       <UL>AppletObject.getContainer()
         
-        set and return the DOMElement in which the applet will be created</UL>
+        return the DOMElement in which the applet will be created</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1620,11 +1637,31 @@ AppletObject</H3>
 
    <A NAME="preload"><!-- --></A>
    <H3>preload</H3>
-   <PRE>Object <B>preload</B>( emlID )</PRE>
+   <PRE>Object <B>preload</B>( element_id )</PRE>
    
       <UL>AppletObject.preload()
         
-        start preloading loop</UL>
+        start preloading into a given element</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="setContainer"><!-- --></A>
+   <H3>setContainer</H3>
+   <PRE>Object <B>setContainer</B>( element )</PRE>
+   
+      <UL>AppletObject.setContainer()
+        
+        set and return the DOMElement in which the applet will be created.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1724,6 +1761,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 
 </FONT>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Aug 27 07:17:05 2007</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Feb  5 09:04:43 2009</div>
 </BODY>
 </HTML>

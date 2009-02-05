@@ -1,7 +1,19 @@
-import processing.core.*; import processing.pdf.*; import processing.dxf.*; import processing.candy.*; import processing.xml.*; import java.applet.*; import java.awt.*; import java.awt.image.*; import java.awt.event.*; import java.io.*; import java.net.*; import java.text.*; import java.util.*; import java.util.zip.*; public class xhtml1 extends PApplet {
+import processing.core.*; 
+import processing.pdf.*; 
+import processing.dxf.*; 
+import processing.candy.*; 
+import processing.xml.*; 
+import java.applet.*; 
+import java.awt.*; 
+import java.awt.image.*; 
+import java.awt.event.*; 
+import java.io.*; 
+import java.net.*; 
+import java.text.*; 
+import java.util.*; 
+import java.util.zip.*; 
 
-
-
+public class xhtml1 extends PApplet {
 
 /**
  *    
@@ -34,4 +46,8 @@ public void draw() {
     text( s, 10, 20 ); // read from param
     text( i++, 10, height-10 ); // counter to see sketch is running
 }
-static public void main(String args[]) {   PApplet.main(new String[] { "xhtml1" });}}
+
+static public void main(String args[]) { 
+	PApplet.main(new String[] { "xhtml1" });
+}
+}

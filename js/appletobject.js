@@ -373,7 +373,7 @@ function AppletObject ( )
     this.width      = arguments[2] > 0 ? arguments[2] : 100;
     this.height     = arguments[3] > 0 ? arguments[3] : 100;
     
-    this.minimumVersion = arguments[4] ? arguments[4].replace(/\._/g,"") : undefined;
+    this.minimumVersion = arguments[4] ? arguments[4].replace(/[\._]/g,"") : undefined;
                       
     this.mayscript  = arguments[5] ? arguments[5] : 'true';
     

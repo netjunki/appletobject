@@ -231,12 +231,12 @@ var AppletObjects =
     {
     	for ( i=0; i<vers1.length && i<vers2.length; i++ )
         {
-			if ( vers1[i] > vers2[i] )
+			if ( vers1.charAt(i) < vers2.charAt(i) )
 			{
-				return false;
+				return true;
 			}
         }
-        return true;
+        return false;
     },
     
     debugLevel : -1,

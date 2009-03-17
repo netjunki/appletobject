@@ -373,6 +373,7 @@ function AppletObject ( )
     this.width      = arguments[2] > 0 ? arguments[2] : 100;
     this.height     = arguments[3] > 0 ? arguments[3] : 100;
     
+    this.minimumVersionString = arguments[4];
     this.minimumVersion = arguments[4] ? arguments[4].replace(/[\._]/g,"") : undefined;
                       
     this.mayscript  = arguments[5] ? arguments[5] : 'true';
@@ -407,7 +408,10 @@ function AppletObject ( )
     this.java_version_message = '<p><strong>'+
                                 'This browser does not have a recent enough Java Plug-in.'+
                                 '<'+'/strong><'+'/p>'+
-                                '<a href="http://java.sun.com/products/plugin/downloads/index.html">'+
+                               	'<p><strong>'+
+			        'This application requires at least version' + this.minimumVersionString + ' of the Java Plug-in.'+
+                                '<'+'/strong><'+'/p>'+
+				'<a href="http://java.sun.com/products/plugin/downloads/index.html">'+
                                 'Get the latest Java Plug-in here.'+
                                 '<'+'/a>';
 
